@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
-export type View = 'resultats' | 'face-a-face' | 'bilans';
-const VIEWS: View[] = ['resultats', 'face-a-face', 'bilans'];
+export type View = 'resultats' | 'face-a-face' | 'competitions' | 'bilans';
+const VIEWS: View[] = ['resultats', 'face-a-face', 'competitions', 'bilans'];
 
 export interface Route {
   view: View;

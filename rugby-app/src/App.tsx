@@ -4,17 +4,21 @@ import { useRoute, type View } from './router';
 import { HeadToHeadView } from './components/HeadToHeadView';
 import { ResultsView } from './components/ResultsView';
 import { OverviewView } from './components/OverviewView';
+import { CompetitionsView } from './components/CompetitionsView';
+import type { LeftOut } from './competitions';
 
 const TABS: { view: View; label: string; icon: string }[] = [
   { view: 'face-a-face', label: 'Face-à-face', icon: '⚔️' },
+  { view: 'competitions', label: 'Compétitions', icon: '🏆' },
   { view: 'resultats', label: 'Résultats', icon: '📋' },
-  { view: 'bilans', label: 'Bilans', icon: '🏆' },
+  { view: 'bilans', label: 'Bilans', icon: '📊' },
 ];
 
 export default function App() {
   const [base, setBase] = useState<Match[] | null>(null);
   const [error, setError] = useState('');
   const [local, setLocal] = useState<Match[]>(loadLocalMatches);
+  const [compMeta, setCompMeta] = useState<Record<string, LeftOut>>({});
   const [route, navigate] = useRoute();
 
   useEffect(() => {
@@ -25,6 +29,11 @@ export default function App() {
       })
       .then((t) => setBase(matchesFromCSV(t)))
       .catch((e) => setError(String(e)));
+    // Optional: which competitions miss matches against nations outside the app.
+    fetch(`${import.meta.env.BASE_URL}data/competitions.json`)
+      .then((r) => (r.ok ? r.json() : {}))
+      .then(setCompMeta)
+      .catch(() => {});
   }, []);
 
   const matches = useMemo(() => (base ? [...base, ...local] : []), [base, local]);
@@ -73,6 +82,15 @@ export default function App() {
             a={validTeam(p.get('a'), 'France')}
             b={validTeam(p.get('b'), 'New Zealand')}
             onChange={(a, b) => navigate('face-a-face', { a, b })}
+          />
+        )}
+        {base && route.view === 'competitions' && (
+          <CompetitionsView
+            matches={matches}
+            meta={compMeta}
+            family={p.get('c') ?? ''}
+            edition={p.get('e') ?? ''}
+            onSelect={(c, e) => navigate('competitions', { c, e })}
           />
         )}
         {base && route.view === 'resultats' && (

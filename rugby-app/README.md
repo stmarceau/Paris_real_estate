@@ -9,6 +9,13 @@ entre les nations de la Coupe du monde et comparer les bilans historiques d'une 
   matchs, série en cours, bilan selon le lieu (domicile / extérieur / neutre), bilan en Coupe du monde,
   records (plus larges victoires, match le plus prolifique, plus longues séries), victoires par
   décennie et courbe « qui mène la série ? », liste complète des matchs.
+- **Compétitions** : Coupe du monde (podium, phase finale, poules), Tournoi des Six Nations (et Tournoi
+  britannique / Cinq Nations), Tri-Nations / Rugby Championship, Pacific Nations Cup, Championnat d'Europe,
+  Nations Championship, tests d'automne et qualifications : classement calculé et résultats de chaque édition.
+  Certaines éditions sont **reconstituées** (règles commentées dans `src/competitions.ts`) car la source ne nomme
+  pas leurs matchs (Cinq Nations 1952–1999, Tri-Nations 1996–1999, Rugby Championship 2021 et 2023) ; d'autres
+  sont signalées **incomplètes** quand des matchs contre des nations hors de l'app manquent
+  (`public/data/competitions.json`, généré par le script de mise à jour).
 - **Résultats** : tous les matchs, filtrables par équipe, adversaire, compétition/lieu, années et
   Coupe du monde.
 - **Bilans** : classement au % de victoires par groupe (Six Nations + Rugby Championship, qualifiés 2027,

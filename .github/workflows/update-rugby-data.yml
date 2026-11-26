@@ -58,7 +58,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           last=$(tail -n 1 rugby-app/public/data/rugby_results.csv | cut -d, -f1)
-          git add rugby-app/public/data/rugby_results.csv
+          git add rugby-app/public/data
           git commit -m "Mise à jour des résultats de rugby (jusqu'au $last)"
           git push origin HEAD:main
           echo "changed=true" >> "$GITHUB_OUTPUT"

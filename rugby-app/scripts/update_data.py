@@ -11,7 +11,10 @@ import csv, json, pathlib, urllib.request
 
 SOURCE = 'https://raw.githubusercontent.com/rugbyarchive/rugbyarchive.github.io/main/data/archive-data.js'
 EXTRA_NATIONS = {'Hong Kong'}  # qualified for RWC 2027, never played a World Cup before
-OUT = pathlib.Path(__file__).resolve().parent.parent / 'public' / 'data' / 'rugby_results.csv'
+DATA = pathlib.Path(__file__).resolve().parent.parent / 'public' / 'data'
+OUT = DATA / 'rugby_results.csv'
+# Per competition: matches left out because one side is not one of the app's nations.
+META = DATA / 'competitions.json'
 
 
 def main() -> None:
@@ -30,12 +33,18 @@ def main() -> None:
             nations |= {T[r[F['home']]], T[r[F['away']]]}
 
     rows = []
+    left_out = {}
     for r in d['rows']:
         h, a = T[r[F['home']]], T[r[F['away']]]
         mt = lk('match_type', r)
-        if h not in nations or a not in nations or not r[F['full_intl']]:
+        if not r[F['full_intl']] or any(x in mt for x in ('Abandoned', 'Awarded', 'Non-Test')):
             continue
-        if any(x in mt for x in ('Abandoned', 'Awarded', 'Non-Test')):
+        if h not in nations or a not in nations:
+            comp = lk('competition', r)
+            if comp and (h in nations or a in nations):
+                e = left_out.setdefault(comp, {'matches': 0, 'teams': set()})
+                e['matches'] += 1
+                e['teams'] |= {t for t in (h, a) if t not in nations}
             continue
         rows.append([r[F['date']], h, a, r[F['home_score']], r[F['away_score']], lk('competition', r), lk('stadium', r),
                      lk('city', r), lk('country', r), str(bool(r[F['neutral']])), str(bool(r[F['world_cup']]))])
@@ -52,6 +61,10 @@ def main() -> None:
         w.writerow(['date', 'home_team', 'away_team', 'home_score', 'away_score', 'competition',
                     'stadium', 'city', 'country', 'neutral', 'world_cup'])
         w.writerows(rows)
+    kept = {r[5] for r in rows}
+    meta = {c: {'leftOut': e['matches'], 'teams': sorted(e['teams'])} for c, e in sorted(left_out.items()) if c in kept}
+    META.write_text(json.dumps(meta, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
+
     print(f'{len(rows)} matches, {len(nations)} nations, last match {rows[-1][0]} -> {OUT}')
     print('Nations:', ', '.join(sorted(nations)))
 

@@ -259,3 +259,38 @@ select:focus, input:focus, button:focus-visible { outline: 2px solid var(--accen
 @media (max-width: 640px) {
   .controls { grid-template-columns: 1fr; }
 }
+
+/* ---------- competitions ---------- */
+.chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: thin; }
+.chips button {
+  flex: none; border: 1px solid var(--border); background: var(--surface); border-radius: 999px; padding: 7px 12px; cursor: pointer; white-space: nowrap;
+}
+.chips button.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.chips button.on .muted { color: inherit; opacity: 0.8; }
+.edition-bar { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: end; }
+.swap:disabled { opacity: 0.35; cursor: default; }
+.edition-head h2 { margin: 0 0 2px; font-size: 1.3rem; }
+.edition-head p { margin: 6px 0 0; }
+.edition-head .tag { margin-left: 8px; }
+.note { background: var(--surface-2); border-left: 3px solid #f5c542; padding: 8px 10px; border-radius: 6px; }
+.podium { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.podium > div { display: flex; flex-direction: column; gap: 2px; background: var(--surface-2); border-radius: 10px; padding: 8px 12px; min-width: 130px; }
+.podium .gold { background: color-mix(in srgb, #f5c542 30%, var(--surface)); font-weight: 700; }
+.podium-rank { font-size: 0.75rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+h4 { margin: 14px 0 8px; font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.round:first-of-type h4, .days > div:first-child h4 { margin-top: 4px; }
+.pools { display: grid; gap: 4px 16px; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); }
+.standings td .pos { display: inline-block; width: 1.3em; }
+.standings tr.qualified td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+.pool-matches { margin-top: 10px; }
+.pool-matches summary { cursor: pointer; color: var(--accent); font-weight: 600; padding: 6px 0; }
+@media (max-width: 640px) {
+  .tabs button { font-size: 0.8rem; padding: 8px 4px; }
+  .pools { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .tabs button > span[aria-hidden] { display: none; }
+  .standings th:nth-child(6), .standings td:nth-child(6),
+  .standings th:nth-child(7), .standings td:nth-child(7) { display: none; }
+  .standings th, .standings td { padding: 8px 4px; }
+}

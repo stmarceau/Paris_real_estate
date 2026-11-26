@@ -1,0 +1,80 @@
+import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { matchesFromCSV } from './data';
+import { buildEditions, standings, winner, worldCupPhases } from './competitions';
+
+const all = matchesFromCSV(readFileSync(new URL('../public/data/rugby_results.csv', import.meta.url), 'utf8'));
+const eds = buildEditions(all);
+const ed = (fam: string, key: string) => eds.get(fam)!.find((e) => e.key === key)!;
+
+describe('World Cups', () => {
+  const champions: [string, string][] = [
+    ['1987', 'New Zealand'],
+    ['1991', 'Australia'],
+    ['1995', 'South Africa'],
+    ['1999', 'Australia'],
+    ['2003', 'England'],
+    ['2007', 'South Africa'],
+    ['2011', 'New Zealand'],
+    ['2015', 'New Zealand'],
+    ['2019', 'South Africa'],
+    ['2023', 'South Africa'],
+  ];
+  it.each(champions)('%s: the last match is the final, won by %s', (year, champ) => {
+    const p = worldCupPhases(ed('coupe-du-monde', year))!;
+    expect(winner(p.rounds[3].matches[0])).toBe(champ);
+  });
+  it('splits pool matches into the right number of pools', () => {
+    expect(standings(worldCupPhases(ed('coupe-du-monde', '1987'))!.pools).map((g) => g.length)).toEqual([4, 4, 4, 4]);
+    expect(standings(worldCupPhases(ed('coupe-du-monde', '2023'))!.pools).map((g) => g.length)).toEqual([5, 5, 5, 5]);
+  });
+});
+
+describe('Six Nations', () => {
+  it('2023: Ireland grand slam, 15 matches, 6 teams', () => {
+    const e = ed('six-nations', '2023');
+    expect(e.matches).toHaveLength(15);
+    const [table] = standings(e.matches);
+    expect(table).toHaveLength(6);
+    expect(table[0]).toMatchObject({ team: 'Ireland', wins: 5 });
+    expect(table[5].team).toBe('Italy');
+  });
+  it('names older editions after the tournament of the time', () => {
+    expect(ed('six-nations', '1955').label).toBe('Tournoi des Cinq Nations 1955');
+    expect(ed('six-nations', '1890').label).toBe('Tournoi britannique 1890');
+  });
+});
+
+describe('reconstructed editions', () => {
+  it('every Five Nations 1952–1999 has its 10 matches (8 in 1972: Scotland and Wales did not travel to Dublin)', () => {
+    for (let y = 1953; y <= 1999; y++) expect([y, ed('six-nations', String(y)).matches.length]).toEqual([y, y === 1972 ? 8 : 10]);
+  });
+  it('drops the 1971 centenary match and the 1988 Millennium match', () => {
+    expect(ed('six-nations', '1971').matches.some((m) => m.date === '1971-03-27' && m.home === 'Scotland')).toBe(false);
+    expect(ed('six-nations', '1988').matches.some((m) => m.date === '1988-04-23')).toBe(false);
+  });
+  it('Tri-Nations 1996–1999: 6 matches, known winners', () => {
+    const champs: Record<string, string> = { '1996': 'New Zealand', '1997': 'New Zealand', '1998': 'South Africa', '1999': 'New Zealand' };
+    for (const [y, c] of Object.entries(champs)) {
+      const e = ed('rugby-championship', y);
+      expect(e.matches).toHaveLength(6);
+      expect(standings(e.matches)[0][0].team).toBe(c);
+    }
+  });
+  it('Rugby Championship 2021 (12), 2023 (6) and 2025 (12)', () => {
+    expect(ed('rugby-championship', '2021').matches).toHaveLength(12);
+    expect(ed('rugby-championship', '2023').matches).toHaveLength(6);
+    expect(ed('rugby-championship', '2025').matches).toHaveLength(12);
+    expect(standings(ed('rugby-championship', '2021').matches)[0][0].team).toBe('New Zealand');
+  });
+});
+
+describe('families', () => {
+  it('never puts a match in two families', () => {
+    const seen = new Set<string>();
+    for (const list of eds.values()) for (const e of list) for (const m of e.matches) {
+      expect(seen.has(m.id)).toBe(false);
+      seen.add(m.id);
+    }
+  });
+});
