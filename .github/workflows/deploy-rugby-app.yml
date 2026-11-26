@@ -7,6 +7,12 @@ on:
     branches: [main]
     paths: ['rugby-app/**', '.github/workflows/deploy-rugby-app.yml']
   workflow_dispatch:
+  workflow_call: # used by the weekly data update
+    inputs:
+      ref:
+        description: Commit to deploy
+        type: string
+        required: true
 
 permissions:
   contents: read
@@ -25,6 +31,8 @@ jobs:
         working-directory: rugby-app
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: 22

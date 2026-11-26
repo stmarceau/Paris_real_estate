@@ -33,7 +33,11 @@ régionales ou XV « B » sont exclus), ainsi que les matchs abandonnés ou attr
 Source : [Nuck's Rugby Archive](https://rugbyarchive.github.io/) ([dépôt](https://github.com/rugbyarchive/rugbyarchive.github.io)).
 ⚠️ Cette archive ne publie pas de licence : demander l'accord de son auteur avant toute diffusion publique.
 
-Mise à jour des données : `python3 scripts/update_data.py` (re-télécharge l'archive et régénère le CSV).
+Mise à jour des données : **automatique chaque lundi soir** (19 h 17 UTC, soit 20 h 17 / 21 h 17 à Paris)
+via `.github/workflows/update-rugby-data.yml` : re-télécharge l'archive, régénère le CSV, lance les tests
+et, s'il y a de nouveaux matchs, commite sur `main` et redéploie le site. Lancement manuel possible via
+*Actions → Weekly rugby data update → Run workflow*, ou en local : `python3 scripts/update_data.py`.
+La mise à jour est refusée si l'archive renvoie nettement moins de matchs qu'avant (source cassée).
 
 ## Mise en ligne (GitHub Pages)
 

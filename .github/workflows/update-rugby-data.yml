@@ -1,0 +1,73 @@
+# Every Monday evening: refresh rugby-app/public/data/rugby_results.csv from
+# Nuck's Rugby Archive. If new matches came in, test, commit to main and redeploy.
+name: Weekly rugby data update
+
+on:
+  schedule:
+    # Mondays 19:17 UTC = 20:17 in Paris in winter, 21:17 in summer.
+    - cron: '17 19 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: rugby-data-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+      sha: ${{ steps.commit.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Download archive and rebuild CSV
+        run: python3 rugby-app/scripts/update_data.py
+      - name: Detect changes
+        id: diff
+        run: |
+          if git diff --quiet -- rugby-app/public/data; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Aucun nouveau match." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --numstat -- rugby-app/public/data >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - uses: actions/setup-node@v4
+        if: steps.diff.outputs.changed == 'true'
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: rugby-app/package-lock.json
+      - name: Test with the new data
+        if: steps.diff.outputs.changed == 'true'
+        working-directory: rugby-app
+        run: npm ci && npm test
+      - name: Commit and push
+        id: commit
+        run: |
+          if [ "${{ steps.diff.outputs.changed }}" != "true" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          last=$(tail -n 1 rugby-app/public/data/rugby_results.csv | cut -d, -f1)
+          git add rugby-app/public/data/rugby_results.csv
+          git commit -m "Mise à jour des résultats de rugby (jusqu'au $last)"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  # Pushes made with GITHUB_TOKEN do not trigger other workflows, so deploy from here.
+  deploy:
+    needs: update
+    if: needs.update.outputs.changed == 'true'
+    uses: ./.github/workflows/deploy-rugby-app.yml
+    with:
+      ref: ${{ needs.update.outputs.sha }}

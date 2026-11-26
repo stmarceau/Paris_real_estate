@@ -69,7 +69,7 @@ describe('headToHead', () => {
 describe('real dataset', () => {
   const all = matchesFromCSV(readFileSync(new URL('../public/data/rugby_results.csv', import.meta.url), 'utf8'));
   it('parses every row', () => {
-    expect(all.length).toBe(5096);
+    expect(all.length).toBeGreaterThanOrEqual(5096); // the dataset only grows with weekly updates
     expect(all.every((x) => Number.isFinite(x.homeScore) && Number.isFinite(x.awayScore))).toBe(true);
   });
   it('only contains the app’s 27 nations, and all of them', () => {

@@ -41,6 +41,12 @@ def main() -> None:
                      lk('city', r), lk('country', r), str(bool(r[F['neutral']])), str(bool(r[F['world_cup']]))])
     rows.sort(key=lambda x: x[0])
 
+    # Safety net: never replace the data with a much smaller set (broken or truncated source).
+    if OUT.exists():
+        previous = sum(1 for _ in OUT.open(encoding='utf-8')) - 1
+        if len(rows) < previous * 0.98:
+            raise SystemExit(f'Refusing update: {len(rows)} matches vs {previous} currently. Check the source.')
+
     with OUT.open('w', newline='', encoding='utf-8') as f:
         w = csv.writer(f, lineterminator='\n')
         w.writerow(['date', 'home_team', 'away_team', 'home_score', 'away_score', 'competition',
