@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { loadLocalMatches, matchesFromCSV, saveLocalMatches, team, type Match } from './data';
+import { TEAMS, isKnownTeam, loadLocalMatches, matchesFromCSV, saveLocalMatches, type Match } from './data';
 import { useRoute, type View } from './router';
 import { HeadToHeadView } from './components/HeadToHeadView';
 import { ResultsView } from './components/ResultsView';
@@ -36,7 +36,7 @@ export default function App() {
   };
 
   const p = route.params;
-  const validTeam = (n: string | null, fallback: string) => (n && team(n).flag !== '🏉' ? n : fallback);
+  const validTeam = (n: string | null, fallback: string) => (isKnownTeam(n) ? n : fallback);
 
   return (
     <div className="app">
@@ -47,7 +47,7 @@ export default function App() {
           </span>
           <div>
             <h1>Rugby Face-à-Face</h1>
-            <p className="muted small">Les grandes nations du rugby, de 1871 à aujourd’hui</p>
+            <p className="muted small">Les nations de la Coupe du monde, de 1871 à aujourd’hui</p>
           </div>
         </div>
         <nav className="tabs" aria-label="Sections">
@@ -101,13 +101,13 @@ export default function App() {
       <footer className="foot muted small">
         {base && (
           <p>
-            {base.length.toLocaleString('fr-FR')} matchs officiels entre l’Afrique du Sud, l’Angleterre, l’Argentine, l’Australie, l’Écosse, la France, l’Irlande,
-            l’Italie, la Nouvelle-Zélande et le pays de Galles · données jusqu’au {new Date(base.reduce((d, m) => (m.date > d ? m.date : d), '') + 'T12:00').toLocaleDateString('fr-FR')}
+            {base.length.toLocaleString('fr-FR')} test-matchs entre les {TEAMS.length} nations ayant disputé une Coupe du monde (1987–2023) ou qualifiées pour 2027 ·
+            données jusqu’au {new Date(base.reduce((d, m) => (m.date > d ? m.date : d), '') + 'T12:00').toLocaleDateString('fr-FR')}
             {local.length > 0 && ` · ${local.length} résultat(s) ajouté(s) localement (dernier match : ${new Date(lastDate + 'T12:00').toLocaleDateString('fr-FR')})`}.
           </p>
         )}
         <p>
-          Source : jeu de données « Rugby match analysis » d’Adrien M. (licence MIT). Les scores anciens suivent les barèmes de l’époque.
+          Source : <a href="https://rugbyarchive.github.io/">Nuck's Rugby Archive</a> (11 000+ matchs depuis 1871). Les scores anciens suivent les barèmes de l’époque.
         </p>
       </footer>
     </div>

@@ -18,14 +18,21 @@ export function TeamSelect({
       <span className="field-label">{label}</span>
       <select value={value} onChange={(e) => onChange(e.target.value)}>
         {allowEmpty !== undefined && <option value="">{allowEmpty}</option>}
-        {TEAMS.filter((t) => t.name !== exclude)
-          .slice()
-          .sort((x, y) => x.fr.localeCompare(y.fr, 'fr'))
-          .map((t) => (
-            <option key={t.name} value={t.name}>
-              {t.flag} {t.fr}
-            </option>
-          ))}
+        {[
+          { label: 'Six Nations + Rugby Championship', list: TEAMS.filter((t) => t.tier1) },
+          { label: 'Autres nations de la Coupe du monde', list: TEAMS.filter((t) => !t.tier1) },
+        ].map((g) => (
+          <optgroup key={g.label} label={g.label}>
+            {g.list
+              .filter((t) => t.name !== exclude)
+              .sort((x, y) => x.fr.localeCompare(y.fr, 'fr'))
+              .map((t) => (
+                <option key={t.name} value={t.name}>
+                  {t.flag} {t.fr}
+                </option>
+              ))}
+          </optgroup>
+        ))}
       </select>
     </label>
   );

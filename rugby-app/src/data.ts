@@ -20,26 +20,59 @@ export interface TeamInfo {
   name: string; // name as found in the dataset
   fr: string;
   flag: string;
-  color: string;
+  /** Six Nations + Rugby Championship */
+  tier1?: boolean;
+  /** qualified for the 2027 Men's Rugby World Cup */
+  rwc2027?: boolean;
 }
 
+/** Every nation that has played a Rugby World Cup (1987–2023), plus Hong Kong China (qualified for 2027). */
 export const TEAMS: TeamInfo[] = [
-  { name: 'France', fr: 'France', flag: '🇫🇷', color: '#1d4ed8' },
-  { name: 'New Zealand', fr: 'Nouvelle-Zélande', flag: '🇳🇿', color: '#111827' },
-  { name: 'South Africa', fr: 'Afrique du Sud', flag: '🇿🇦', color: '#047857' },
-  { name: 'Ireland', fr: 'Irlande', flag: '☘️', color: '#16a34a' },
-  { name: 'England', fr: 'Angleterre', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', color: '#be123c' },
-  { name: 'Australia', fr: 'Australie', flag: '🇦🇺', color: '#ca8a04' },
-  { name: 'Scotland', fr: 'Écosse', flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', color: '#1e3a8a' },
-  { name: 'Wales', fr: 'Pays de Galles', flag: '🏴󠁧󠁢󠁷󠁬󠁳󠁿', color: '#dc2626' },
-  { name: 'Argentina', fr: 'Argentine', flag: '🇦🇷', color: '#0284c7' },
-  { name: 'Italy', fr: 'Italie', flag: '🇮🇹', color: '#2563eb' },
+  { name: 'France', fr: 'France', flag: '🇫🇷', tier1: true, rwc2027: true },
+  { name: 'New Zealand', fr: 'Nouvelle-Zélande', flag: '🇳🇿', tier1: true, rwc2027: true },
+  { name: 'South Africa', fr: 'Afrique du Sud', flag: '🇿🇦', tier1: true, rwc2027: true },
+  { name: 'Ireland', fr: 'Irlande', flag: '☘️', tier1: true, rwc2027: true },
+  { name: 'England', fr: 'Angleterre', flag: '🏴\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}', tier1: true, rwc2027: true },
+  { name: 'Australia', fr: 'Australie', flag: '🇦🇺', tier1: true, rwc2027: true },
+  { name: 'Scotland', fr: 'Écosse', flag: '🏴\u{E0067}\u{E0062}\u{E0073}\u{E0063}\u{E0074}\u{E007F}', tier1: true, rwc2027: true },
+  { name: 'Wales', fr: 'Pays de Galles', flag: '🏴\u{E0067}\u{E0062}\u{E0077}\u{E006C}\u{E0073}\u{E007F}', tier1: true, rwc2027: true },
+  { name: 'Argentina', fr: 'Argentine', flag: '🇦🇷', tier1: true, rwc2027: true },
+  { name: 'Italy', fr: 'Italie', flag: '🇮🇹', tier1: true, rwc2027: true },
+  { name: 'Fiji', fr: 'Fidji', flag: '🇫🇯', rwc2027: true },
+  { name: 'Japan', fr: 'Japon', flag: '🇯🇵', rwc2027: true },
+  { name: 'Georgia', fr: 'Géorgie', flag: '🇬🇪', rwc2027: true },
+  { name: 'Samoa', fr: 'Samoa', flag: '🇼🇸', rwc2027: true },
+  { name: 'Tonga', fr: 'Tonga', flag: '🇹🇴', rwc2027: true },
+  { name: 'Romania', fr: 'Roumanie', flag: '🇷🇴', rwc2027: true },
+  { name: 'Spain', fr: 'Espagne', flag: '🇪🇸', rwc2027: true },
+  { name: 'Portugal', fr: 'Portugal', flag: '🇵🇹', rwc2027: true },
+  { name: 'Uruguay', fr: 'Uruguay', flag: '🇺🇾', rwc2027: true },
+  { name: 'Chile', fr: 'Chili', flag: '🇨🇱', rwc2027: true },
+  { name: 'Canada', fr: 'Canada', flag: '🇨🇦', rwc2027: true },
+  { name: 'USA', fr: 'États-Unis', flag: '🇺🇸', rwc2027: true },
+  { name: 'Zimbabwe', fr: 'Zimbabwe', flag: '🇿🇼', rwc2027: true },
+  { name: 'Hong Kong', fr: 'Hong Kong Chine', flag: '🇭🇰', rwc2027: true },
+  { name: 'Namibia', fr: 'Namibie', flag: '🇳🇦' },
+  { name: 'Russia', fr: 'Russie', flag: '🇷🇺' },
+  { name: 'Ivory Coast', fr: "Côte d'Ivoire", flag: '🇨🇮' },
 ];
+
+export type TeamGroup = 'tier1' | 'rwc2027' | 'all';
+export const GROUPS: { id: TeamGroup; label: string }[] = [
+  { id: 'tier1', label: 'Six Nations + Rugby Championship' },
+  { id: 'rwc2027', label: 'Qualifiés Coupe du monde 2027' },
+  { id: 'all', label: 'Toutes (27)' },
+];
+export function inGroup(t: TeamInfo, g: TeamGroup): boolean {
+  return g === 'all' || (g === 'tier1' ? !!t.tier1 : !!t.rwc2027);
+}
 
 const BY_NAME = new Map(TEAMS.map((t) => [t.name, t]));
 
+export const isKnownTeam = (name: string | null): name is string => !!name && BY_NAME.has(name);
+
 export function team(name: string): TeamInfo {
-  return BY_NAME.get(name) ?? { name, fr: name, flag: '🏉', color: '#64748b' };
+  return BY_NAME.get(name) ?? { name, fr: name, flag: '🏉' };
 }
 
 /** Minimal RFC-4180 CSV parser (handles quoted fields with commas and "" escapes). */

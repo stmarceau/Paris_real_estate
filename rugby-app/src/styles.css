@@ -247,3 +247,15 @@ select:focus, input:focus, button:focus-visible { outline: 2px solid var(--accen
 @media (max-width: 400px) {
   .side .team-name span:last-child { white-space: normal; overflow-wrap: anywhere; line-height: 1.2; }
 }
+
+/* ---------- bilans controls & large matrix ---------- */
+.controls { display: grid; gap: 12px; grid-template-columns: minmax(200px, 1fr) 2fr; align-items: end; }
+.controls .segmented { padding: 3px; }
+.rank-row.few { opacity: 0.6; }
+.matrix th.sticky { position: sticky; left: 0; background: var(--surface); z-index: 1; }
+.matrix.compact { border-spacing: 2px; }
+.matrix.compact td { width: 32px; min-width: 32px; height: 30px; font-size: 0.72rem; border-radius: 4px; }
+.matrix.compact th { font-size: 0.95rem; }
+@media (max-width: 640px) {
+  .controls { grid-template-columns: 1fr; }
+}

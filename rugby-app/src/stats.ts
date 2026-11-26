@@ -167,14 +167,20 @@ export function headToHead(all: Match[], a: string, b: string): HeadToHead {
 }
 
 /** Record of `team` against every opponent, plus its overall record. */
-export function teamRecords(all: Match[], teamName: string, fromYear = 0): { overall: Record; byOpponent: Map<string, Record> } {
+export function teamRecords(
+  all: Match[],
+  teamName: string,
+  fromYear = 0,
+  opponents?: Set<string>,
+): { overall: Record; byOpponent: Map<string, Record> } {
   const overall = emptyRecord();
   const byOpponent = new Map<string, Record>();
   for (const m of all) {
     if (m.year < fromYear) continue;
     if (m.home !== teamName && m.away !== teamName) continue;
-    const v = viewFor(teamName, m);
     const opp = m.home === teamName ? m.away : m.home;
+    if (opponents && !opponents.has(opp)) continue;
+    const v = viewFor(teamName, m);
     const r = byOpponent.get(opp) ?? emptyRecord();
     addTo(r, v);
     addTo(overall, v);

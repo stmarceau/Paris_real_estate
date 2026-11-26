@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { matchesFromCSV, parseCSV, type Match } from './data';
+import { TEAMS, matchesFromCSV, parseCSV, type Match } from './data';
 import { headToHead, teamRecords } from './stats';
 
 const m = (date: string, home: string, away: string, hs: number, as: number, extra: Partial<Match> = {}): Match => ({
@@ -69,12 +69,20 @@ describe('headToHead', () => {
 describe('real dataset', () => {
   const all = matchesFromCSV(readFileSync(new URL('../public/data/rugby_results.csv', import.meta.url), 'utf8'));
   it('parses every row', () => {
-    expect(all.length).toBe(2727);
+    expect(all.length).toBe(5096);
     expect(all.every((x) => Number.isFinite(x.homeScore) && Number.isFinite(x.awayScore))).toBe(true);
+  });
+  it('only contains the app’s 27 nations, and all of them', () => {
+    const names = new Set(all.flatMap((x) => [x.home, x.away]));
+    expect([...names].sort()).toEqual(TEAMS.map((t) => t.name).sort());
   });
   it('per-team totals equal the sum over opponents', () => {
     const { overall, byOpponent } = teamRecords(all, 'France');
     const sum = [...byOpponent.values()].reduce((s, r) => s + r.played, 0);
     expect(sum).toBe(overall.played);
+  });
+  it('has the 2023 World Cup final', () => {
+    const f = all.find((x) => x.date === '2023-10-28' && x.worldCup);
+    expect(f && [f.home, f.homeScore, f.awayScore, f.away]).toEqual(['New Zealand', 11, 12, 'South Africa']);
   });
 });
