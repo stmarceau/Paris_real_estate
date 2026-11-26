@@ -35,6 +35,13 @@ Source : [Nuck's Rugby Archive](https://rugbyarchive.github.io/) ([dépôt](http
 
 Mise à jour des données : `python3 scripts/update_data.py` (re-télécharge l'archive et régénère le CSV).
 
+## Mise en ligne (GitHub Pages)
+
+Le workflow `.github/workflows/deploy-rugby-app.yml` teste, construit et publie l'app à chaque push
+sur `main` touchant `rugby-app/` (ou manuellement via *Actions → Run workflow*).
+Réglage unique : *Settings → Pages → Build and deployment → Source : GitHub Actions*.
+Adresse : https://stmarceau.github.io/Paris_real_estate/
+
 ## Développement
 
 ```bash
