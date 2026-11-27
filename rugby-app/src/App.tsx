@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { TEAMS, isKnownTeam, loadLocalMatches, matchesFromCSV, saveLocalMatches, type Match } from './data';
+import { PERIODS, TEAMS, isKnownTeam, loadLocalMatches, matchesFromCSV, periodById, saveLocalMatches, type Match } from './data';
 import { useRoute, type View } from './router';
 import { HeadToHeadView } from './components/HeadToHeadView';
 import { ResultsView } from './components/ResultsView';
@@ -36,8 +36,11 @@ export default function App() {
       .catch(() => {});
   }, []);
 
-  const matches = useMemo(() => (base ? [...base, ...local] : []), [base, local]);
-  const lastDate = useMemo(() => matches.reduce((d, m) => (m.date > d ? m.date : d), ''), [matches]);
+  const period = periodById(route.params.get('periode'));
+  const allMatches = useMemo(() => (base ? [...base, ...local] : []), [base, local]);
+  // Every view works on the matches of the selected period only.
+  const matches = useMemo(() => allMatches.filter((m) => m.year >= period.from), [allMatches, period.from]);
+  const lastDate = useMemo(() => allMatches.reduce((d, m) => (m.date > d ? m.date : d), ''), [allMatches]);
 
   const updateLocal = (list: Match[]) => {
     setLocal(list);
@@ -59,6 +62,22 @@ export default function App() {
             <p className="muted small">Les nations de la Coupe du monde, de 1871 à aujourd’hui</p>
           </div>
         </div>
+        <div className="top-right">
+          <div className="period" role="radiogroup" aria-label="Période">
+            <span className="period-label">Période</span>
+            {PERIODS.map((pe) => (
+              <button
+                key={pe.id}
+                role="radio"
+                aria-checked={pe.id === period.id}
+                className={pe.id === period.id ? 'on' : ''}
+                onClick={() => navigate(route.view, { ...Object.fromEntries(p), periode: pe.id === PERIODS[0].id ? undefined : pe.id })}
+              >
+                <span className="long">{pe.label}</span>
+                <span className="short">{pe.short}</span>
+              </button>
+            ))}
+          </div>
         <nav className="tabs" aria-label="Sections">
           {TABS.map((t) => (
             <button
@@ -71,6 +90,7 @@ export default function App() {
             </button>
           ))}
         </nav>
+        </div>
       </header>
 
       <main>

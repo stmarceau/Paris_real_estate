@@ -3,12 +3,6 @@ import { GROUPS, TEAMS, inGroup, team, type Match, type TeamGroup } from '../dat
 import { teamRecords, winRate } from '../stats';
 import { TeamSelect, pct } from './common';
 
-const ERAS = [
-  { label: 'Depuis 1871', from: 0 },
-  { label: 'Ère pro (1995+)', from: 1995 },
-  { label: 'Depuis 2010', from: 2010 },
-];
-
 /** Below this many matches a win rate says little: such teams are listed after the others. */
 const MIN_MATCHES = 10;
 
@@ -23,28 +17,26 @@ export function OverviewView({
   onTeam: (t: string) => void;
   onCompare: (a: string, b: string) => void;
 }) {
-  const [era, setEra] = useState(0);
   const [group, setGroup] = useState<TeamGroup>(() => (team(teamName).tier1 ? 'tier1' : 'rwc2027'));
-  const from = ERAS[era].from;
   const members = useMemo(() => TEAMS.filter((t) => inGroup(t, group)), [group]);
   const memberSet = useMemo(() => new Set(members.map((t) => t.name)), [members]);
 
   const ranking = useMemo(
     () =>
       members
-        .map((t) => ({ t, ...teamRecords(matches, t.name, from, memberSet) }))
+        .map((t) => ({ t, ...teamRecords(matches, t.name, 0, memberSet) }))
         .filter((x) => x.overall.played)
         .sort((x, y) => {
           const fx = x.overall.played >= MIN_MATCHES ? 1 : 0;
           const fy = y.overall.played >= MIN_MATCHES ? 1 : 0;
           return fy - fx || winRate(y.overall) - winRate(x.overall);
         }),
-    [matches, from, members, memberSet],
+    [matches, members, memberSet],
   );
 
   // The team's own record is always shown against every nation in the app, whatever the group.
   const allNames = useMemo(() => new Set(TEAMS.map((t) => t.name)), []);
-  const current = useMemo(() => teamRecords(matches, teamName, from, allNames), [matches, teamName, from, allNames]);
+  const current = useMemo(() => teamRecords(matches, teamName, 0, allNames), [matches, teamName, allNames]);
   const opps = [...current.byOpponent.entries()].sort((x, y) => y[1].played - x[1].played);
   const ordered = ranking.map((r) => r.t.name);
   const big = ordered.length > 12;
@@ -62,16 +54,6 @@ export function OverviewView({
             ))}
           </select>
         </label>
-        <div className="field">
-          <span className="field-label">Période</span>
-          <div className="segmented" role="tablist" aria-label="Période">
-            {ERAS.map((e, i) => (
-              <button key={e.label} role="tab" aria-selected={era === i} className={era === i ? 'on' : ''} onClick={() => setEra(i)}>
-                {e.label}
-              </button>
-            ))}
-          </div>
-        </div>
       </div>
 
       <div className="card">

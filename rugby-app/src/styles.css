@@ -294,3 +294,21 @@ h4 { margin: 14px 0 8px; font-size: 0.85rem; color: var(--muted); text-transform
   .standings th:nth-child(7), .standings td:nth-child(7) { display: none; }
   .standings th, .standings td { padding: 8px 4px; }
 }
+
+/* ---------- global period filter (above the tabs) ---------- */
+.top-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.period { display: flex; align-items: center; gap: 4px; }
+.period-label { font-size: 0.72rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; margin-right: 4px; }
+.period button {
+  border: 1px solid var(--border); background: var(--surface); border-radius: 999px; padding: 4px 10px; cursor: pointer;
+  font-size: 0.82rem; white-space: nowrap;
+}
+.period button.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.period .short { display: none; }
+@media (max-width: 640px) {
+  .top-right { width: 100%; align-items: stretch; }
+  .period { justify-content: center; }
+  .period button { flex: 1; }
+  .period .long { display: none; }
+  .period .short { display: inline; }
+}

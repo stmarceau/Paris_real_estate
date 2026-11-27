@@ -173,3 +173,19 @@ export function formatDate(iso: string): string {
   const d = new Date(iso + 'T12:00:00');
   return isNaN(d.getTime()) ? iso : DATE_FMT.format(d);
 }
+
+/** Period filter shared by every view. */
+export interface Period {
+  id: string;
+  label: string;
+  short: string;
+  from: number;
+}
+export const PERIODS: Period[] = [
+  { id: 'tout', label: 'Depuis 1871', short: '1871+', from: 0 },
+  { id: 'pro', label: 'Ère pro (1995+)', short: '1995+', from: 1995 },
+  { id: '2010', label: 'Depuis 2010', short: '2010+', from: 2010 },
+];
+export function periodById(id: string | null): Period {
+  return PERIODS.find((p) => p.id === id) ?? PERIODS[0];
+}

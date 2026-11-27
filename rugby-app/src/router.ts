@@ -14,6 +14,9 @@ function parse(): Route {
   return { view, params: new URLSearchParams(query) };
 }
 
+/** Params that apply to the whole app and are kept when switching views. */
+const GLOBAL_PARAMS = ['periode'];
+
 /** Tiny hash router: state lives in the URL so any view can be shared or bookmarked. */
 export function useRoute(): [Route, (view: View, params?: Record<string, string | undefined>) => void] {
   const [route, setRoute] = useState(parse);
@@ -24,6 +27,11 @@ export function useRoute(): [Route, (view: View, params?: Record<string, string 
   }, []);
   const navigate = useCallback((view: View, params: Record<string, string | undefined> = {}) => {
     const q = new URLSearchParams();
+    const current = parse().params;
+    GLOBAL_PARAMS.forEach((k) => {
+      const v = current.get(k);
+      if (v && !(k in params)) q.set(k, v);
+    });
     Object.entries(params).forEach(([k, v]) => v && q.set(k, v));
     const s = q.toString();
     const next = `#/${view}${s ? '?' + s : ''}`;

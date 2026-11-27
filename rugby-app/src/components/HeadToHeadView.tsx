@@ -33,7 +33,7 @@ export function HeadToHeadView({
       </div>
 
       {t.played === 0 ? (
-        <p className="empty">Aucun match entre {ta.fr} et {tb.fr} dans les données.</p>
+        <p className="empty">Aucun match entre {ta.fr} et {tb.fr} sur la période choisie.</p>
       ) : (
         <>
           <div className="hero card">
