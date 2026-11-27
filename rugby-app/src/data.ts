@@ -20,6 +20,10 @@ export interface Match {
   espnCompetition?: string;
   /** World Cup stage from ESPN: 'Pool A'…'Pool E', 'quarter', 'semi-final', '3rd place play-off', 'final' */
   stage?: string;
+  /** where the breakdown comes from */
+  breakdownSource?: 'archive' | 'espn';
+  /** line-ups, scoring timeline or video exist in public/data/details/<year>.json */
+  hasDetails?: boolean;
   /** tries, conversions, penalties… when the source has them */
   breakdown?: { home: Breakdown; away: Breakdown };
 }
@@ -161,6 +165,8 @@ export function matchesFromCSV(text: string): Match[] {
       ...(home && away ? { breakdown: { home, away } } : {}),
       ...(idx('espn_competition') >= 0 && r[idx('espn_competition')] ? { espnCompetition: r[idx('espn_competition')] } : {}),
       ...(idx('stage') >= 0 && r[idx('stage')] ? { stage: r[idx('stage')] } : {}),
+      ...(r[idx('breakdown_source')] === 'espn' || r[idx('breakdown_source')] === 'archive' ? { breakdownSource: r[idx('breakdown_source')] as 'archive' | 'espn' } : {}),
+      ...(r[idx('details')] === '1' ? { hasDetails: true } : {}),
       };
     });
 }
@@ -224,4 +230,35 @@ export function competitionLabel(m: Match): string {
   const name = m.competition || m.espnCompetition || '';
   const stage = m.stage ? STAGE_LABELS[m.stage] ?? m.stage : '';
   return [name, stage].filter(Boolean).join(' · ');
+}
+
+/** Line-ups, scoring timeline and video of a match (ESPN, 1987–2020). */
+export interface MatchDetails {
+  lineups?: { home: { nb: number | null; pos: string | null; name: string }[]; away: { nb: number | null; pos: string | null; name: string }[] };
+  timeline?: { side: 'home' | 'away'; player: string | null; action: string | null; points: number; minute: number | null }[];
+  video?: string;
+}
+
+const detailCache = new Map<string, Promise<Record<string, MatchDetails>>>();
+
+/** Details are stored per year and fetched only when a match sheet needs them. */
+export function loadMatchDetails(m: Match): Promise<MatchDetails | null> {
+  if (!m.hasDetails) return Promise.resolve(null);
+  const year = m.date.slice(0, 4);
+  if (!detailCache.has(year)) {
+    detailCache.set(
+      year,
+      fetch(`${import.meta.env.BASE_URL}data/details/${year}.json`).then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      }),
+    );
+  }
+  return detailCache
+    .get(year)!
+    .then((all) => all[`${m.date}|${m.home}|${m.away}`] ?? null)
+    .catch(() => {
+      detailCache.delete(year);
+      return null;
+    });
 }

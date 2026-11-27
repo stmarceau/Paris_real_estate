@@ -79,7 +79,11 @@ export function MatchRow({ m, perspective, onRemove }: { m: Match; perspective?:
     >
       <div className="match-meta">
         <time dateTime={m.date}>{formatDate(m.date)}</time>
-        {m.breakdown && <span className="tag detail" title="Tries, conversions, penalties and drop goals available">Details</span>}
+        {(m.breakdown || m.hasDetails) && (
+          <span className="tag detail" title="Scoring details, line-ups or scorers available">
+            Details
+          </span>
+        )}
         <span className="match-comp" title={competitionLabel(m)}>
           {m.worldCup && <span className="tag wc">World Cup</span>}
           {m.local && <span className="tag local">Added</span>}

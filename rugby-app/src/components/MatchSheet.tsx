@@ -1,5 +1,5 @@
-import { createContext, useEffect, useRef } from 'react';
-import { competitionLabel, formatDate, team, type Match } from '../data';
+import { createContext, useEffect, useRef, useState } from 'react';
+import { competitionLabel, formatDate, loadMatchDetails, team, type Match, type MatchDetails } from '../data';
 import { GOALS_ERA_END, SCORE_KINDS, breakdownMatchesScore, pointValues } from '../scoring';
 
 /** Any match row can open the detail sheet through this context. */
@@ -11,6 +11,21 @@ export function MatchSheet({ match: m, onClose, onHeadToHead }: { match: Match; 
     const d = ref.current;
     if (d && !d.open) d.showModal();
   }, []);
+
+  // Line-ups, timeline and video live in per-year files, fetched on demand.
+  const [details, setDetails] = useState<MatchDetails | null>(null);
+  const [loading, setLoading] = useState(!!m.hasDetails);
+  useEffect(() => {
+    let live = true;
+    loadMatchDetails(m).then((d) => {
+      if (!live) return;
+      setDetails(d);
+      setLoading(false);
+    });
+    return () => {
+      live = false;
+    };
+  }, [m]);
 
   const b = m.breakdown;
   const exact = breakdownMatchesScore(m);
@@ -103,6 +118,7 @@ export function MatchSheet({ match: m, onClose, onHeadToHead }: { match: Match; 
                 Values in {m.year}: try {values!.tries}, conversion {values!.conversions}, penalty {values!.penalties}, drop goal {values!.dropGoals}
                 {values!.marks ? `, goal from a mark ${values!.marks}` : ''}, penalty try {values!.penaltyTries}
                 {m.year >= 2017 ? ' (no conversion needed)' : ''}.
+                {m.breakdownSource === 'espn' && ' Source: ESPN.'}
               </p>
             )}
           </>
@@ -112,6 +128,16 @@ export function MatchSheet({ match: m, onClose, onHeadToHead }: { match: Match; 
             in four, mostly recent ones.
           </p>
         )}
+
+        {loading && <p className="muted small">Loading line-ups and scorers…</p>}
+        {details?.timeline && <Timeline items={details.timeline} home={m.home} away={m.away} />}
+        {details?.lineups && <Lineups lineups={details.lineups} home={m.home} away={m.away} />}
+        {details?.video && (
+          <a className="btn ghost wide video-link" href={details.video} target="_blank" rel="noopener noreferrer">
+            ▶︎ Watch on YouTube <span aria-hidden>↗</span>
+          </a>
+        )}
+        {(details?.timeline || details?.lineups) && <p className="muted small">Line-ups and scorers: ESPN.</p>}
 
         <button
           className="btn wide"
@@ -124,5 +150,76 @@ export function MatchSheet({ match: m, onClose, onHeadToHead }: { match: Match; 
         </button>
       </div>
     </dialog>
+  );
+}
+
+const ACTION_LABELS: Record<string, string> = {
+  try: 'Try',
+  conversion: 'Conversion',
+  penalty: 'Penalty goal',
+  drop: 'Drop goal',
+  'penalty try': 'Penalty try',
+};
+
+/** Scoring events in order, with the running score worked out from their points. */
+function Timeline({ items, home, away }: { items: NonNullable<MatchDetails['timeline']>; home: string; away: string }) {
+  let h = 0;
+  let a = 0;
+  return (
+    <>
+      <h4>Scoring timeline</h4>
+      <ol className="timeline">
+        {items.map((e, i) => {
+          if (e.side === 'home') h += e.points;
+          else a += e.points;
+          return (
+            <li key={i} className={e.side}>
+              <span className="tl-min">{e.minute !== null ? `${e.minute}′` : ''}</span>
+              <span className="tl-flag" aria-label={team(e.side === 'home' ? home : away).display}>
+                {team(e.side === 'home' ? home : away).flag}
+              </span>
+              <span className="tl-what">
+                <b>{e.player && e.player !== e.action ? e.player : ACTION_LABELS[e.action ?? ''] ?? e.action}</b>
+                <span className="muted">
+                  {' '}
+                  {e.player && e.player !== e.action ? ACTION_LABELS[e.action ?? ''] ?? e.action : ''} +{e.points}
+                </span>
+              </span>
+              <span className="tl-score">
+                {h}–{a}
+              </span>
+            </li>
+          );
+        })}
+      </ol>
+    </>
+  );
+}
+
+function Lineups({ lineups, home, away }: { lineups: NonNullable<MatchDetails['lineups']>; home: string; away: string }) {
+  const col = (name: string, list: NonNullable<MatchDetails['lineups']>['home']) => (
+    <div>
+      <p className="lu-team">
+        {team(name).flag} {team(name).display}
+      </p>
+      <ol className="lineup">
+        {list.map((p, i) => (
+          <li key={i}>
+            <span className="lu-nb">{p.nb ?? ''}</span>
+            <span className="lu-name">{p.name}</span>
+            <span className="lu-pos muted">{p.pos === 'R' ? 'Rep.' : p.pos ?? ''}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+  return (
+    <>
+      <h4>Line-ups</h4>
+      <div className="lineups">
+        {col(home, lineups.home)}
+        {col(away, lineups.away)}
+      </div>
+    </>
   );
 }

@@ -19,7 +19,7 @@ entre les nations de la Coupe du monde et comparer les bilans historiques d'une 
 - **Détail d'un match** : cliquer (ou taper) sur n'importe quel résultat ouvre une fiche avec le score, la
   compétition, le lieu et, quand la source les fournit, les **essais, transformations, pénalités, drops**
   (et goals from a mark, essais de pénalité) de chaque équipe, avec les points selon le barème de l'époque.
-  Environ 1 400 matchs sur 5 100 ont ce détail (75 % des matchs des années 2020, aucun dans les années 1960–70).
+  Environ 3 500 matchs sur 5 100 ont ce détail ; la fiche montre aussi, pour 1987–2020, les compositions, les marqueurs et un lien vidéo.
   La page Head-to-head totalise aussi ces actions sur les confrontations qui en disposent.
 - **Résultats** : tous les matchs, filtrables par équipe, adversaire, compétition/lieu, années et
   Coupe du monde.
@@ -55,6 +55,14 @@ des données simples sont lues). Lors de la construction des données, un match 
 mêmes équipes, une date à un jour près et le même score (2 936 matchs). ESPN apporte le nom de la compétition
 pour 2 000 matchs que l'archive ne nomme pas (Cinq Nations 1987–1999, Pacific Nations Cup, Pacific Rim,
 Churchill Cup, qualifications…), les poules et tours des Coupes du monde 1987–2019, et le stade quand il manque.
+
+Détails ESPN (`data/espn_details.json.gz`, 3 511 matchs de 1987 à 2020), tirés d'un second export ESPN
+au format pickle et convertis par `scripts/import_espn_details.py` (même chargement sans classe). Pour les
+mêmes matchs (équipes, date, score), ils apportent : le décompte essais / transformations / pénalités /
+drops quand l'archive n'en a pas **et** qu'il redonne exactement le score officiel (2 088 matchs : la
+couverture passe de 1 397 à 3 485 matchs), et, dans `public/data/details/<année>.json` chargés à la demande,
+les compositions d'équipes (2 677 matchs), la chronologie des points avec les marqueurs (2 712, seulement si
+elle redonne le score) et un lien vidéo YouTube (1 119, liens non vérifiés).
 
 Mise à jour des données : **automatique chaque lundi soir** (19 h 17 UTC, soit 20 h 17 / 21 h 17 à Paris)
 via `.github/workflows/update-rugby-data.yml` : re-télécharge l'archive, régénère le CSV, lance les tests

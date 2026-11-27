@@ -40,4 +40,17 @@ describe('scoring breakdowns', () => {
     expect(t.covered).toBe(withBreakdown.filter((m) => m.home === 'France' || m.away === 'France').length);
     expect(t.for.tries).toBeGreaterThan(0);
   });
+
+  it('ESPN fills breakdowns the archive lacks (1987–2020)', () => {
+    expect(withBreakdown.filter((m) => m.breakdownSource === 'espn').length).toBeGreaterThan(2000);
+  });
+
+  it('detail files: Japan v Ireland 2019 has line-ups and a timeline that adds up', () => {
+    const details = JSON.parse(readFileSync(new URL('../public/data/details/2019.json', import.meta.url), 'utf8'));
+    const d = details['2019-09-28|Japan|Ireland'];
+    expect(d.lineups.home).toHaveLength(23);
+    expect(d.timeline[0]).toMatchObject({ side: 'away', player: 'Garry Ringrose', action: 'try', minute: 14 });
+    const sum = (side: string) => d.timeline.filter((e: { side: string }) => e.side === side).reduce((s: number, e: { points: number }) => s + e.points, 0);
+    expect([sum('home'), sum('away')]).toEqual([19, 12]);
+  });
 });

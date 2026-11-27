@@ -455,3 +455,26 @@ select:focus-visible, input:focus-visible, button:focus-visible, summary:focus-v
   .sheet-grabber { display: block; position: absolute; left: 50%; top: 6px; transform: translateX(-50%); width: 36px; height: 5px; border-radius: 3px; background: var(--fill-strong); }
   .breakdown li { grid-template-columns: 4.5em 1fr 4.5em; }
 }
+
+/* ---------- match sheet: timeline, line-ups, video ---------- */
+.timeline { list-style: none; margin: 0 0 8px; padding: 0; }
+.timeline li { display: grid; grid-template-columns: 2.6em 1.6em 1fr auto; gap: 8px; align-items: center; padding: 7px 0; border-bottom: 0.5px solid var(--border); font-size: 0.9375rem; }
+.timeline li:last-child { border-bottom: 0; }
+.tl-min { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 0.8125rem; }
+.tl-what { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tl-what b { font-weight: 500; }
+.tl-score { font: 600 0.9375rem var(--font-rounded); font-variant-numeric: tabular-nums; }
+.timeline li.home .tl-score { color: var(--a); }
+.timeline li.away .tl-score { color: var(--b); }
+.lineups { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 8px; }
+.lu-team { margin: 0 0 4px; font-weight: 600; font-size: 0.875rem; }
+.lineup { list-style: none; margin: 0; padding: 0; font-size: 0.8125rem; }
+.lineup li { display: grid; grid-template-columns: 1.8em 1fr auto; gap: 6px; padding: 3px 0; border-bottom: 0.5px solid var(--border); }
+.lu-nb { color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+.lu-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lu-pos { font-size: 0.75rem; }
+.video-link { display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: 14px; text-decoration: none; }
+.video-link:hover { text-decoration: none; }
+@media (max-width: 640px) {
+  .lineups { grid-template-columns: 1fr; }
+}
