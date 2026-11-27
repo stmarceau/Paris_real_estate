@@ -68,7 +68,7 @@ export function MatchSheet({ match: m, onClose, onHeadToHead }: { match: Match; 
               {kinds.map((k) => {
                 const h = b.home[k.key];
                 const a = b.away[k.key];
-                const pts = (n: number) => (exact && values && n ? `${n * values[k.key]} pts` : x27x27);
+                const pts = (n: number) => (exact && values && n ? `${n * values[k.key]} pts` : '');
                 return (
                   <li key={k.key}>
                     <span className="bd-val ka">
