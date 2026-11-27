@@ -19,7 +19,7 @@ entre les nations de la Coupe du monde et comparer les bilans historiques d'une 
 - **Détail d'un match** : cliquer (ou taper) sur n'importe quel résultat ouvre une fiche avec le score, la
   compétition, le lieu et, quand la source les fournit, les **essais, transformations, pénalités, drops**
   (et goals from a mark, essais de pénalité) de chaque équipe, avec les points selon le barème de l'époque.
-  Environ 3 500 matchs sur 5 100 ont ce détail ; pour 1987–2020, la fiche montre aussi la chronologie des points.
+  Environ 3 500 matchs sur 5 100 ont ce détail.
   La page Head-to-head totalise aussi ces actions sur les confrontations qui en disposent.
 - **Résultats** : tous les matchs, filtrables par équipe, adversaire, compétition/lieu, années et
   Coupe du monde.
@@ -56,13 +56,12 @@ mêmes équipes, une date à un jour près et le même score (2 936 matchs). ESP
 pour 2 000 matchs que l'archive ne nomme pas (Cinq Nations 1987–1999, Pacific Nations Cup, Pacific Rim,
 Churchill Cup, qualifications…), les poules et tours des Coupes du monde 1987–2019, et le stade quand il manque.
 
-Détails ESPN (`data/espn_details.json.gz`, 3 511 matchs de 1987 à 2020), tirés d'un second export ESPN
-au format pickle et convertis par `scripts/import_espn_details.py` (même chargement sans classe). Seules les
-statistiques de points sont conservées : ni noms de joueurs, ni compositions, ni vidéos. Pour les mêmes
-matchs (équipes, date, score), elles apportent le décompte essais / transformations / pénalités / drops
-quand l'archive n'en a pas **et** qu'il redonne exactement le score officiel (2 088 matchs : la couverture
-passe de 1 397 à 3 485 matchs), et, dans `public/data/details/<année>.json` chargés à la demande, la
-chronologie des points (minute, équipe, type, score) pour 2 712 matchs, seulement si elle redonne le score.
+Décomptes ESPN (`data/espn_details.json.gz`, 3 511 matchs de 1987 à 2020), tirés d'un second export ESPN
+au format pickle et convertis par `scripts/import_espn_details.py` (même chargement sans classe). Seuls les
+décomptes de points sont conservés (essais, transformations, pénalités, drops, essais de pénalité) : ni
+chronologie, ni noms de joueurs, ni compositions, ni vidéos. Pour les mêmes matchs (équipes, date, score),
+ils complètent le détail quand l'archive n'en a pas **et** qu'il redonne exactement le score officiel
+(2 088 matchs : la couverture passe de 1 397 à 3 485 matchs).
 
 Mise à jour des données : **automatique chaque lundi soir** (19 h 17 UTC, soit 20 h 17 / 21 h 17 à Paris)
 via `.github/workflows/update-rugby-data.yml` : re-télécharge l'archive, régénère le CSV, lance les tests

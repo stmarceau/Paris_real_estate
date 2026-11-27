@@ -3,14 +3,14 @@
 
 Each game in the pickle has its two teams with score, scoring counts (tries,
 conversions, penalties, drops) and line-up, the list of scoring actions (player,
-minute, action, points, running score) and video links. Only scoring data is kept:
-counts and actions without the player's name. Line-ups, player names and videos
-are left out.
+minute, action, points, running score) and video links. Only the scoring counts
+are kept, plus each team's number of penalty tries (taken from the actions).
+Line-ups, player names, the scoring timeline and videos are left out.
 
 The pickle is loaded with an unpickler that refuses every class, so only plain
 Python data can be read and no code can run. Missing values (NaN floats) become
 null. Nothing is checked against scores here: scripts/update_data.py only uses
-counts and timelines that add up to the official score.
+counts that add up to the official score.
 
 Usage: python3 scripts/import_espn_details.py path/to/games.pkl
 """
@@ -44,12 +44,13 @@ def main(path: str) -> None:
         sides = []
         for t in teams:
             counts = {k: num(t.get(k)) for k in ('tries', 'conversions', 'penalties', 'drops')}
+            actions = g.get('actions') if isinstance(g.get('actions'), list) else []
+            penalty_tries = sum(1 for a in actions if isinstance(a, dict) and a.get('team') == t['name']
+                                and a.get('action') == 'penalty try')
             sides.append({'name': text(t['name']), 'score': int(t['score']),
-                          'counts': counts if all(v is not None for v in counts.values()) else None})
-        actions = [{'team': text(a.get('team')), 'action': text(a.get('action')),
-                    'points': num(a.get('points')), 'minute': num(a.get('timestamp'))}
-                   for a in (g.get('actions') if isinstance(g.get('actions'), list) else []) if isinstance(a, dict)]
-        out.append({'date': f'{d[:4]}-{d[4:6]}-{d[6:8]}', 'teams': sides, 'actions': actions})
+                          'counts': counts if all(v is not None for v in counts.values()) else None,
+                          'penalty_tries': penalty_tries})
+        out.append({'date': f'{d[:4]}-{d[4:6]}-{d[6:8]}', 'teams': sides})
     out.sort(key=lambda x: (x['date'], x['teams'][0]['name']))
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_bytes(gzip.compress((json.dumps(out, ensure_ascii=False, separators=(',', ':')) + '\n').encode('utf-8'), mtime=0))

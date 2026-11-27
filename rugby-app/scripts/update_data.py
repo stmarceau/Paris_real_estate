@@ -11,15 +11,14 @@ adds the competition name ESPN used (espn_competition), the World Cup stage (poo
 letter or knockout round) and the venue when the archive has none. A match is
 enriched only when ESPN has the same teams, a date within one day and the same score.
 
-ESPN game details (data/espn_details.json.gz, made by scripts/import_espn_details.py)
+ESPN scoring counts (data/espn_details.json.gz, made by scripts/import_espn_details.py)
 add, for the same matches: a scoring breakdown when the archive has none and ESPN's
 counts add up to the official score (breakdown_source says which source was used),
-and per-year detail files in public/data/details/ with the scoring timeline (only when
-its points add up to the score). No player names, line-ups or videos are published.
+Nothing else from it is published (no timeline, player names, line-ups or videos).
 
 Usage: python3 scripts/update_data.py
 """
-import collections, csv, datetime, gzip, json, pathlib, shutil, urllib.request
+import collections, csv, datetime, gzip, json, pathlib, urllib.request
 
 SOURCE = 'https://raw.githubusercontent.com/rugbyarchive/rugbyarchive.github.io/main/data/archive-data.js'
 EXTRA_NATIONS = {'Hong Kong'}  # qualified for RWC 2027, never played a World Cup before
@@ -31,7 +30,6 @@ META = DATA / 'competitions.json'
 BREAKDOWN = ['tries', 'conversions', 'penalties', 'drop_goals', 'marks', 'penalty_tries']
 ESPN = pathlib.Path(__file__).resolve().parent.parent / 'data' / 'espn_games.csv'
 ESPN_DETAILS = pathlib.Path(__file__).resolve().parent.parent / 'data' / 'espn_details.json.gz'
-DETAILS_DIR = DATA / 'details'
 
 # Points per action by era (from the archive's scoring table): try, conversion, penalty, drop, penalty try.
 ERAS = [(1971, 4, 2, 3, 3, 4), (1978, 4, 2, 3, 3, 4), (1992, 5, 2, 3, 3, 5), (2017, 5, 2, 3, 3, 7)]
@@ -54,7 +52,7 @@ def load_details():
 
 
 def details_for(index, date, home, away, hs, as_):
-    """ESPN details for this match: same teams, date within a day, same score."""
+    """ESPN scoring counts for this match: same teams, date within a day, same score."""
     d = datetime.date.fromisoformat(date)
     best = None
     for g in index.get(frozenset((home, away)), []):
@@ -65,7 +63,7 @@ def details_for(index, date, home, away, hs, as_):
     return best
 
 
-def espn_breakdown(sides, g, home, away, year):
+def espn_breakdown(sides, home, away, year):
     """[tries, conv, pens, drops, marks, pen tries] for home then away, only if it adds up to the score."""
     v = era_values(year)
     if not v:
@@ -76,7 +74,7 @@ def espn_breakdown(sides, g, home, away, year):
         c = t['counts']
         if not c:
             return None
-        pt = sum(1 for a in g['actions'] if a['team'] == name and a['action'] == 'penalty try')
+        pt = t['penalty_tries']
         # ESPN's try count may or may not include penalty tries: accept whichever reading matches the score.
         for tries, ptries in ((c['tries'] - pt, pt), (c['tries'], 0)):
             pts = tries * v[1] + c['conversions'] * v[2] + c['penalties'] * v[3] + c['drops'] * v[4] + ptries * v[5]
@@ -86,18 +84,6 @@ def espn_breakdown(sides, g, home, away, year):
         else:
             return None
     return out
-
-
-def match_details(g, home, away, sides):
-    """Scoring timeline (side, action, points, minute), only if its points add up to the score."""
-    acts = [a for a in g['actions'] if a['team'] in (home, away) and a['points'] is not None]
-    totals = collections.Counter()
-    for a in acts:
-        totals[a['team']] += a['points']
-    if acts and totals[home] == sides[home]['score'] and totals[away] == sides[away]['score']:
-        return {'timeline': [{'side': 'home' if a['team'] == home else 'away', 'action': a['action'], 'points': int(a['points']),
-                              'minute': int(a['minute']) if a['minute'] is not None else None} for a in acts]}
-    return {}
 
 
 def load_espn():
@@ -147,7 +133,6 @@ def main() -> None:
     details_index = load_details()
     enriched = 0
     from_espn_breakdown = 0
-    details = collections.defaultdict(dict)
 
     rows = []
     left_out = {}
@@ -167,23 +152,19 @@ def main() -> None:
         source = 'archive' if b else ''
         found = details_for(details_index, r[F['date']], h, a, r[F['home_score']], r[F['away_score']])
         if found:
-            _, sides, eg = found
+            _, sides, _game = found
             if not b:
-                b = espn_breakdown(sides, eg, h, a, int(r[F['date']][:4]))
+                b = espn_breakdown(sides, h, a, int(r[F['date']][:4]))
                 if b:
                     source = 'espn'
                     from_espn_breakdown += 1
-            extra = match_details(eg, h, a, sides)
-            if extra:
-                details[r[F['date']][:4]][f"{r[F['date']]}|{h}|{a}"] = extra
         b = b or [''] * 12
         g = espn_match(espn, r[F['date']], h, a, r[F['home_score']], r[F['away_score']])
         enriched += bool(g)
         stadium = lk('stadium', r) or (g['venue'] if g else '')
         rows.append([r[F['date']], h, a, r[F['home_score']], r[F['away_score']], lk('competition', r), stadium,
                      lk('city', r), lk('country', r), str(bool(r[F['neutral']])), str(bool(r[F['world_cup']]))] + list(b)
-                    + [g['competition'] if g else '', g['stage'] if g else '', source,
-                       '1' if f"{r[F['date']]}|{h}|{a}" in details.get(r[F['date']][:4], {}) else ''])
+                    + [g['competition'] if g else '', g['stage'] if g else '', source])
     rows.sort(key=lambda x: x[0])
 
     # Safety net: never replace the data with a much smaller set (broken or truncated source).
@@ -196,14 +177,9 @@ def main() -> None:
         w = csv.writer(f, lineterminator='\n')
         w.writerow(['date', 'home_team', 'away_team', 'home_score', 'away_score', 'competition',
                     'stadium', 'city', 'country', 'neutral', 'world_cup']
-                   + [f'{side}_{k}' for side in ('home', 'away') for k in BREAKDOWN] + ['espn_competition', 'stage', 'breakdown_source', 'details'])
+                   + [f'{side}_{k}' for side in ('home', 'away') for k in BREAKDOWN] + ['espn_competition', 'stage', 'breakdown_source'])
         w.writerows(rows)
-    # Per-year detail files, loaded by the app when a match sheet is opened.
-    shutil.rmtree(DETAILS_DIR, ignore_errors=True)
-    DETAILS_DIR.mkdir(parents=True)
-    for year, items in details.items():
-        (DETAILS_DIR / f'{year}.json').write_text(json.dumps(items, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
-    print(f'{from_espn_breakdown} breakdowns from ESPN, scoring timelines for {sum(len(x) for x in details.values())} matches')
+    print(f'{from_espn_breakdown} breakdowns from ESPN')
 
     kept = {r[5] for r in rows}
     meta = {c: {'leftOut': e['matches'], 'teams': sorted(e['teams'])} for c, e in sorted(left_out.items()) if c in kept}

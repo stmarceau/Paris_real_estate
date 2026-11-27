@@ -79,7 +79,7 @@ export function MatchRow({ m, perspective, onRemove }: { m: Match; perspective?:
     >
       <div className="match-meta">
         <time dateTime={m.date}>{formatDate(m.date)}</time>
-        {(m.breakdown || m.hasDetails) && (
+        {m.breakdown && (
           <span className="tag detail" title="Scoring details available">
             Details
           </span>
