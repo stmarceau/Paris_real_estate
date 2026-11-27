@@ -25,6 +25,9 @@ function Icon({ view }: { view: View }) {
   );
 }
 
+/** Views where the period filter is shown and applied. */
+const PERIOD_VIEWS: View[] = ['head-to-head', 'rankings'];
+
 const TABS: { view: View; label: string }[] = [
   { view: 'head-to-head', label: 'Head-to-head' },
   { view: 'competitions', label: 'Competitions' },
@@ -54,10 +57,11 @@ export default function App() {
       .catch(() => {});
   }, []);
 
-  const period = periodById(route.params.get('period'));
+  // The period filter only applies to some views; elsewhere it is hidden but kept in the URL.
+  const periodApplies = PERIOD_VIEWS.includes(route.view);
+  const period = periodApplies ? periodById(route.params.get('period')) : PERIODS[0];
   const allMatches = useMemo(() => (base ? [...base, ...local] : []), [base, local]);
-  // Every view works on the matches of the selected period only.
-  const matches = useMemo(() => allMatches.filter((m) => m.year >= period.from), [allMatches, period.from]);
+  const periodMatches = useMemo(() => allMatches.filter((m) => m.year >= period.from), [allMatches, period.from]);
   const lastDate = useMemo(() => allMatches.reduce((d, m) => (m.date > d ? m.date : d), ''), [allMatches]);
 
   const updateLocal = (list: Match[]) => {
@@ -78,6 +82,7 @@ export default function App() {
           <span className="brand-name">RugbyNation</span>
         </div>
         <div className="top-right">
+          {periodApplies && (
           <div className="period" role="radiogroup" aria-label="Period">
             <span className="period-label">Period</span>
             {PERIODS.map((pe) => (
@@ -93,6 +98,7 @@ export default function App() {
               </button>
             ))}
           </div>
+          )}
         <nav className="tabs" aria-label="Sections">
           {TABS.map((t) => (
             <button
@@ -120,7 +126,7 @@ export default function App() {
         {!base && !error && <p className="loading">Loading results…</p>}
         {base && route.view === 'head-to-head' && (
           <HeadToHeadView
-            matches={matches}
+            matches={periodMatches}
             a={validTeam(p.get('a'), 'France')}
             b={validTeam(p.get('b'), 'New Zealand')}
             onChange={(a, b) => navigate('head-to-head', { a, b })}
@@ -128,7 +134,7 @@ export default function App() {
         )}
         {base && route.view === 'competitions' && (
           <CompetitionsView
-            matches={matches}
+            matches={allMatches}
             meta={compMeta}
             family={p.get('c') ?? ''}
             edition={p.get('e') ?? ''}
@@ -137,7 +143,7 @@ export default function App() {
         )}
         {base && route.view === 'results' && (
           <ResultsView
-            matches={matches}
+            matches={allMatches}
             teamName={validTeam(p.get('team'), '')}
             opponent={validTeam(p.get('opponent'), '')}
             onFilter={(team, opponent) => navigate('results', { team, opponent })}
@@ -147,7 +153,7 @@ export default function App() {
         )}
         {base && route.view === 'rankings' && (
           <OverviewView
-            matches={matches}
+            matches={periodMatches}
             teamName={validTeam(p.get('team'), 'France')}
             onTeam={(team) => navigate('rankings', { team })}
             onCompare={(a, b) => {
