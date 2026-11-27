@@ -4,6 +4,9 @@ import { headToHead, type Record as Rec, type Streak, type TeamView } from '../s
 import { BalanceChart, DecadeBars } from './charts';
 import { MatchRow, TeamSelect, pct } from './common';
 
+const plural = (n: number, one: string, many = one + 's') => `${n} ${n === 1 ? one : many}`;
+const letter = (o: TeamView['outcome']) => (o === 'W' ? 'W' : o === 'L' ? 'L' : 'D');
+
 export function HeadToHeadView({
   matches,
   a,
@@ -25,99 +28,107 @@ export function HeadToHeadView({
   return (
     <section className="view">
       <div className="picker">
-        <TeamSelect label="Équipe A" value={a} onChange={(v) => onChange(v, v === b ? a : b)} />
-        <button className="swap" onClick={() => onChange(b, a)} aria-label="Inverser les équipes" title="Inverser">
+        <TeamSelect label="Team A" value={a} onChange={(v) => onChange(v, v === b ? a : b)} />
+        <button className="swap" onClick={() => onChange(b, a)} aria-label="Swap teams" title="Swap">
           ⇄
         </button>
-        <TeamSelect label="Équipe B" value={b} onChange={(v) => onChange(v === a ? b : a, v)} />
+        <TeamSelect label="Team B" value={b} onChange={(v) => onChange(v === a ? b : a, v)} />
       </div>
 
       {t.played === 0 ? (
-        <p className="empty">Aucun match entre {ta.fr} et {tb.fr} sur la période choisie.</p>
+        <p className="empty">
+          No matches between {ta.display} and {tb.display} in the selected period.
+        </p>
       ) : (
         <>
           <div className="hero card">
             <div className="hero-team">
               <span className="hero-flag">{ta.flag}</span>
-              <span className="hero-name">{ta.fr}</span>
+              <span className="hero-name">{ta.display}</span>
               <span className="hero-wins ka">{t.wins}</span>
-              <span className="muted">victoires</span>
+              <span className="muted">{t.wins === 1 ? 'win' : 'wins'}</span>
             </div>
             <div className="hero-mid">
               <span className="hero-played">{t.played}</span>
-              <span className="muted">matchs</span>
-              <span className="hero-draws">{t.draws} nul{t.draws > 1 ? 's' : ''}</span>
+              <span className="muted">{t.played === 1 ? 'match' : 'matches'}</span>
+              <span className="hero-draws">{plural(t.draws, 'draw')}</span>
             </div>
             <div className="hero-team">
               <span className="hero-flag">{tb.flag}</span>
-              <span className="hero-name">{tb.fr}</span>
+              <span className="hero-name">{tb.display}</span>
               <span className="hero-wins kb">{t.losses}</span>
-              <span className="muted">victoires</span>
+              <span className="muted">{t.losses === 1 ? 'win' : 'wins'}</span>
             </div>
             <ShareBar r={t} />
             <p className="hero-sub muted">
-              Depuis le {formatDate(h.views[0].match.date)} · dernier match le {formatDate(h.views[h.views.length - 1].match.date)}
+              First meeting {formatDate(h.views[0].match.date)} · latest {formatDate(h.views[h.views.length - 1].match.date)}
             </p>
           </div>
 
           <div className="grid-stats">
-            <Stat label="Points marqués" a={t.pointsFor} b={t.pointsAgainst} />
-            <Stat label="Moyenne par match" a={(t.pointsFor / t.played).toFixed(1)} b={(t.pointsAgainst / t.played).toFixed(1)} />
-            <Stat label="10 derniers matchs" a={`${h.last10.wins} V`} b={`${h.last10.losses} V`} note={h.last10.draws ? `${h.last10.draws} nul(s)` : undefined} />
+            <Stat label="Points scored" a={t.pointsFor} b={t.pointsAgainst} />
+            <Stat label="Average per match" a={(t.pointsFor / t.played).toFixed(1)} b={(t.pointsAgainst / t.played).toFixed(1)} />
+            <Stat label="Last 10 matches" a={`${h.last10.wins} W`} b={`${h.last10.losses} W`} note={h.last10.draws ? plural(h.last10.draws, 'draw') : undefined} />
             <Stat
-              label="Coupe du monde"
+              label="World Cup"
               a={h.worldCup.played ? h.worldCup.wins : '–'}
               b={h.worldCup.played ? h.worldCup.losses : '–'}
-              note={h.worldCup.played ? `${h.worldCup.played} match(s)` : 'Jamais affrontés'}
+              note={h.worldCup.played ? plural(h.worldCup.played, 'match', 'matches') : 'Never met'}
             />
           </div>
 
           <div className="card">
-            <h3>Forme récente</h3>
-            <p className="muted small">Les 10 derniers face-à-face, du plus ancien au plus récent, vus par {ta.fr}.</p>
+            <h3>Recent form</h3>
+            <p className="muted small">The last 10 meetings, oldest to newest, from {ta.display}’s point of view.</p>
             <div className="form-strip">
               {h.views.slice(-10).map((v) => (
-                <span key={v.match.id} className={`badge big ${v.outcome === 'W' ? 'w' : v.outcome === 'L' ? 'l' : 'd'}`} title={`${formatDate(v.match.date)} : ${v.for}–${v.against}`}>
-                  {v.outcome === 'W' ? 'V' : v.outcome === 'L' ? 'D' : 'N'}
+                <span key={v.match.id} className={`badge big ${v.outcome === 'W' ? 'w' : v.outcome === 'L' ? 'l' : 'd'}`} title={`${formatDate(v.match.date)}: ${v.for}–${v.against}`}>
+                  {letter(v.outcome)}
                 </span>
               ))}
             </div>
             <p className="small">
-              <StreakText s={h.currentStreak} a={ta.fr} b={tb.fr} current />
+              <StreakText s={h.currentStreak} a={ta.display} b={tb.display} />
             </p>
           </div>
 
           <div className="two-col">
             <div className="card">
-              <h3>Selon le lieu</h3>
+              <h3>By venue</h3>
               <table className="table">
                 <thead>
                   <tr>
-                    <th>Lieu</th>
-                    <th>J</th>
+                    <th>Venue</th>
+                    <th>P</th>
                     <th className="ka">{ta.flag}</th>
-                    <th>N</th>
+                    <th>D</th>
                     <th className="kb">{tb.flag}</th>
-                    <th>% {ta.flag}</th>
+                    <th>{ta.flag} %</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <VenueRow label={`Chez ${ta.fr}`} r={h.byVenue.home} />
-                  <VenueRow label={`Chez ${tb.fr}`} r={h.byVenue.away} />
-                  <VenueRow label="Terrain neutre" r={h.byVenue.neutral} />
+                  <VenueRow label={`In ${ta.display}`} r={h.byVenue.home} />
+                  <VenueRow label={`In ${tb.display}`} r={h.byVenue.away} />
+                  <VenueRow label="Neutral venue" r={h.byVenue.neutral} />
                 </tbody>
               </table>
             </div>
             <div className="card">
               <h3>Records</h3>
               <ul className="records">
-                <RecordItem label={`Plus large victoire ${ta.fr}`} v={h.biggestWinA} />
-                <RecordItem label={`Plus large victoire ${tb.fr}`} v={h.biggestWinB} />
-                <RecordItem label="Match le plus prolifique" v={h.highestAggregate} total />
+                <RecordItem label={`Biggest ${ta.display} win`} v={h.biggestWinA} />
+                <RecordItem label={`Biggest ${tb.display} win`} v={h.biggestWinB} />
+                <RecordItem label="Highest-scoring match" v={h.highestAggregate} total />
                 <li>
-                  <span className="muted">Plus longues séries</span>
+                  <span className="muted">Longest winning runs</span>
                   <span>
-                    <span className="ka">{ta.fr} : {h.longestStreakA.length}</span> · <span className="kb">{tb.fr} : {h.longestStreakB.length}</span>
+                    <span className="ka">
+                      {ta.display}: {h.longestStreakA.length}
+                    </span>{' '}
+                    ·{' '}
+                    <span className="kb">
+                      {tb.display}: {h.longestStreakB.length}
+                    </span>
                   </span>
                 </li>
               </ul>
@@ -125,17 +136,17 @@ export function HeadToHeadView({
           </div>
 
           <div className="card">
-            <h3>Victoires par décennie</h3>
-            <DecadeBars rows={h.decades} labelA={ta.fr} labelB={tb.fr} />
+            <h3>Wins per decade</h3>
+            <DecadeBars rows={h.decades} labelA={ta.display} labelB={tb.display} />
           </div>
 
           <div className="card">
-            <h3>Qui mène la série ?</h3>
-            <BalanceChart points={h.balance} labelA={ta.fr} labelB={tb.fr} />
+            <h3>Who leads the series?</h3>
+            <BalanceChart points={h.balance} labelA={ta.display} labelB={tb.display} />
           </div>
 
           <div className="card">
-            <h3>Tous les matchs ({list.length})</h3>
+            <h3>All matches ({list.length})</h3>
             <ul className="matches">
               {(showAll ? list : list.slice(0, 15)).map((m) => (
                 <MatchRow key={m.id} m={m} perspective={a} />
@@ -143,7 +154,7 @@ export function HeadToHeadView({
             </ul>
             {list.length > 15 && (
               <button className="btn ghost" onClick={() => setShowAll((s) => !s)}>
-                {showAll ? 'Réduire' : `Afficher les ${list.length - 15} autres`}
+                {showAll ? 'Show less' : `Show ${list.length - 15} more`}
               </button>
             )}
           </div>
@@ -156,10 +167,14 @@ export function HeadToHeadView({
 function ShareBar({ r }: { r: Rec }) {
   const w = (n: number) => `${(n / r.played) * 100}%`;
   return (
-    <div className="sharebar" role="img" aria-label={`${pct(r.wins / r.played)} de victoires A, ${pct(r.draws / r.played)} de nuls, ${pct(r.losses / r.played)} de victoires B`}>
-      <span className="fill-a" style={{ width: w(r.wins) }}>{r.wins / r.played >= 0.12 ? pct(r.wins / r.played) : ''}</span>
+    <div className="sharebar" role="img" aria-label={`Team A wins ${pct(r.wins / r.played)}, draws ${pct(r.draws / r.played)}, team B wins ${pct(r.losses / r.played)}`}>
+      <span className="fill-a" style={{ width: w(r.wins) }}>
+        {r.wins / r.played >= 0.12 ? pct(r.wins / r.played) : ''}
+      </span>
       <span className="fill-d" style={{ width: w(r.draws) }} />
-      <span className="fill-b" style={{ width: w(r.losses) }}>{r.losses / r.played >= 0.12 ? pct(r.losses / r.played) : ''}</span>
+      <span className="fill-b" style={{ width: w(r.losses) }}>
+        {r.losses / r.played >= 0.12 ? pct(r.losses / r.played) : ''}
+      </span>
     </div>
   );
 }
@@ -192,12 +207,13 @@ function VenueRow({ label, r }: { label: string; r: Rec }) {
 }
 
 function RecordItem({ label, v, total }: { label: string; v?: TeamView; total?: boolean }) {
-  if (!v) return (
-    <li>
-      <span className="muted">{label}</span>
-      <span>–</span>
-    </li>
-  );
+  if (!v)
+    return (
+      <li>
+        <span className="muted">{label}</span>
+        <span>–</span>
+      </li>
+    );
   const m = v.match;
   return (
     <li>
@@ -215,16 +231,14 @@ function RecordItem({ label, v, total }: { label: string; v?: TeamView; total?: 
   );
 }
 
-function StreakText({ s, a, b, current }: { s: Streak; a: string; b: string; current?: boolean }) {
+function StreakText({ s, a, b }: { s: Streak; a: string; b: string }) {
   if (!s.team) return null;
   const who = s.team === 'A' ? a : s.team === 'B' ? b : null;
-  const prefix = current ? 'Série en cours : ' : '';
-  if (!who) return <>{prefix}{s.length} match{s.length > 1 ? 's' : ''} nul{s.length > 1 ? 's' : ''} consécutif{s.length > 1 ? 's' : ''}</>;
+  if (!who) return <>Current run: {plural(s.length, 'draw')} in a row.</>;
   return (
     <>
-      {prefix}
-      <b className={s.team === 'A' ? 'ka' : 'kb'}>{who}</b> a gagné {s.length > 1 ? `les ${s.length} derniers matchs` : 'le dernier match'}
-      {s.from && s.length > 1 ? ` (depuis ${s.from.slice(0, 4)})` : ''}.
+      Current run: <b className={s.team === 'A' ? 'ka' : 'kb'}>{who}</b> {s.length > 1 ? `have won the last ${s.length} meetings` : 'won the last meeting'}
+      {s.from && s.length > 1 ? ` (since ${s.from.slice(0, 4)})` : ''}.
     </>
   );
 }

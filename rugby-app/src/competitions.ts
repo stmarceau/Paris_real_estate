@@ -11,16 +11,16 @@ export interface Family {
 }
 
 export const FAMILIES: Family[] = [
-  { id: 'coupe-du-monde', label: 'Coupe du monde', test: (m) => m.worldCup, table: true },
+  { id: 'world-cup', label: 'Rugby World Cup', test: (m) => m.worldCup, table: true },
   {
     id: 'six-nations',
-    label: 'Tournoi des Six Nations',
+    label: 'Six Nations',
     test: (m) => /(Home|Five|Six) Nations Championship/.test(m.competition),
     table: true,
   },
   {
     id: 'rugby-championship',
-    label: 'Tri-Nations / Rugby Championship',
+    label: 'Tri Nations / Rugby Championship',
     test: (m) => /^(\d{4} )?(Tri Nations( Series)?|(The )?Rugby Championship)$/.test(m.competition),
     table: true,
   },
@@ -29,18 +29,21 @@ export const FAMILIES: Family[] = [
   { id: 'pacific', label: 'Pacific Nations Cup', test: (m) => /Pacific Nations Cup/.test(m.competition), table: true },
   {
     id: 'europe',
-    label: 'Championnat d’Europe',
+    label: 'European Championship',
     test: (m) => /Rugby Europe|European Nations Cup|FIRA (Trophy|Nations Cup)/.test(m.competition),
     table: true,
   },
-  { id: 'automne', label: 'Tests d’automne', test: (m) => /Autumn Nations (Series|Cup)/.test(m.competition), table: false },
+  { id: 'autumn', label: 'Autumn Nations', test: (m) => /Autumn Nations (Series|Cup)/.test(m.competition), table: false },
   {
-    id: 'qualifications',
-    label: 'Qualifications Coupe du monde',
+    id: 'qualifying',
+    label: 'World Cup qualifying',
     test: (m) => !m.worldCup && /Rugby World Cup (Qualifying|Final Qualification|qualification)/i.test(m.competition),
     table: false,
   },
 ];
+
+/** Family ids used before the app was translated, so old links keep working. */
+export const FAMILY_ALIASES: Record<string, string> = { 'coupe-du-monde': 'world-cup', automne: 'autumn', qualifications: 'qualifying' };
 
 export interface Edition {
   family: Family;
@@ -101,23 +104,23 @@ function ruleFor(m: Match): Rule | undefined {
 
 /** Year of an edition: the first 4-digit year in the competition name, else the match year. */
 function editionKey(f: Family, m: Match): string {
-  if (f.id === 'coupe-du-monde') return String(m.year);
+  if (f.id === 'world-cup') return String(m.year);
   return m.competition.match(/\d{4}/)?.[0] ?? String(m.year);
 }
 
 function editionLabel(f: Family, key: string, names: string[], year?: number): string {
-  if (f.id === 'coupe-du-monde') return `Coupe du monde ${key}`;
+  if (f.id === 'world-cup') return `${key} Rugby World Cup`;
   if (f.id === 'six-nations') {
     const n = names[0] ?? '';
     const y = year ?? Number(key);
     const kind =
-      n.includes('Home') || (!n && y < 1910) ? 'Tournoi britannique' : n.includes('Six') || y >= 2000 ? 'Tournoi des Six Nations' : 'Tournoi des Cinq Nations';
-    return `${kind} ${key}`;
+      n.includes('Home') || (!n && y < 1910) ? 'Home Nations Championship' : n.includes('Six') || y >= 2000 ? 'Six Nations Championship' : 'Five Nations Championship';
+    return `${key} ${kind}`;
   }
-  if (f.id === 'rugby-championship') return `${Number(key) < 2012 ? 'Tri-Nations' : 'Rugby Championship'} ${key}`;
+  if (f.id === 'rugby-championship') return `${key} ${Number(key) < 2012 ? 'Tri Nations' : 'Rugby Championship'}`;
   // Keep the source's own name (e.g. "2008-10 European Nations Cup Division 1A") when it carries the year.
   const withYear = names.find((n) => n.includes(key));
-  return withYear ?? `${f.label} ${key}`;
+  return withYear ?? `${key} ${f.label}`;
 }
 
 /** Group matches by competition family, then by edition (most recent first). */
@@ -220,16 +223,16 @@ export interface Round {
  * the bronze final and the final. Returns null for other formats (2027 adds a round of 16).
  */
 export function worldCupPhases(ed: Edition): { pools: Match[]; rounds: Round[] } | null {
-  if (ed.family.id !== 'coupe-du-monde' || Number(ed.key) > 2023 || ed.matches.length < 9) return null;
+  if (ed.family.id !== 'world-cup' || Number(ed.key) > 2023 || ed.matches.length < 9) return null;
   const ms = ed.matches;
   const ko = ms.slice(-8);
   return {
     pools: ms.slice(0, -8),
     rounds: [
-      { label: 'Quarts de finale', matches: ko.slice(0, 4) },
-      { label: 'Demi-finales', matches: ko.slice(4, 6) },
-      { label: 'Match pour la 3e place', matches: [ko[6]] },
-      { label: 'Finale', matches: [ko[7]] },
+      { label: 'Quarter-finals', matches: ko.slice(0, 4) },
+      { label: 'Semi-finals', matches: ko.slice(4, 6) },
+      { label: 'Bronze final', matches: [ko[6]] },
+      { label: 'Final', matches: [ko[7]] },
     ],
   };
 }

@@ -35,14 +35,14 @@ export function DecadeBars({ rows, labelA, labelB }: { rows: DecadeRow[]; labelA
       <div className="chart-readout" aria-live="polite">
         {h ? (
           <>
-            <b>Années {h.decade}</b> · <span className="ka">{labelA} {h.winsA}</span> ·{' '}
-            <span className="kd">nuls {h.draws}</span> · <span className="kb">{labelB} {h.winsB}</span>
+            <b>{h.decade}s</b> · <span className="ka">{labelA} {h.winsA}</span> ·{' '}
+            <span className="kd">draws {h.draws}</span> · <span className="kb">{labelB} {h.winsB}</span>
           </>
         ) : (
-          <span className="muted">Survolez ou touchez une décennie</span>
+          <span className="muted">Hover or tap a decade</span>
         )}
       </div>
-      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Victoires par décennie" onMouseLeave={() => setHover(null)}>
+      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Wins per decade" onMouseLeave={() => setHover(null)}>
         {ticks.map((t) => (
           <g key={t}>
             <line x1={pad.l} x2={W - pad.r} y1={pad.t + ih - y(t)} y2={pad.t + ih - y(t)} className="grid" />
@@ -80,7 +80,7 @@ export function DecadeBars({ rows, labelA, labelB }: { rows: DecadeRow[]; labelA
       </svg>
       <figcaption className="legend">
         <span className="key ka">{labelA}</span>
-        <span className="key kd">Nuls</span>
+        <span className="key kd">Draws</span>
         <span className="key kb">{labelB}</span>
       </figcaption>
     </figure>
@@ -115,15 +115,15 @@ export function BalanceChart({ points, labelA, labelB }: { points: { date: strin
     setHover(Math.max(0, Math.min(points.length - 1, i)));
   };
 
-  const lead = h.value > 0 ? `${labelA} +${h.value}` : h.value < 0 ? `${labelB} +${-h.value}` : 'Égalité parfaite';
+  const lead = h.value > 0 ? `${labelA} +${h.value}` : h.value < 0 ? `${labelB} +${-h.value}` : 'All square';
 
   return (
     <figure className="chart" ref={ref as React.RefObject<HTMLElement>}>
       <div className="chart-readout" aria-live="polite">
-        <b>{formatDate(h.date)}</b> · après {hover !== null ? hover + 1 : points.length} matchs ·{' '}
+        <b>{formatDate(h.date)}</b> · after {hover !== null ? hover + 1 : points.length} matches ·{' '}
         <span className={h.value > 0 ? 'ka' : h.value < 0 ? 'kb' : 'kd'}>{lead}</span>
       </div>
-      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Évolution de l'écart de victoires" onPointerMove={onMove} onPointerLeave={() => setHover(null)}>
+      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Running difference in wins" onPointerMove={onMove} onPointerLeave={() => setHover(null)}>
         <defs>
           <clipPath id="above">
             <rect x={0} y={0} width={W} height={y(0)} />
@@ -161,8 +161,8 @@ export function BalanceChart({ points, labelA, labelB }: { points: { date: strin
         )}
       </svg>
       <figcaption className="legend">
-        <span className="key ka">Au-dessus de 0 : {labelA} mène</span>
-        <span className="key kb">En dessous : {labelB} mène</span>
+        <span className="key ka">Above 0: {labelA} lead</span>
+        <span className="key kb">Below: {labelB} lead</span>
       </figcaption>
     </figure>
   );

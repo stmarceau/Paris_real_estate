@@ -20,15 +20,15 @@ export function TeamSelect({
         {allowEmpty !== undefined && <option value="">{allowEmpty}</option>}
         {[
           { label: 'Six Nations + Rugby Championship', list: TEAMS.filter((t) => t.tier1) },
-          { label: 'Autres nations de la Coupe du monde', list: TEAMS.filter((t) => !t.tier1) },
+          { label: 'Other Rugby World Cup nations', list: TEAMS.filter((t) => !t.tier1) },
         ].map((g) => (
           <optgroup key={g.label} label={g.label}>
             {g.list
               .filter((t) => t.name !== exclude)
-              .sort((x, y) => x.fr.localeCompare(y.fr, 'fr'))
+              .sort((x, y) => x.display.localeCompare(y.display, 'en'))
               .map((t) => (
                 <option key={t.name} value={t.name}>
-                  {t.flag} {t.fr}
+                  {t.flag} {t.display}
                 </option>
               ))}
           </optgroup>
@@ -45,7 +45,7 @@ export function TeamName({ name, short }: { name: string; short?: boolean }) {
       <span className="flag" aria-hidden>
         {t.flag}
       </span>
-      {short ? null : <span>{t.fr}</span>}
+      {short ? null : <span>{t.display}</span>}
     </span>
   );
 }
@@ -54,20 +54,20 @@ export function TeamName({ name, short }: { name: string; short?: boolean }) {
 export function MatchRow({ m, perspective, onRemove }: { m: Match; perspective?: string; onRemove?: () => void }) {
   const homeWin = m.homeScore > m.awayScore;
   const awayWin = m.awayScore > m.homeScore;
-  let badge: { cls: string; txt: string } | null = null;
+  let badge: { cls: string; txt: string; label: string } | null = null;
   if (perspective) {
     const isHome = m.home === perspective;
     const won = isHome ? homeWin : awayWin;
     const lost = isHome ? awayWin : homeWin;
-    badge = won ? { cls: 'w', txt: 'V' } : lost ? { cls: 'l', txt: 'D' } : { cls: 'd', txt: 'N' };
+    badge = won ? { cls: 'w', txt: 'W', label: 'Win' } : lost ? { cls: 'l', txt: 'L', label: 'Loss' } : { cls: 'd', txt: 'D', label: 'Draw' };
   }
   return (
     <li className="match">
       <div className="match-meta">
         <time dateTime={m.date}>{formatDate(m.date)}</time>
         <span className="match-comp" title={m.competition}>
-          {m.worldCup && <span className="tag wc">Coupe du monde</span>}
-          {m.local && <span className="tag local">Ajouté</span>}
+          {m.worldCup && <span className="tag wc">World Cup</span>}
+          {m.local && <span className="tag local">Added</span>}
           {m.competition}
         </span>
       </div>
@@ -84,17 +84,17 @@ export function MatchRow({ m, perspective, onRemove }: { m: Match; perspective?:
           <TeamName name={m.away} />
         </span>
         {badge && (
-          <span className={`badge ${badge.cls}`} aria-label={badge.cls === 'w' ? 'Victoire' : badge.cls === 'l' ? 'Défaite' : 'Nul'}>
+          <span className={`badge ${badge.cls}`} aria-label={badge.label}>
             {badge.txt}
           </span>
         )}
       </div>
       <div className="match-venue">
         {[m.stadium, m.city].filter(Boolean).join(', ')}
-        {m.neutral && ' · terrain neutre'}
+        {m.neutral && ' · neutral venue'}
         {onRemove && (
           <button className="link danger" onClick={onRemove}>
-            Supprimer
+            Delete
           </button>
         )}
       </div>
@@ -103,5 +103,5 @@ export function MatchRow({ m, perspective, onRemove }: { m: Match; perspective?:
 }
 
 export function pct(n: number): string {
-  return `${Math.round(n * 100)} %`;
+  return `${Math.round(n * 100)}%`;
 }

@@ -21,12 +21,12 @@ describe('World Cups', () => {
     ['2023', 'South Africa'],
   ];
   it.each(champions)('%s: the last match is the final, won by %s', (year, champ) => {
-    const p = worldCupPhases(ed('coupe-du-monde', year))!;
+    const p = worldCupPhases(ed('world-cup', year))!;
     expect(winner(p.rounds[3].matches[0])).toBe(champ);
   });
   it('splits pool matches into the right number of pools', () => {
-    expect(standings(worldCupPhases(ed('coupe-du-monde', '1987'))!.pools).map((g) => g.length)).toEqual([4, 4, 4, 4]);
-    expect(standings(worldCupPhases(ed('coupe-du-monde', '2023'))!.pools).map((g) => g.length)).toEqual([5, 5, 5, 5]);
+    expect(standings(worldCupPhases(ed('world-cup', '1987'))!.pools).map((g) => g.length)).toEqual([4, 4, 4, 4]);
+    expect(standings(worldCupPhases(ed('world-cup', '2023'))!.pools).map((g) => g.length)).toEqual([5, 5, 5, 5]);
   });
 });
 
@@ -40,8 +40,8 @@ describe('Six Nations', () => {
     expect(table[5].team).toBe('Italy');
   });
   it('names older editions after the tournament of the time', () => {
-    expect(ed('six-nations', '1955').label).toBe('Tournoi des Cinq Nations 1955');
-    expect(ed('six-nations', '1890').label).toBe('Tournoi britannique 1890');
+    expect(ed('six-nations', '1955').label).toBe('1955 Five Nations Championship');
+    expect(ed('six-nations', '1890').label).toBe('1890 Home Nations Championship');
   });
 });
 

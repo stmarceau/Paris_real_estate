@@ -20,9 +20,9 @@ export function AddMatchForm({ onAdd }: { onAdd: (m: Match) => void }) {
     e.preventDefault();
     const h = Number(hs);
     const a = Number(as);
-    if (home === away) return setError('Choisissez deux équipes différentes.');
-    if (!date) return setError('La date est obligatoire.');
-    if (hs === '' || as === '' || !Number.isInteger(h) || !Number.isInteger(a) || h < 0 || a < 0) return setError('Les scores doivent être des nombres entiers positifs.');
+    if (home === away) return setError('Choose two different teams.');
+    if (!date) return setError('The date is required.');
+    if (hs === '' || as === '' || !Number.isInteger(h) || !Number.isInteger(a) || h < 0 || a < 0) return setError('Scores must be whole numbers, zero or more.');
     setError('');
     onAdd({
       id: `l${Date.now()}`,
@@ -44,15 +44,15 @@ export function AddMatchForm({ onAdd }: { onAdd: (m: Match) => void }) {
 
   return (
     <form className="card add-form" onSubmit={submit}>
-      <h3>Ajouter un résultat</h3>
-      <p className="muted small">Enregistré uniquement dans ce navigateur. Il est pris en compte dans toutes les statistiques.</p>
+      <h3>Add a result</h3>
+      <p className="muted small">Saved in this browser only. It counts in every statistic.</p>
       <div className="form-grid">
-        <TeamSelect label="Domicile" value={home} onChange={setHome} />
+        <TeamSelect label="Home" value={home} onChange={setHome} />
         <label className="field">
           <span className="field-label">Score</span>
           <input type="number" inputMode="numeric" min={0} value={hs} onChange={(e) => setHs(e.target.value)} required />
         </label>
-        <TeamSelect label="Extérieur" value={away} onChange={setAway} />
+        <TeamSelect label="Away" value={away} onChange={setAway} />
         <label className="field">
           <span className="field-label">Score</span>
           <input type="number" inputMode="numeric" min={0} value={as} onChange={(e) => setAs(e.target.value)} required />
@@ -62,29 +62,29 @@ export function AddMatchForm({ onAdd }: { onAdd: (m: Match) => void }) {
           <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
         </label>
         <label className="field">
-          <span className="field-label">Compétition</span>
-          <input value={competition} onChange={(e) => setCompetition(e.target.value)} placeholder="ex. 2024 Six Nations" />
+          <span className="field-label">Competition</span>
+          <input value={competition} onChange={(e) => setCompetition(e.target.value)} placeholder="e.g. 2024 Six Nations" />
         </label>
         <label className="field">
-          <span className="field-label">Stade</span>
+          <span className="field-label">Stadium</span>
           <input value={stadium} onChange={(e) => setStadium(e.target.value)} />
         </label>
         <label className="field">
-          <span className="field-label">Ville</span>
+          <span className="field-label">City</span>
           <input value={city} onChange={(e) => setCity(e.target.value)} />
         </label>
       </div>
       <div className="row wrap">
         <label className="check">
-          <input type="checkbox" checked={neutral} onChange={(e) => setNeutral(e.target.checked)} /> Terrain neutre
+          <input type="checkbox" checked={neutral} onChange={(e) => setNeutral(e.target.checked)} /> Neutral venue
         </label>
         <label className="check">
-          <input type="checkbox" checked={worldCup} onChange={(e) => setWorldCup(e.target.checked)} /> Coupe du monde
+          <input type="checkbox" checked={worldCup} onChange={(e) => setWorldCup(e.target.checked)} /> World Cup
         </label>
       </div>
       {error && <p className="error">{error}</p>}
       <button className="btn" type="submit">
-        Enregistrer
+        Save
       </button>
     </form>
   );

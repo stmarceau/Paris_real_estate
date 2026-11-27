@@ -1,6 +1,6 @@
-# 🏉 Rugby Face-à-Face
+# 🏉 RugbyNation
 
-Web app responsive (React + TypeScript + Vite) pour consulter les résultats des matchs de rugby
+Web app responsive (React + TypeScript + Vite), **interface en anglais**, pour consulter les résultats des matchs de rugby
 entre les nations de la Coupe du monde et comparer les bilans historiques d'une équipe contre une autre.
 
 ## Fonctionnalités
@@ -19,13 +19,14 @@ entre les nations de la Coupe du monde et comparer les bilans historiques d'une 
 - **Résultats** : tous les matchs, filtrables par équipe, adversaire, compétition/lieu, années et
   Coupe du monde.
 - **Période** (en haut, au-dessus des onglets) : depuis 1871, ère pro (1995+) ou depuis 2010. Elle
-  s'applique à toutes les pages et reste dans l'URL (`&periode=pro`).
+  s'applique à toutes les pages et reste dans l'URL (`&period=pro`).
 - **Bilans** : classement au % de victoires par groupe (Six Nations + Rugby Championship, qualifiés 2027,
   toutes), bilan d'une équipe
   contre chaque adversaire, matrice de tous les face-à-face.
 - **Ajouter un résultat** : enregistre un match récent dans le navigateur (localStorage) ; il est pris
   en compte dans toutes les statistiques.
-- L'état est dans l'URL (`#/face-a-face?a=France&b=New+Zealand`) : chaque vue se partage.
+- Les anciens liens en français (`#/face-a-face`, `#/resultats`, `#/bilans`, `equipe=`, `periode=`…) restent valides.
+- L'état est dans l'URL (`#/head-to-head?a=France&b=New+Zealand`) : chaque vue se partage.
 - Thème clair / sombre automatique, mise en page mobile.
 
 ## Données

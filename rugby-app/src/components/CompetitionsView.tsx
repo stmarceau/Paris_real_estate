@@ -1,21 +1,21 @@
 import { useMemo } from 'react';
 import { formatDate, team, type Match } from '../data';
-import { FAMILIES, buildEditions, leftOutFor, standings, winner, worldCupPhases, type Edition, type LeftOut, type Standing } from '../competitions';
+import {
+  FAMILIES,
+  FAMILY_ALIASES,
+  buildEditions,
+  leftOutFor,
+  standings,
+  winner,
+  worldCupPhases,
+  type Edition,
+  type LeftOut,
+  type Standing,
+} from '../competitions';
 import { MatchRow, TeamName } from './common';
 
-/** French names for nations outside the app that appear in some competitions. */
-const OTHER_FR: Record<string, string> = {
-  Belgium: 'Belgique',
-  Brazil: 'Brésil',
-  'Cook Islands': 'Îles Cook',
-  Czechia: 'Tchéquie',
-  Germany: 'Allemagne',
-  Kenya: 'Kenya',
-  Netherlands: 'Pays-Bas',
-  Poland: 'Pologne',
-  Switzerland: 'Suisse',
-  UAE: 'Émirats arabes unis',
-};
+/** Display names for nations outside the app that appear in some competitions. */
+const OTHER_NAMES: Record<string, string> = { UAE: 'United Arab Emirates' };
 
 export function CompetitionsView({
   matches,
@@ -32,14 +32,15 @@ export function CompetitionsView({
 }) {
   const all = useMemo(() => buildEditions(matches), [matches]);
   const families = FAMILIES.filter((f) => all.has(f.id));
-  const fam = all.has(family) ? family : families[0]?.id;
+  const wanted = FAMILY_ALIASES[family] ?? family;
+  const fam = all.has(wanted) ? wanted : families[0]?.id;
   const list = all.get(fam) ?? [];
   const idx = Math.max(0, list.findIndex((e) => e.key === edition));
   const ed = list[idx];
 
   return (
     <section className="view">
-      <div className="chips" role="tablist" aria-label="Compétitions">
+      <div className="chips" role="tablist" aria-label="Competitions">
         {families.map((f) => (
           <button key={f.id} role="tab" aria-selected={f.id === fam} className={f.id === fam ? 'on' : ''} onClick={() => onSelect(f.id)}>
             {f.label} <span className="muted">{all.get(f.id)!.length}</span>
@@ -50,11 +51,11 @@ export function CompetitionsView({
       {ed && (
         <>
           <div className="card edition-bar">
-            <button className="swap" disabled={idx >= list.length - 1} onClick={() => onSelect(fam, list[idx + 1].key)} aria-label="Édition précédente">
+            <button className="swap" disabled={idx >= list.length - 1} onClick={() => onSelect(fam, list[idx + 1].key)} aria-label="Previous edition">
               ‹
             </button>
             <label className="field">
-              <span className="field-label">Édition</span>
+              <span className="field-label">Edition</span>
               <select value={ed.key} onChange={(e) => onSelect(fam, e.target.value)}>
                 {list.map((e) => (
                   <option key={e.key} value={e.key}>
@@ -63,7 +64,7 @@ export function CompetitionsView({
                 ))}
               </select>
             </label>
-            <button className="swap" disabled={idx === 0} onClick={() => onSelect(fam, list[idx - 1].key)} aria-label="Édition suivante">
+            <button className="swap" disabled={idx === 0} onClick={() => onSelect(fam, list[idx - 1].key)} aria-label="Next edition">
               ›
             </button>
           </div>
@@ -85,29 +86,30 @@ function EditionDetail({ ed, leftOut }: { ed: Edition; leftOut: LeftOut | null }
   const runnerUp = final && champ && (final.home === champ ? final.away : final.home);
   const third = bronze && winner(bronze);
   const leader = groups.length === 1 ? groups[0][0] : null;
+  const n = ed.matches.length;
 
   return (
     <>
       <div className="card edition-head">
         <h2>{ed.label}</h2>
         <p className="muted small">
-          {ed.matches.length} match{ed.matches.length > 1 ? 's' : ''} · du {formatDate(first.date)} au {formatDate(last.date)}
+          {n} {n === 1 ? 'match' : 'matches'} · {formatDate(first.date)} to {formatDate(last.date)}
         </p>
         {champ && (
           <div className="podium">
             <div className="gold">
-              <span className="podium-rank">🏆 Champion</span>
+              <span className="podium-rank">🏆 Champions</span>
               <TeamName name={champ} />
             </div>
             {runnerUp && (
               <div>
-                <span className="podium-rank">2e</span>
+                <span className="podium-rank">Runners-up</span>
                 <TeamName name={runnerUp} />
               </div>
             )}
             {third && (
               <div>
-                <span className="podium-rank">3e</span>
+                <span className="podium-rank">Third</span>
                 <TeamName name={third} />
               </div>
             )}
@@ -115,28 +117,32 @@ function EditionDetail({ ed, leftOut }: { ed: Edition; leftOut: LeftOut | null }
         )}
         {leader && (
           <p className="small">
-            En tête du classement calculé : <b>{team(leader.team).flag} {team(leader.team).fr}</b> ({leader.wins} V, {leader.draws} N, {leader.losses} D)
-            {ed.family.id === 'six-nations' && groups[0].length >= 4 && leader.wins === groups[0].length - 1 && <span className="tag wc">Grand Chelem</span>}
+            Top of the computed table:{' '}
+            <b>
+              {team(leader.team).flag} {team(leader.team).display}
+            </b>{' '}
+            ({leader.wins} W, {leader.draws} D, {leader.losses} L)
+            {ed.family.id === 'six-nations' && groups[0].length >= 4 && leader.wins === groups[0].length - 1 && <span className="tag wc">Grand Slam</span>}
           </p>
         )}
         {ed.inferred > 0 && (
           <p className="note small">
-            Édition reconstituée : {ed.inferred === ed.matches.length ? 'ces matchs' : `${ed.inferred} de ces matchs`} n’ont pas de nom de compétition
-            dans la source et ont été rattachés d’après les équipes et les dates du tournoi.
+            Rebuilt edition: {ed.inferred === n ? 'these matches have' : `${ed.inferred} of these matches have`} no competition name in the source and were
+            attached using the tournament’s teams and dates.
           </p>
         )}
         {leftOut && (
           <p className="note small">
-            Édition incomplète : {leftOut.leftOut} match{leftOut.leftOut > 1 ? 's' : ''} contre{' '}
-            {leftOut.teams.map((t) => OTHER_FR[t] ?? t).join(', ')} (nations absentes de l’app) ne figure{leftOut.leftOut > 1 ? 'nt' : ''} pas ici.
-            Le classement est partiel.
+            Incomplete edition: {leftOut.leftOut} {leftOut.leftOut === 1 ? 'match' : 'matches'} against{' '}
+            {leftOut.teams.map((t) => OTHER_NAMES[t] ?? t).join(', ')} (nations not covered by the app) {leftOut.leftOut === 1 ? 'is' : 'are'} not shown. The
+            table is partial.
           </p>
         )}
       </div>
 
       {wc && (
         <div className="card">
-          <h3>Phase finale</h3>
+          <h3>Knockout stage</h3>
           {[...wc.rounds].reverse().map((r) => (
             <div key={r.label} className="round">
               <h4>{r.label}</h4>
@@ -152,19 +158,27 @@ function EditionDetail({ ed, leftOut }: { ed: Edition; leftOut: LeftOut | null }
 
       {wc && (
         <div className="card">
-          <h3>Phase de poules</h3>
+          <h3>Pool stage</h3>
           <div className="pools">
             {/* The data has no pool names: pools are found from who played whom, so they are not lettered. */}
             {standings(wc.pools).map((g) => (
               <div key={g[0].team}>
-                <h4>Poule : {g.map((r) => team(r.team).fr).sort((a, b) => a.localeCompare(b, 'fr')).slice(0, 2).join(', ')}…</h4>
+                <h4>
+                  Pool:{' '}
+                  {g
+                    .map((r) => team(r.team).display)
+                    .sort((a, b) => a.localeCompare(b, 'en'))
+                    .slice(0, 2)
+                    .join(', ')}
+                  …
+                </h4>
                 <StandingsTable rows={g} qualified={2} />
               </div>
             ))}
           </div>
           <TableNote />
           <details className="pool-matches">
-            <summary>Tous les matchs de poule ({wc.pools.length})</summary>
+            <summary>All pool matches ({wc.pools.length})</summary>
             <MatchesByDay matches={wc.pools} />
           </details>
         </div>
@@ -172,10 +186,10 @@ function EditionDetail({ ed, leftOut }: { ed: Edition; leftOut: LeftOut | null }
 
       {groups.length > 0 && (
         <div className="card">
-          <h3>Classement</h3>
+          <h3>Table</h3>
           {groups.map((g, i) => (
             <div key={g[0].team}>
-              {groups.length > 1 && <h4>Groupe {i + 1}</h4>}
+              {groups.length > 1 && <h4>Group {i + 1}</h4>}
               <StandingsTable rows={g} />
             </div>
           ))}
@@ -185,7 +199,7 @@ function EditionDetail({ ed, leftOut }: { ed: Edition; leftOut: LeftOut | null }
 
       {!wc && (
         <div className="card">
-          <h3>Résultats</h3>
+          <h3>Results</h3>
           <MatchesByDay matches={ed.matches} />
         </div>
       )}
@@ -199,22 +213,22 @@ function StandingsTable({ rows, qualified = 0 }: { rows: Standing[]; qualified?:
       <table className="table standings">
         <thead>
           <tr>
-            <th>Équipe</th>
-            <th title="Joués">J</th>
-            <th title="Victoires">V</th>
-            <th title="Nuls">N</th>
-            <th title="Défaites">D</th>
-            <th title="Points marqués">PM</th>
-            <th title="Points encaissés">PE</th>
-            <th title="Différence">+/−</th>
-            <th title="Points (2 par victoire, 1 par nul)">Pts</th>
+            <th>Team</th>
+            <th title="Played">P</th>
+            <th title="Won">W</th>
+            <th title="Drawn">D</th>
+            <th title="Lost">L</th>
+            <th title="Points for">PF</th>
+            <th title="Points against">PA</th>
+            <th title="Points difference">+/−</th>
+            <th title="Table points (2 for a win, 1 for a draw)">Pts</th>
           </tr>
         </thead>
         <tbody>
           {rows.map((r, i) => (
             <tr key={r.team} className={i < qualified ? 'qualified' : ''}>
               <td>
-                <span className="muted pos">{i + 1}</span> {team(r.team).flag} {team(r.team).fr}
+                <span className="muted pos">{i + 1}</span> {team(r.team).flag} {team(r.team).display}
               </td>
               <td>{r.played}</td>
               <td>{r.wins}</td>
@@ -240,8 +254,8 @@ function StandingsTable({ rows, qualified = 0 }: { rows: Standing[]; qualified?:
 function TableNote() {
   return (
     <p className="muted small">
-      Classement calculé à partir des scores : 2 points par victoire, 1 par nul, puis différence de points. Les points de bonus (nombre d’essais) ne
-      figurent pas dans les données : l’ordre officiel peut différer quand deux équipes sont proches.
+      Table computed from the scores: 2 points for a win, 1 for a draw, then points difference. Bonus points (tries scored) are not in the data, so the
+      official order may differ when teams are close.
     </p>
   );
 }

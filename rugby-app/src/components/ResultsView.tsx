@@ -60,29 +60,29 @@ export function ResultsView({
   return (
     <section className="view">
       <div className="card filters">
-        <TeamSelect label="Équipe" value={teamName} allowEmpty="Toutes" onChange={(v) => { onFilter(v, v ? opponent : ''); setLimit(PAGE); }} />
-        <TeamSelect label="Adversaire" value={opponent} allowEmpty="Tous" exclude={teamName} onChange={(v) => { onFilter(teamName, v); setLimit(PAGE); }} />
+        <TeamSelect label="Team" value={teamName} allowEmpty="All" onChange={(v) => { onFilter(v, v ? opponent : ''); setLimit(PAGE); }} />
+        <TeamSelect label="Opponent" value={opponent} allowEmpty="All" exclude={teamName} onChange={(v) => { onFilter(teamName, v); setLimit(PAGE); }} />
         <label className="field">
-          <span className="field-label">Compétition / lieu</span>
-          <input type="search" placeholder="ex. Six Nations, Twickenham…" value={query} onChange={(e) => { setQuery(e.target.value); setLimit(PAGE); }} />
+          <span className="field-label">Competition / venue</span>
+          <input type="search" placeholder="e.g. Six Nations, Twickenham…" value={query} onChange={(e) => { setQuery(e.target.value); setLimit(PAGE); }} />
         </label>
         <div className="field years">
-          <span className="field-label">Années</span>
+          <span className="field-label">Years</span>
           <div className="row">
-            <input type="number" inputMode="numeric" placeholder={String(years.min)} min={years.min} max={years.max} value={from} onChange={(e) => setFrom(e.target.value ? Number(e.target.value) : '')} aria-label="Année de début" />
+            <input type="number" inputMode="numeric" placeholder={String(years.min)} min={years.min} max={years.max} value={from} onChange={(e) => setFrom(e.target.value ? Number(e.target.value) : '')} aria-label="From year" />
             <span className="muted">→</span>
-            <input type="number" inputMode="numeric" placeholder={String(years.max)} min={years.min} max={years.max} value={to} onChange={(e) => setTo(e.target.value ? Number(e.target.value) : '')} aria-label="Année de fin" />
+            <input type="number" inputMode="numeric" placeholder={String(years.max)} min={years.min} max={years.max} value={to} onChange={(e) => setTo(e.target.value ? Number(e.target.value) : '')} aria-label="To year" />
           </div>
         </div>
         <label className="check">
-          <input type="checkbox" checked={wcOnly} onChange={(e) => setWcOnly(e.target.checked)} /> Coupe du monde uniquement
+          <input type="checkbox" checked={wcOnly} onChange={(e) => setWcOnly(e.target.checked)} /> World Cup only
         </label>
         <div className="filters-actions">
           <button className="btn ghost" onClick={reset}>
-            Réinitialiser
+            Reset
           </button>
           <button className="btn" onClick={() => setAdding((s) => !s)}>
-            {adding ? 'Fermer' : '+ Ajouter un résultat'}
+            {adding ? 'Close' : '+ Add a result'}
           </button>
         </div>
       </div>
@@ -97,10 +97,10 @@ export function ResultsView({
       )}
 
       <p className="count muted">
-        {filtered.length.toLocaleString('fr-FR')} match{filtered.length > 1 ? 's' : ''}
+        {filtered.length.toLocaleString('en-GB')} {filtered.length === 1 ? 'match' : 'matches'}
       </p>
       {filtered.length === 0 ? (
-        <p className="empty">Aucun match ne correspond à ces filtres.</p>
+        <p className="empty">No matches for these filters.</p>
       ) : (
         <ul className="matches">
           {filtered.slice(0, limit).map((m) => (
@@ -110,7 +110,7 @@ export function ResultsView({
       )}
       {filtered.length > limit && (
         <button className="btn ghost wide" onClick={() => setLimit((l) => l + PAGE)}>
-          Afficher plus ({filtered.length - limit} restants)
+          Show more ({filtered.length - limit} left)
         </button>
       )}
     </section>
