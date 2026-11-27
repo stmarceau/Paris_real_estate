@@ -10,34 +10,46 @@ export interface Family {
   table: boolean;
 }
 
+/**
+ * Names a match is known by: the archive's competition, then each part of ESPN's name
+ * (ESPN joins competition and trophy, e.g. "Five Nations / Calcutta Cup").
+ */
+export function competitionNames(m: Match): string[] {
+  return [m.competition, ...(m.espnCompetition ? m.espnCompetition.split(' / ') : [])].map((n) => n.trim()).filter(Boolean);
+}
+
+const named = (re: RegExp) => (m: Match) => competitionNames(m).some((n) => re.test(n));
+
+/** Order matters: a match joins the first family it fits (championships before qualifying). */
 export const FAMILIES: Family[] = [
   { id: 'world-cup', label: 'Rugby World Cup', test: (m) => m.worldCup, table: true },
-  {
-    id: 'six-nations',
-    label: 'Six Nations',
-    test: (m) => /(Home|Five|Six) Nations Championship/.test(m.competition),
-    table: true,
-  },
+  { id: 'six-nations', label: 'Six Nations', test: named(/(Home|Five|Six) Nations Championship|^(Five|Six) Nations$/), table: true },
   {
     id: 'rugby-championship',
     label: 'Tri Nations / Rugby Championship',
-    test: (m) => /^(\d{4} )?(Tri Nations( Series)?|(The )?Rugby Championship)$/.test(m.competition),
+    test: named(/^(\d{4} )?(Tri Nations( Series)?|(The )?Rugby Championship)$/),
     table: true,
   },
-  { id: 'nations-championship', label: 'Nations Championship', test: (m) => /^\d{4} Nations Championship$/.test(m.competition), table: true },
-  { id: 'nations-cup', label: 'World Rugby Nations Cup', test: (m) => /World Rugby Nations Cup/.test(m.competition), table: true },
-  { id: 'pacific', label: 'Pacific Nations Cup', test: (m) => /Pacific Nations Cup/.test(m.competition), table: true },
+  { id: 'nations-championship', label: 'Nations Championship', test: named(/^\d{4} Nations Championship$/), table: true },
+  { id: 'nations-cup', label: 'World Rugby Nations Cup', test: named(/World Rugby Nations Cup/), table: true },
+  { id: 'pacific', label: 'Pacific Nations Cup', test: named(/Pacific Nations Cup/), table: true },
+  { id: 'pacific-rim', label: 'Pacific Rim Championship', test: named(/^Pacific Rim Championship$/), table: true },
+  { id: 'south-pacific', label: 'South Pacific Championship', test: named(/^South Pacific Championship$/), table: true },
   {
     id: 'europe',
     label: 'European Championship',
-    test: (m) => /Rugby Europe|European Nations Cup|FIRA (Trophy|Nations Cup)/.test(m.competition),
+    test: named(/Rugby Europe|European Nations Cup|FIRA (Trophy|Nations Cup)|^FIRA Championship|^Six Nations B$/),
     table: true,
   },
-  { id: 'autumn', label: 'Autumn Nations', test: (m) => /Autumn Nations (Series|Cup)/.test(m.competition), table: false },
+  { id: 'south-america', label: 'South American Championship', test: named(/^South American Championship$/), table: true },
+  { id: 'americas', label: 'Americas Championship', test: named(/^(Americas Rugby Championship|Pan-American Championship)$/), table: true },
+  { id: 'churchill', label: 'Churchill Cup', test: named(/^Churchill Cup$/), table: false },
+  { id: 'irb-nations-cup', label: 'IRB Nations Cup', test: named(/^Nations Cup$/), table: true },
+  { id: 'autumn', label: 'Autumn Nations', test: named(/Autumn Nations (Series|Cup)/), table: false },
   {
     id: 'qualifying',
     label: 'World Cup qualifying',
-    test: (m) => !m.worldCup && /Rugby World Cup (Qualifying|Final Qualification|qualification)/i.test(m.competition),
+    test: (m) => !m.worldCup && named(/Rugby World Cup (Qualifying|Qualifier|Final Qualification|qualification)/i)(m),
     table: false,
   },
 ];
@@ -92,7 +104,7 @@ function ruleFor(m: Match): Rule | undefined {
   const md = m.date.slice(5);
   return RULES.find(
     (r) =>
-      (!m.competition || r.alsoNamed?.test(m.competition)) &&
+      ((!m.competition && !m.espnCompetition) || r.alsoNamed?.test(m.competition)) &&
       m.year >= r.years[0] &&
       m.year <= r.years[1] &&
       md >= r.window[0] &&
@@ -105,6 +117,7 @@ function ruleFor(m: Match): Rule | undefined {
 /** Year of an edition: the first 4-digit year in the competition name, else the match year. */
 function editionKey(f: Family, m: Match): string {
   if (f.id === 'world-cup') return String(m.year);
+  // Only the archive's own name: ESPN's "2011 Rugby World Cup Qualifier" names the target tournament, not the season.
   return m.competition.match(/\d{4}/)?.[0] ?? String(m.year);
 }
 
@@ -218,13 +231,30 @@ export interface Round {
   matches: Match[];
 }
 
+/** ESPN's World Cup stages (1987–2019), in playing order. */
+const KO_STAGES: [string, string][] = [
+  ['quarter - play-offs', 'Quarter-final play-offs'],
+  ['quarter', 'Quarter-finals'],
+  ['semi-final', 'Semi-finals'],
+  ['3rd place play-off', 'Bronze final'],
+  ['final', 'Final'],
+];
+
 /**
- * World Cups 1987–2023 all end with the same 8 knockout matches: 4 quarter-finals, 2 semi-finals,
- * the bronze final and the final. Returns null for other formats (2027 adds a round of 16).
+ * Pool and knockout matches of a World Cup. Uses ESPN's stage labels when the edition has them
+ * (1987–2019; this also gets 1999's quarter-final play-offs right). Otherwise (2023) relies on
+ * every edition ending with 8 knockout matches: 4 quarter-finals, 2 semi-finals, the bronze final
+ * and the final. Returns null for other formats (2027 adds a round of 16).
  */
 export function worldCupPhases(ed: Edition): { pools: Match[]; rounds: Round[] } | null {
-  if (ed.family.id !== 'world-cup' || Number(ed.key) > 2023 || ed.matches.length < 9) return null;
+  if (ed.family.id !== 'world-cup') return null;
   const ms = ed.matches;
+  if (ms.some((m) => m.stage === 'final')) {
+    const rounds = KO_STAGES.map(([stage, label]) => ({ label, matches: ms.filter((m) => m.stage === stage) })).filter((r) => r.matches.length);
+    const ko = new Set(rounds.flatMap((r) => r.matches));
+    return { pools: ms.filter((m) => !ko.has(m)), rounds };
+  }
+  if (Number(ed.key) > 2023 || ms.length < 9) return null;
   const ko = ms.slice(-8);
   return {
     pools: ms.slice(0, -8),
@@ -235,6 +265,13 @@ export function worldCupPhases(ed: Edition): { pools: Match[]; rounds: Round[] }
       { label: 'Final', matches: [ko[7]] },
     ],
   };
+}
+
+/** The pool's real name ('Pool A'…) when ESPN gives it for one of its matches. */
+export function poolName(group: Standing[], pools: Match[]): string | null {
+  const teams = new Set(group.map((r) => r.team));
+  const m = pools.find((x) => x.stage?.startsWith('Pool') && teams.has(x.home) && teams.has(x.away));
+  return m?.stage ?? null;
 }
 
 export function winner(m: Match): string | null {

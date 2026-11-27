@@ -5,6 +5,7 @@ import {
   FAMILY_ALIASES,
   buildEditions,
   leftOutFor,
+  poolName,
   standings,
   winner,
   worldCupPhases,
@@ -80,8 +81,8 @@ function EditionDetail({ ed, leftOut }: { ed: Edition; leftOut: LeftOut | null }
   const groups = ed.family.table && !wc ? standings(ed.matches) : [];
   const first = ed.matches[0];
   const last = ed.matches[ed.matches.length - 1];
-  const final = wc?.rounds[3].matches[0];
-  const bronze = wc?.rounds[2].matches[0];
+  const final = wc?.rounds.find((r) => r.label === 'Final')?.matches[0];
+  const bronze = wc?.rounds.find((r) => r.label === 'Bronze final')?.matches[0];
   const champ = final && winner(final);
   const runnerUp = final && champ && (final.home === champ ? final.away : final.home);
   const third = bronze && winner(bronze);
@@ -160,17 +161,19 @@ function EditionDetail({ ed, leftOut }: { ed: Edition; leftOut: LeftOut | null }
         <div className="card">
           <h3>Pool stage</h3>
           <div className="pools">
-            {/* The data has no pool names: pools are found from who played whom, so they are not lettered. */}
-            {standings(wc.pools).map((g) => (
+            {/* Pools are found from who played whom; ESPN gives their letter for 1987–2019. */}
+            {standings(wc.pools)
+              .map((g) => ({ g, name: poolName(g, wc.pools) }))
+              .sort((x, y) => (x.name && y.name ? x.name.localeCompare(y.name) : 0))
+              .map(({ g, name }) => (
               <div key={g[0].team}>
                 <h4>
-                  Pool:{' '}
-                  {g
-                    .map((r) => team(r.team).display)
-                    .sort((a, b) => a.localeCompare(b, 'en'))
-                    .slice(0, 2)
-                    .join(', ')}
-                  …
+                  {name ??
+                    `Pool: ${g
+                      .map((r) => team(r.team).display)
+                      .sort((a, b) => a.localeCompare(b, 'en'))
+                      .slice(0, 2)
+                      .join(', ')}…`}
                 </h4>
                 <StandingsTable rows={g} qualified={2} />
               </div>

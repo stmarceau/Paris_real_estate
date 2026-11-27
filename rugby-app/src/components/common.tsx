@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { TEAMS, formatDate, team, type Match } from '../data';
+import { TEAMS, competitionLabel, formatDate, team, type Match } from '../data';
 import { MatchDetailContext } from './MatchSheet';
 
 export function TeamSelect({
@@ -80,10 +80,10 @@ export function MatchRow({ m, perspective, onRemove }: { m: Match; perspective?:
       <div className="match-meta">
         <time dateTime={m.date}>{formatDate(m.date)}</time>
         {m.breakdown && <span className="tag detail" title="Tries, conversions, penalties and drop goals available">Details</span>}
-        <span className="match-comp" title={m.competition}>
+        <span className="match-comp" title={competitionLabel(m)}>
           {m.worldCup && <span className="tag wc">World Cup</span>}
           {m.local && <span className="tag local">Added</span>}
-          {m.competition}
+          {competitionLabel(m)}
         </span>
       </div>
       <div className="match-score">

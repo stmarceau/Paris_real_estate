@@ -42,7 +42,7 @@ export function ResultsView({
         if (from !== '' && m.year < from) return false;
         if (to !== '' && m.year > to) return false;
         if (wcOnly && !m.worldCup) return false;
-        if (q && !`${m.competition} ${m.stadium} ${m.city}`.toLowerCase().includes(q)) return false;
+        if (q && !`${m.competition} ${m.espnCompetition ?? ""} ${m.stadium} ${m.city}`.toLowerCase().includes(q)) return false;
         return true;
       }),
     );

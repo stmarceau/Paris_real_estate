@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { matchesFromCSV } from './data';
-import { buildEditions, standings, winner, worldCupPhases } from './competitions';
+import { buildEditions, poolName, standings, winner, worldCupPhases } from './competitions';
 
 const all = matchesFromCSV(readFileSync(new URL('../public/data/rugby_results.csv', import.meta.url), 'utf8'));
 const eds = buildEditions(all);
@@ -22,11 +22,32 @@ describe('World Cups', () => {
   ];
   it.each(champions)('%s: the last match is the final, won by %s', (year, champ) => {
     const p = worldCupPhases(ed('world-cup', year))!;
-    expect(winner(p.rounds[3].matches[0])).toBe(champ);
+    expect(winner(p.rounds.find((r) => r.label === 'Final')!.matches[0])).toBe(champ);
   });
   it('splits pool matches into the right number of pools', () => {
     expect(standings(worldCupPhases(ed('world-cup', '1987'))!.pools).map((g) => g.length)).toEqual([4, 4, 4, 4]);
     expect(standings(worldCupPhases(ed('world-cup', '2023'))!.pools).map((g) => g.length)).toEqual([5, 5, 5, 5]);
+  });
+});
+
+describe('World Cup stages from ESPN', () => {
+  it('1999: quarter-final play-offs, then 4 quarter-finals, and five lettered pools', () => {
+    const p = worldCupPhases(ed('world-cup', '1999'))!;
+    expect(p.rounds.map((r) => [r.label, r.matches.length])).toEqual([
+      ['Quarter-final play-offs', 3],
+      ['Quarter-finals', 4],
+      ['Semi-finals', 2],
+      ['Bronze final', 1],
+      ['Final', 1],
+    ]);
+    const pools = standings(p.pools);
+    expect(pools).toHaveLength(5);
+    expect(pools.map((g) => poolName(g, p.pools)).sort()).toEqual(['Pool A', 'Pool B', 'Pool C', 'Pool D', 'Pool E']);
+  });
+  it('2019: Japan topped Pool A, ahead of Ireland', () => {
+    const p = worldCupPhases(ed('world-cup', '2019'))!;
+    const a = standings(p.pools).find((g) => poolName(g, p.pools) === 'Pool A')!;
+    expect(a.slice(0, 2).map((r) => r.team)).toEqual(['Japan', 'Ireland']);
   });
 });
 

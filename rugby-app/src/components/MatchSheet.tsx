@@ -1,5 +1,5 @@
 import { createContext, useEffect, useRef } from 'react';
-import { formatDate, team, type Match } from '../data';
+import { competitionLabel, formatDate, team, type Match } from '../data';
 import { GOALS_ERA_END, SCORE_KINDS, breakdownMatchesScore, pointValues } from '../scoring';
 
 /** Any match row can open the detail sheet through this context. */
@@ -37,7 +37,7 @@ export function MatchSheet({ match: m, onClose, onHeadToHead }: { match: Match; 
 
         <p className="sheet-meta">
           {m.worldCup && <span className="tag wc">World Cup</span>}
-          {m.competition || 'Test match'}
+          {competitionLabel(m) || 'Test match'}
         </p>
         <p className="muted small sheet-date">
           {formatDate(m.date)}

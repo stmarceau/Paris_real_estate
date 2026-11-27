@@ -16,6 +16,10 @@ export interface Match {
   worldCup: boolean;
   /** true when the match was added by the user (stored in the browser) */
   local?: boolean;
+  /** competition name used by ESPN (1987–2020), when the archive has none or another one */
+  espnCompetition?: string;
+  /** World Cup stage from ESPN: 'Pool A'…'Pool E', 'quarter', 'semi-final', '3rd place play-off', 'final' */
+  stage?: string;
   /** tries, conversions, penalties… when the source has them */
   breakdown?: { home: Breakdown; away: Breakdown };
 }
@@ -155,6 +159,8 @@ export function matchesFromCSV(text: string): Match[] {
       neutral: r[col.neutral] === 'True',
       worldCup: r[col.wc] === 'True',
       ...(home && away ? { breakdown: { home, away } } : {}),
+      ...(idx('espn_competition') >= 0 && r[idx('espn_competition')] ? { espnCompetition: r[idx('espn_competition')] } : {}),
+      ...(idx('stage') >= 0 && r[idx('stage')] ? { stage: r[idx('stage')] } : {}),
       };
     });
 }
@@ -203,4 +209,19 @@ export const PERIODS: Period[] = [
 ];
 export function periodById(id: string | null): Period {
   return PERIODS.find((p) => p.id === id) ?? PERIODS[0];
+}
+
+const STAGE_LABELS: Record<string, string> = {
+  quarter: 'Quarter-final',
+  'quarter - play-offs': 'Quarter-final play-off',
+  'semi-final': 'Semi-final',
+  '3rd place play-off': 'Bronze final',
+  final: 'Final',
+};
+
+/** Competition shown for a match: the archive's name, else ESPN's; plus the World Cup stage. */
+export function competitionLabel(m: Match): string {
+  const name = m.competition || m.espnCompetition || '';
+  const stage = m.stage ? STAGE_LABELS[m.stage] ?? m.stage : '';
+  return [name, stage].filter(Boolean).join(' · ');
 }

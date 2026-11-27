@@ -49,6 +49,13 @@ régionales ou XV « B » sont exclus), ainsi que les matchs abandonnés ou attr
 Source : [Nuck's Rugby Archive](https://rugbyarchive.github.io/) ([dépôt](https://github.com/rugbyarchive/rugbyarchive.github.io)).
 ⚠️ Cette archive ne publie pas de licence : demander l'accord de son auteur avant toute diffusion publique.
 
+Données ESPN (`data/espn_games.csv`, 6 884 matchs de 1987 à 2020) : tirées d'un export ESPN Scrum fourni
+au format pickle et converti par `scripts/import_espn_pickle.py` (chargement qui refuse toute classe : seules
+des données simples sont lues). Lors de la construction des données, un match n'est enrichi que si ESPN a les
+mêmes équipes, une date à un jour près et le même score (2 936 matchs). ESPN apporte le nom de la compétition
+pour 2 000 matchs que l'archive ne nomme pas (Cinq Nations 1987–1999, Pacific Nations Cup, Pacific Rim,
+Churchill Cup, qualifications…), les poules et tours des Coupes du monde 1987–2019, et le stade quand il manque.
+
 Mise à jour des données : **automatique chaque lundi soir** (19 h 17 UTC, soit 20 h 17 / 21 h 17 à Paris)
 via `.github/workflows/update-rugby-data.yml` : re-télécharge l'archive, régénère le CSV, lance les tests
 et, s'il y a de nouveaux matchs, commite sur `main` et redéploie le site. Lancement manuel possible via
