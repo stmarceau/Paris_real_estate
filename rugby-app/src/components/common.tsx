@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { TEAMS, formatDate, team, type Match } from '../data';
+import { MatchDetailContext } from './MatchSheet';
 
 export function TeamSelect({
   value,
@@ -61,10 +63,23 @@ export function MatchRow({ m, perspective, onRemove }: { m: Match; perspective?:
     const lost = isHome ? awayWin : homeWin;
     badge = won ? { cls: 'w', txt: 'W', label: 'Win' } : lost ? { cls: 'l', txt: 'L', label: 'Loss' } : { cls: 'd', txt: 'D', label: 'Draw' };
   }
+  const open = useContext(MatchDetailContext);
+  const onKey = (e: React.KeyboardEvent) => {
+    if (open && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      open(m);
+    }
+  };
   return (
-    <li className="match">
+    <li
+      className={`match ${open ? 'clickable' : ''}`}
+      {...(open
+        ? { role: 'button', tabIndex: 0, onClick: () => open(m), onKeyDown: onKey, 'aria-label': `${team(m.home).display} ${m.homeScore}–${m.awayScore} ${team(m.away).display}, ${formatDate(m.date)}: details` }
+        : {})}
+    >
       <div className="match-meta">
         <time dateTime={m.date}>{formatDate(m.date)}</time>
+        {m.breakdown && <span className="tag detail" title="Tries, conversions, penalties and drop goals available">Details</span>}
         <span className="match-comp" title={m.competition}>
           {m.worldCup && <span className="tag wc">World Cup</span>}
           {m.local && <span className="tag local">Added</span>}
@@ -93,7 +108,14 @@ export function MatchRow({ m, perspective, onRemove }: { m: Match; perspective?:
         {[m.stadium, m.city].filter(Boolean).join(', ')}
         {m.neutral && ' · neutral venue'}
         {onRemove && (
-          <button className="link danger" onClick={onRemove}>
+          <button
+            className="link danger"
+            onClick={(e) => {
+              e.stopPropagation();
+              onRemove();
+            }}
+            onKeyDown={(e) => e.stopPropagation()}
+          >
             Delete
           </button>
         )}

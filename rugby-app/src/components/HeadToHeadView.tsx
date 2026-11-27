@@ -3,6 +3,7 @@ import { formatDate, sortByDateDesc, team, type Match } from '../data';
 import { headToHead, type Record as Rec, type Streak, type TeamView } from '../stats';
 import { BalanceChart, DecadeBars } from './charts';
 import { MatchRow, TeamSelect, pct } from './common';
+import { SCORE_KINDS, scoringTotals } from '../scoring';
 
 const plural = (n: number, one: string, many = one + 's') => `${n} ${n === 1 ? one : many}`;
 const letter = (o: TeamView['outcome']) => (o === 'W' ? 'W' : o === 'L' ? 'L' : 'D');
@@ -24,6 +25,7 @@ export function HeadToHeadView({
   const tb = team(b);
   const t = h.total;
   const list = sortByDateDesc(h.views.map((v) => v.match));
+  const scoring = useMemo(() => scoringTotals(h.views.map((v) => v.match), a), [h, a]);
 
   return (
     <section className="view">
@@ -76,6 +78,35 @@ export function HeadToHeadView({
               note={h.worldCup.played ? plural(h.worldCup.played, 'match', 'matches') : 'Never met'}
             />
           </div>
+
+          {scoring.covered > 0 && (
+            <div className="card">
+              <h3>How the points were scored</h3>
+              <p className="muted small">
+                Based on the {scoring.covered} of {t.played} meetings with detailed scoring. Tap any match below for its own breakdown.
+              </p>
+              <ul className="breakdown">
+                {SCORE_KINDS.filter((k) => k.key !== 'marks' || scoring.for.marks || scoring.against.marks).map((k) => {
+                  const x = scoring.for[k.key];
+                  const y = scoring.against[k.key];
+                  return (
+                    <li key={k.key}>
+                      <span className="bd-val ka">{x}</span>
+                      <span className="bd-mid">
+                        <span className="bd-label">{k.plural}</span>
+                        <span className="bd-bar" aria-hidden>
+                          <span className="fill-a" style={{ flexGrow: x }} />
+                          <span className="fill-b" style={{ flexGrow: y }} />
+                          {!x && !y && <span className="bd-empty" />}
+                        </span>
+                      </span>
+                      <span className="bd-val kb">{y}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
 
           <div className="card">
             <h3>Recent form</h3>

@@ -1,3 +1,5 @@
+import type { Breakdown } from './scoring';
+
 export interface Match {
   id: string;
   date: string; // ISO yyyy-mm-dd
@@ -14,6 +16,8 @@ export interface Match {
   worldCup: boolean;
   /** true when the match was added by the user (stored in the browser) */
   local?: boolean;
+  /** tries, conversions, penalties… when the source has them */
+  breakdown?: { home: Breakdown; away: Breakdown };
 }
 
 export interface TeamInfo {
@@ -125,9 +129,18 @@ export function matchesFromCSV(text: string): Match[] {
     neutral: idx('neutral'),
     wc: idx('world_cup'),
   };
+  const side = (r: string[], prefix: string): Breakdown | null => {
+    const get = (k: string) => r[idx(`${prefix}_${k}`)];
+    if (idx(`${prefix}_tries`) < 0 || get('tries') === '' || get('tries') === undefined) return null;
+    const n = (k: string) => Number(get(k)) || 0;
+    return { tries: n('tries'), conversions: n('conversions'), penalties: n('penalties'), dropGoals: n('drop_goals'), marks: n('marks'), penaltyTries: n('penalty_tries') };
+  };
   return rows
     .filter((r) => r.length >= header.length)
-    .map((r, i) => ({
+    .map((r, i) => {
+      const home = side(r, 'home');
+      const away = side(r, 'away');
+      return {
       id: `d${i}`,
       date: r[col.date],
       year: Number(r[col.date].slice(0, 4)),
@@ -141,7 +154,9 @@ export function matchesFromCSV(text: string): Match[] {
       country: r[col.country],
       neutral: r[col.neutral] === 'True',
       worldCup: r[col.wc] === 'True',
-    }));
+      ...(home && away ? { breakdown: { home, away } } : {}),
+      };
+    });
 }
 
 const LOCAL_KEY = 'rugby-face-a-face:local-matches';

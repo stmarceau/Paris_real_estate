@@ -16,6 +16,11 @@ entre les nations de la Coupe du monde et comparer les bilans historiques d'une 
   pas leurs matchs (Cinq Nations 1952–1999, Tri-Nations 1996–1999, Rugby Championship 2021 et 2023) ; d'autres
   sont signalées **incomplètes** quand des matchs contre des nations hors de l'app manquent
   (`public/data/competitions.json`, généré par le script de mise à jour).
+- **Détail d'un match** : cliquer (ou taper) sur n'importe quel résultat ouvre une fiche avec le score, la
+  compétition, le lieu et, quand la source les fournit, les **essais, transformations, pénalités, drops**
+  (et goals from a mark, essais de pénalité) de chaque équipe, avec les points selon le barème de l'époque.
+  Environ 1 400 matchs sur 5 100 ont ce détail (75 % des matchs des années 2020, aucun dans les années 1960–70).
+  La page Head-to-head totalise aussi ces actions sur les confrontations qui en disposent.
 - **Résultats** : tous les matchs, filtrables par équipe, adversaire, compétition/lieu, années et
   Coupe du monde.
 - **Période** (sous le titre des pages Head-to-head et Rankings) : depuis 1871, ère pro (1995+) ou depuis 2010. Elle

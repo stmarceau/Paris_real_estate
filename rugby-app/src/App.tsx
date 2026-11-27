@@ -6,6 +6,7 @@ import { ResultsView } from './components/ResultsView';
 import { OverviewView } from './components/OverviewView';
 import { CompetitionsView } from './components/CompetitionsView';
 import type { LeftOut } from './competitions';
+import { MatchDetailContext, MatchSheet } from './components/MatchSheet';
 
 /** Line icons in the style of system symbols (24×24, drawn with the current text colour). */
 const ICONS: Record<View, JSX.Element> = {
@@ -41,6 +42,7 @@ export default function App() {
   const [local, setLocal] = useState<Match[]>(loadLocalMatches);
   const [compMeta, setCompMeta] = useState<Record<string, LeftOut>>({});
   const [route, navigate] = useRoute();
+  const [selected, setSelected] = useState<Match | null>(null);
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/rugby_results.csv`)
@@ -73,6 +75,7 @@ export default function App() {
   const validTeam = (n: string | null, fallback: string) => (isKnownTeam(n) ? n : fallback);
 
   return (
+    <MatchDetailContext.Provider value={setSelected}>
     <div className="app">
       <header className="top">
         <div className="brand">
@@ -176,6 +179,17 @@ export default function App() {
           Source: <a href="https://rugbyarchive.github.io/">Nuck's Rugby Archive</a> (11,000+ matches since 1871). Early scores follow the scoring values of their time.
         </p>
       </footer>
+      {selected && (
+        <MatchSheet
+          match={selected}
+          onClose={() => setSelected(null)}
+          onHeadToHead={(a, b) => {
+            navigate('head-to-head', { a, b });
+            window.scrollTo({ top: 0 });
+          }}
+        />
+      )}
     </div>
+    </MatchDetailContext.Provider>
   );
 }
