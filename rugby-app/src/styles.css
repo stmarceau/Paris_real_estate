@@ -389,3 +389,9 @@ select:focus-visible, input:focus-visible, button:focus-visible, summary:focus-v
 @media (max-width: 400px) {
   .side .team-name span:last-child { white-space: normal; overflow-wrap: anywhere; line-height: 1.2; }
 }
+
+/* period control sits under the large title (Head-to-head, Rankings) */
+.title-block .period { width: fit-content; margin-top: 16px; }
+@media (max-width: 640px) {
+  .title-block .period { width: auto; margin-top: 14px; }
+}

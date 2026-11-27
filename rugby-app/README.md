@@ -18,7 +18,7 @@ entre les nations de la Coupe du monde et comparer les bilans historiques d'une 
   (`public/data/competitions.json`, généré par le script de mise à jour).
 - **Résultats** : tous les matchs, filtrables par équipe, adversaire, compétition/lieu, années et
   Coupe du monde.
-- **Période** (en haut, au-dessus des onglets) : depuis 1871, ère pro (1995+) ou depuis 2010. Elle
+- **Période** (sous le titre des pages Head-to-head et Rankings) : depuis 1871, ère pro (1995+) ou depuis 2010. Elle
   s'applique aux pages Head-to-head et Rankings (les pages Competitions et Results montrent toujours
   tous les matchs) et reste dans l'URL (`&period=pro`).
 - **Bilans** : classement au % de victoires par groupe (Six Nations + Rugby Championship, qualifiés 2027,

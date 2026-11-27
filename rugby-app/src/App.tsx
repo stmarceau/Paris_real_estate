@@ -82,23 +82,6 @@ export default function App() {
           <span className="brand-name">RugbyNation</span>
         </div>
         <div className="top-right">
-          {periodApplies && (
-          <div className="period" role="radiogroup" aria-label="Period">
-            <span className="period-label">Period</span>
-            {PERIODS.map((pe) => (
-              <button
-                key={pe.id}
-                role="radio"
-                aria-checked={pe.id === period.id}
-                className={pe.id === period.id ? 'on' : ''}
-                onClick={() => navigate(route.view, { ...Object.fromEntries(p), period: pe.id === PERIODS[0].id ? undefined : pe.id })}
-              >
-                <span className="long">{pe.label}</span>
-                <span className="short">{pe.short}</span>
-              </button>
-            ))}
-          </div>
-          )}
         <nav className="tabs" aria-label="Sections">
           {TABS.map((t) => (
             <button
@@ -121,6 +104,23 @@ export default function App() {
           <p className="subtitle">
             Rugby World Cup nations · {period.from ? `since ${period.from}` : 'since 1871'}
           </p>
+          {periodApplies && (
+            <div className="period" role="radiogroup" aria-label="Period">
+              <span className="period-label">Period</span>
+              {PERIODS.map((pe) => (
+                <button
+                  key={pe.id}
+                  role="radio"
+                  aria-checked={pe.id === period.id}
+                  className={pe.id === period.id ? 'on' : ''}
+                  onClick={() => navigate(route.view, { ...Object.fromEntries(p), period: pe.id === PERIODS[0].id ? undefined : pe.id })}
+                >
+                  <span className="long">{pe.label}</span>
+                  <span className="short">{pe.short}</span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
         {error && <p className="error">Could not load the data ({error}).</p>}
         {!base && !error && <p className="loading">Loading results…</p>}
