@@ -22,7 +22,7 @@ export interface Match {
   stage?: string;
   /** where the breakdown comes from */
   breakdownSource?: 'archive' | 'espn';
-  /** line-ups, scoring timeline or video exist in public/data/details/<year>.json */
+  /** a scoring timeline exists in public/data/details/<year>.json */
   hasDetails?: boolean;
   /** tries, conversions, penalties… when the source has them */
   breakdown?: { home: Breakdown; away: Breakdown };
@@ -232,11 +232,9 @@ export function competitionLabel(m: Match): string {
   return [name, stage].filter(Boolean).join(' · ');
 }
 
-/** Line-ups, scoring timeline and video of a match (ESPN, 1987–2020). */
+/** Scoring timeline of a match (ESPN, 1987–2020). */
 export interface MatchDetails {
-  lineups?: { home: { nb: number | null; pos: string | null; name: string }[]; away: { nb: number | null; pos: string | null; name: string }[] };
-  timeline?: { side: 'home' | 'away'; player: string | null; action: string | null; points: number; minute: number | null }[];
-  video?: string;
+  timeline?: { side: 'home' | 'away'; action: string | null; points: number; minute: number | null }[];
 }
 
 const detailCache = new Map<string, Promise<Record<string, MatchDetails>>>();

@@ -45,12 +45,13 @@ describe('scoring breakdowns', () => {
     expect(withBreakdown.filter((m) => m.breakdownSource === 'espn').length).toBeGreaterThan(2000);
   });
 
-  it('detail files: Japan v Ireland 2019 has line-ups and a timeline that adds up', () => {
-    const details = JSON.parse(readFileSync(new URL('../public/data/details/2019.json', import.meta.url), 'utf8'));
-    const d = details['2019-09-28|Japan|Ireland'];
-    expect(d.lineups.home).toHaveLength(23);
-    expect(d.timeline[0]).toMatchObject({ side: 'away', player: 'Garry Ringrose', action: 'try', minute: 14 });
+  it('detail files: Japan v Ireland 2019 has a scoring timeline that adds up, and no player data', () => {
+    const raw = readFileSync(new URL('../public/data/details/2019.json', import.meta.url), 'utf8');
+    const d = JSON.parse(raw)['2019-09-28|Japan|Ireland'];
+    expect(Object.keys(d)).toEqual(['timeline']);
+    expect(d.timeline[0]).toEqual({ side: 'away', action: 'try', points: 5, minute: 14 });
     const sum = (side: string) => d.timeline.filter((e: { side: string }) => e.side === side).reduce((s: number, e: { points: number }) => s + e.points, 0);
     expect([sum('home'), sum('away')]).toEqual([19, 12]);
+    expect(raw).not.toMatch(/"(player|lineups|video)"/);
   });
 });

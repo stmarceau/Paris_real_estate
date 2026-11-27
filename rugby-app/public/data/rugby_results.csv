@@ -1481,7 +1481,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 1986-11-08,France,New Zealand,7,19,,,,,False,False,,,,,,,,,,,,,,,,
 1986-11-15,France,New Zealand,16,3,,,,,False,False,,,,,,,,,,,,,,,,
 1986-11-16,Italy,Russia,14,16,,,,,False,False,,,,,,,,,,,,,,,,
-1987-01-18,Portugal,Italy,3,41,,Lisbon,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,1
+1987-01-18,Portugal,Italy,3,41,,Lisbon,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,
 1987-02-07,Ireland,England,17,0,,Lansdowne Road,Dublin,Ireland,False,False,3,1,1,0,0,0,0,0,0,0,0,0,Five Nations,,espn,1
 1987-02-07,France,Wales,16,9,,Parc des Princes,Paris,France,False,False,2,1,2,0,0,0,0,0,3,0,0,0,Five Nations,,espn,1
 1987-02-21,Scotland,Ireland,16,12,,Murrayfield,Edinburgh,Scotland,False,False,2,1,0,2,0,0,1,1,1,1,0,0,Five Nations,,espn,1
@@ -1685,11 +1685,11 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 1990-08-18,New Zealand,Australia,9,21,,Wellington,,,False,False,0,0,2,1,0,0,1,1,5,0,0,0,Australia tour / Bledisloe Cup,,espn,1
 1990-09-23,Japan,USA,15,25,,Tokyo,,,False,False,2,2,1,0,0,0,3,2,3,0,0,0,United States of America tour,,espn,1
 1990-09-30,Italy,Spain,30,6,,Rovigo,,,False,False,2,2,5,1,0,0,0,0,2,0,0,0,1991 Rugby World Cup Qualifier / FIRA Championship D1,,espn,1
-1990-10-03,Romania,Spain,19,6,,Padova,,,False,False,,,,,,,,,,,,,1991 Rugby World Cup Qualifier / FIRA Championship D1,,,1
+1990-10-03,Romania,Spain,19,6,,Padova,,,False,False,,,,,,,,,,,,,1991 Rugby World Cup Qualifier / FIRA Championship D1,,,
 1990-10-07,Italy,Romania,29,21,,Padova,,,False,False,3,1,2,3,0,0,1,1,4,1,0,0,1991 Rugby World Cup Qualifier,,espn,1
 1990-10-21,Russia,Romania,3,10,,,,,False,False,,,,,,,,,,,,,,,,
 1990-10-27,Ireland,Argentina,20,18,,Lansdowne Road,Dublin,Ireland,False,False,2,0,4,0,0,0,1,1,4,0,0,0,Argentina tour,,espn,1
-1990-10-28,Spain,Portugal,29,6,,Seville,,,False,False,,,,,,,,,,,,,FIRA Championship D2,,,1
+1990-10-28,Spain,Portugal,29,6,,Seville,,,False,False,,,,,,,,,,,,,FIRA Championship D2,,,
 1990-11-03,Chile,Uruguay,9,15,,Santiago,,,False,False,,,,,,,,,,,,,Uruguay tour,,,
 1990-11-03,England,Argentina,51,0,,Twickenham,London,England,False,False,7,7,3,0,0,0,0,0,0,0,0,0,Argentina tour,,espn,1
 1990-11-03,France,New Zealand,3,24,,Nantes,,,False,False,0,0,1,0,0,0,2,2,3,1,0,0,New Zealand tour,,espn,1
@@ -1714,7 +1714,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 1991-05-11,Russia,Spain,30,3,,,,,False,False,,,,,,,,,,,,,,,,
 1991-05-11,Canada,Japan,49,26,,Vancouver,,,False,False,8,7,1,0,0,0,5,3,0,0,0,0,Japan tour,,espn,1
 1991-05-18,Spain,Namibia,6,36,,Madrid,,,False,False,,,,,,,,,,,,,Namibia tour,,,
-1991-05-24,Portugal,Namibia,12,34,,Lisbon,,,False,False,,,,,,,,,,,,,Namibia tour,,,1
+1991-05-24,Portugal,Namibia,12,34,,Lisbon,,,False,False,,,,,,,,,,,,,Namibia tour,,,
 1991-05-28,Tonga,Samoa,13,41,,Nuku A'lofa,,,False,False,,,,,,,,,,,,,South Pacific Championship,,,
 1991-06-01,Samoa,Fiji,40,23,,Apia,,,False,False,5,4,3,1,0,0,4,2,1,0,0,0,South Pacific Championship,,espn,1
 1991-06-08,Fiji,Tonga,34,4,,Suva,,,False,False,6,2,2,0,0,0,1,0,0,0,0,0,South Pacific Championship,,espn,1
@@ -1790,7 +1790,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 1992-03-07,England,Wales,24,0,,Twickenham,London,England,False,False,,,,,,,,,,,,,Five Nations,,,1
 1992-03-21,Wales,Scotland,15,12,,Cardiff,Cardiff,Wales,False,False,,,,,,,,,,,,,Five Nations,,,1
 1992-03-21,France,Ireland,44,12,,Parc des Princes,Paris,France,False,False,,,,,,,,,,,,,Five Nations,,,1
-1992-04-04,Spain,Romania,6,0,,Madrid,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,1
+1992-04-04,Spain,Romania,6,0,,Madrid,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,
 1992-04-18,USA,Hong Kong,23,16,,San Francisco,,,False,False,,,,,,,,,,,,,Hong Kong tour,,,
 1992-04-18,Italy,Romania,39,13,,Rovigo,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,1
 1992-05-09,Namibia,Zimbabwe,55,23,,Windhoek,,,False,False,,,,,,,,,,,,,Zimbabwe tour,,,
@@ -1800,32 +1800,32 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 1992-05-30,New Zealand,Ireland,24,21,,Dunedin,,,False,False,,,,,,,,,,,,,Ireland tour,,,1
 1992-06-06,New Zealand,Ireland,59,6,,Wellington,,,False,False,,,,,,,,,,,,,Ireland tour,,,1
 1992-06-13,USA,Canada,9,32,,Denver,,,False,False,,,,,,,,,,,,,Canada tour,,,1
-1992-06-13,Samoa,Tonga,22,17,,Apia,,,False,False,,,,,,,,,,,,,South Pacific Championship,,,1
+1992-06-13,Samoa,Tonga,22,17,,Apia,,,False,False,,,,,,,,,,,,,South Pacific Championship,,,
 1992-06-13,Australia,Scotland,27,12,,Sydney,,,False,False,,,,,,,,,,,,,Scotland tour,,,1
 1992-06-20,Fiji,Samoa,16,20,,Suva,,,False,False,,,,,,,,,,,,,South Pacific Championship,,,1
 1992-06-21,Australia,Scotland,37,13,,Brisbane,,,False,False,,,,,,,,,,,,,Scotland tour,,,1
-1992-07-04,Argentina,France,12,27,,Buenos Aires,,,False,False,0,0,3,1,0,0,2,1,4,1,0,0,France tour,,espn,1
-1992-07-04,Australia,New Zealand,16,15,,Sydney,,,False,False,2,0,2,0,0,0,2,1,1,0,0,0,New Zealand tour / Bledisloe Cup,,espn,1
-1992-07-11,Argentina,France,9,33,,Buenos Aires,,,False,False,0,0,2,1,0,0,3,3,3,1,0,0,France tour,,espn,1
+1992-07-04,Argentina,France,12,27,,Buenos Aires,,,False,False,0,0,3,1,0,0,2,1,4,1,0,0,France tour,,espn,
+1992-07-04,Australia,New Zealand,16,15,,Sydney,,,False,False,2,0,2,0,0,0,2,1,1,0,0,0,New Zealand tour / Bledisloe Cup,,espn,
+1992-07-11,Argentina,France,9,33,,Buenos Aires,,,False,False,0,0,2,1,0,0,3,3,3,1,0,0,France tour,,espn,
 1992-07-19,Australia,New Zealand,19,17,,Brisbane,,,False,False,2,0,3,0,0,0,2,2,1,0,0,0,New Zealand tour / Bledisloe Cup,,espn,
 1992-07-25,Tonga,Fiji,13,9,,Nuku A'lofa,,,False,False,,,,,,,,,,,,,South Pacific Championship,,,1
-1992-07-25,Australia,New Zealand,23,26,,Sydney,,,False,False,2,2,3,0,0,0,2,2,3,1,0,0,New Zealand tour / Bledisloe Cup,,espn,1
-1992-08-15,South Africa,New Zealand,24,27,,Johannesburg,Johannesburg,South Africa,False,False,3,3,1,0,0,0,3,3,2,0,0,0,New Zealand tour,,espn,1
+1992-07-25,Australia,New Zealand,23,26,,Sydney,,,False,False,2,2,3,0,0,0,2,2,3,1,0,0,New Zealand tour / Bledisloe Cup,,espn,
+1992-08-15,South Africa,New Zealand,24,27,,Johannesburg,Johannesburg,South Africa,False,False,3,3,1,0,0,0,3,3,2,0,0,0,New Zealand tour,,espn,
 1992-08-29,South Africa,Australia,3,26,,,,,False,False,,,,,,,,,,,,,,,,
 1992-09-19,Uruguay,Chile,50,24,,Montevideo,,,False,False,,,,,,,,,,,,,Chile tour,,,
 1992-09-20,Uruguay,Chile,37,15,,Montevideo,,,False,False,,,,,,,,,,,,,Chile tour,,,
-1992-09-26,Hong Kong,Japan,9,37,,Seoul,,,False,False,0,0,3,0,0,0,6,2,1,0,0,0,Asian Championship,,espn,1
-1992-09-26,Argentina,Spain,38,10,,Buenos Aires,,,False,False,5,5,1,0,0,0,2,0,0,0,0,0,Spain tour,,espn,1
-1992-10-01,Italy,Romania,22,3,,Rome,,,False,False,3,2,1,0,0,0,0,0,1,0,0,0,FIRA Championship D1,,espn,1
-1992-10-17,England,Canada,26,13,,Wembley Stadium,London,England,False,False,4,0,2,0,0,0,1,1,2,0,0,0,Canada tour,,espn,1
-1992-10-17,France,South Africa,15,20,,Lyon,,,False,False,2,1,1,0,0,0,2,2,1,1,0,0,South Africa tour,,espn,1
+1992-09-26,Hong Kong,Japan,9,37,,Seoul,,,False,False,0,0,3,0,0,0,6,2,1,0,0,0,Asian Championship,,espn,
+1992-09-26,Argentina,Spain,38,10,,Buenos Aires,,,False,False,5,5,1,0,0,0,2,0,0,0,0,0,Spain tour,,espn,
+1992-10-01,Italy,Romania,22,3,,Rome,,,False,False,3,2,1,0,0,0,0,0,1,0,0,0,FIRA Championship D1,,espn,
+1992-10-17,England,Canada,26,13,,Wembley Stadium,London,England,False,False,4,0,2,0,0,0,1,1,2,0,0,0,Canada tour,,espn,
+1992-10-17,France,South Africa,15,20,,Lyon,,,False,False,2,1,1,0,0,0,2,2,1,1,0,0,South Africa tour,,espn,
 1992-10-24,Spain,Argentina,34,43,,Madrid,,,False,False,4,4,2,0,0,0,6,5,1,0,0,0,Argentina tour,,espn,
-1992-10-24,France,South Africa,29,16,,Parc des Princes 2nd Test,,,False,False,2,2,5,0,0,0,1,1,2,1,0,0,South Africa tour,,espn,1
-1992-10-31,Romania,Argentina,18,21,,"National Stadium, Bucharest",Bucharest,,False,False,2,1,2,0,0,0,3,3,0,0,0,0,Argentina tour,,espn,1
-1992-10-31,Ireland,Australia,17,42,,"Lansdowne Road, Dublin",Dublin,Ireland,False,False,1,0,4,0,0,0,5,4,3,0,0,0,Australia tour,,espn,1
-1992-11-14,England,South Africa,33,16,,Twickenham,London,England,False,False,4,2,3,0,0,0,1,1,2,1,0,0,South Africa tour,,espn,1
-1992-11-14,France,Argentina,20,24,,"Stade Beaujoire, Nantes",Nantes,France,False,False,3,1,1,0,0,0,0,0,7,1,0,0,Argentina tour,,espn,1
-1992-11-21,Wales,Australia,6,23,,"National Ground, Cardiff Arms Park",Cardiff,Wales,False,False,0,0,2,0,0,0,3,1,2,0,0,0,Australia tour,,espn,1
+1992-10-24,France,South Africa,29,16,,Parc des Princes 2nd Test,,,False,False,2,2,5,0,0,0,1,1,2,1,0,0,South Africa tour,,espn,
+1992-10-31,Romania,Argentina,18,21,,"National Stadium, Bucharest",Bucharest,,False,False,2,1,2,0,0,0,3,3,0,0,0,0,Argentina tour,,espn,
+1992-10-31,Ireland,Australia,17,42,,"Lansdowne Road, Dublin",Dublin,Ireland,False,False,1,0,4,0,0,0,5,4,3,0,0,0,Australia tour,,espn,
+1992-11-14,England,South Africa,33,16,,Twickenham,London,England,False,False,4,2,3,0,0,0,1,1,2,1,0,0,South Africa tour,,espn,
+1992-11-14,France,Argentina,20,24,,"Stade Beaujoire, Nantes",Nantes,France,False,False,3,1,1,0,0,0,0,0,7,1,0,0,Argentina tour,,espn,
+1992-11-21,Wales,Australia,6,23,,"National Ground, Cardiff Arms Park",Cardiff,Wales,False,False,0,0,2,0,0,0,3,1,2,0,0,0,Australia tour,,espn,
 1993-01-16,England,France,16,15,,Twickenham,London,England,False,False,1,1,3,0,0,0,2,1,1,0,0,0,Five Nations,,espn,1
 1993-01-16,Scotland,Ireland,15,3,,Murrayfield,Edinburgh,Scotland,False,False,2,1,1,0,0,0,0,0,1,0,0,0,Five Nations / Centenary Quaich,,espn,1
 1993-02-06,France,Scotland,11,3,,Parc des Princes,Paris,France,False,False,1,0,2,0,0,0,0,0,1,0,0,0,Five Nations,,espn,1
@@ -1837,7 +1837,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 1993-03-06,Wales,Ireland,14,19,,Cardiff,Cardiff,Wales,False,False,1,0,3,0,0,0,1,1,3,1,0,0,Five Nations,,espn,1
 1993-03-20,France,Wales,26,10,,Parc des Princes,Paris,France,False,False,3,1,3,0,0,0,1,1,1,0,0,0,Five Nations,,espn,1
 1993-03-20,Ireland,England,17,3,,Lansdowne Road,Dublin,Ireland,False,False,1,0,2,2,0,0,0,0,1,0,0,0,Five Nations / Millennium Trophy,,espn,1
-1993-04-03,Portugal,Romania,13,41,,Lisbon,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,1
+1993-04-03,Portugal,Romania,13,41,,Lisbon,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,
 1993-04-17,Portugal,Italy,11,33,,Coimbra,,,False,False,1,0,2,0,0,0,5,1,2,0,0,0,FIRA Championship D1,,espn,1
 1993-05-15,Argentina,Japan,30,27,,Tucuman,,,False,False,4,2,2,0,0,0,2,1,5,0,0,0,Japan tour,,espn,1
 1993-05-16,Portugal,Spain,15,37,,Lisbon,,,False,False,0,0,5,0,0,0,6,2,0,1,0,0,1995 Rugby World Cup Qualifier,,espn,1
@@ -1846,8 +1846,8 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 1993-05-22,Argentina,Japan,45,20,,Buenos Aires,,,False,False,5,4,4,0,0,0,1,0,5,0,0,0,Japan tour,,espn,1
 1993-05-25,Georgia,Russia,9,15,,Sopot,,,False,False,,,,,,,,,,,,,1995 Rugby World Cup Qualifier,,,
 1993-05-29,Zimbabwe,Wales,13,42,,Harare,,,False,False,1,1,2,0,0,0,6,3,2,0,0,0,Wales tour,,espn,1
-1993-05-29,Tonga,Samoa,6,30,,Nuku A'lofa,,,False,False,,,,,,,,,,,,,South Pacific Championship,,,1
-1993-05-29,Romania,Spain,33,15,,Bucharest,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,1
+1993-05-29,Tonga,Samoa,6,30,,Nuku A'lofa,,,False,False,,,,,,,,,,,,,South Pacific Championship,,,
+1993-05-29,Romania,Spain,33,15,,Bucharest,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,
 1993-06-05,Samoa,Fiji,27,3,,Apia,,,False,False,4,2,1,0,0,0,0,0,1,0,0,0,South Pacific Championship,,espn,1
 1993-06-05,Namibia,Wales,23,38,,Windhoek,,,False,False,2,2,3,0,0,0,5,2,3,0,0,0,Wales tour,,espn,1
 1993-06-12,Fiji,Tonga,11,24,,Suva,,,False,False,1,0,2,0,0,0,4,2,0,0,0,0,1995 Rugby World Cup Qualifier / South Pacific Championship,,espn,1
@@ -1891,7 +1891,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 1994-03-19,England,Wales,15,8,,Twickenham,London,England,False,False,2,1,1,0,0,0,1,0,1,0,0,0,Five Nations,,espn,1
 1994-03-19,Scotland,France,12,20,,Murrayfield,Edinburgh,Scotland,False,False,0,0,4,0,0,0,2,2,2,0,0,0,Five Nations,,espn,1
 1994-04-10,Spain,Russia,9,16,,Madrid,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,
-1994-04-24,Spain,Romania,3,11,,Zaragoza,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,1
+1994-04-24,Spain,Romania,3,11,,Zaragoza,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,
 1994-05-07,Romania,Russia,30,0,,Bucharest,,,False,False,4,2,2,0,0,0,0,0,0,0,0,0,1995 Rugby World Cup Qualifier / FIRA Championship D1,,espn,1
 1994-05-07,Italy,Spain,62,15,,Parma,,,False,False,8,8,2,0,0,0,2,1,1,0,0,0,FIRA Championship D1,,espn,1
 1994-05-08,Japan,Fiji,24,18,,Ehime,,,False,False,3,0,3,0,0,0,3,0,1,0,0,0,Fiji tour,,espn,1
@@ -1901,7 +1901,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 1994-05-21,USA,Canada,10,15,,Long Beach 18th Can-Am Test,,,False,False,1,1,1,0,0,0,0,0,5,0,0,0,Canada tour,,espn,1
 1994-05-21,Spain,Wales,0,54,,Madrid,,,False,False,0,0,0,0,0,0,7,5,3,0,0,0,1995 Rugby World Cup Qualifier,,espn,1
 1994-05-28,USA,Argentina,22,28,,Long Beach,,,False,False,3,2,1,0,0,0,3,2,3,0,0,0,1995 Rugby World Cup Qualifier,,espn,1
-1994-05-28,Spain,Portugal,35,19,,Madrid,,,False,False,,,,,,,,,,,,,1995 Rugby World Cup Qualifier,,,1
+1994-05-28,Spain,Portugal,35,19,,Madrid,,,False,False,,,,,,,,,,,,,1995 Rugby World Cup Qualifier,,,
 1994-06-04,Samoa,Tonga,32,19,,Moamoa,,,False,False,2,2,5,1,0,0,3,2,0,0,0,0,South Pacific Championship,,espn,1
 1994-06-04,Canada,France,18,16,,Nepean,,,False,False,0,0,6,0,0,0,1,1,3,0,0,0,France tour,,espn,1
 1994-06-04,South Africa,England,15,32,,Pretoria,Pretoria,South Africa,False,False,0,0,5,0,0,0,2,2,5,1,0,0,England tour,,espn,1
@@ -1975,12 +1975,12 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 1995-05-26,Ivory Coast,Scotland,0,89,1995 Rugby World Cup,Olympia Park,Rustenburg,South Africa,True,True,0,0,0,0,0,0,13,9,2,0,0,0,Rugby World Cup,Pool D,archive,1
 1995-05-27,Ireland,New Zealand,19,43,1995 Rugby World Cup,Ellis Park,Johannesburg,South Africa,True,True,3,2,0,0,0,0,5,3,4,0,0,0,Rugby World Cup,Pool C,archive,1
 1995-05-27,Argentina,England,18,24,1995 Rugby World Cup,King's Park,Durban,South Africa,True,True,2,1,2,0,0,0,0,0,6,2,0,0,Rugby World Cup,Pool B,archive,1
-1995-05-27,Japan,Wales,10,57,1995 Rugby World Cup,Free State Stadium,Bloemfontein,South Africa,True,True,2,0,0,0,0,0,7,5,4,0,0,0,Rugby World Cup,Pool C,archive,1
+1995-05-27,Japan,Wales,10,57,1995 Rugby World Cup,Free State Stadium,Bloemfontein,South Africa,True,True,2,0,0,0,0,0,7,5,4,0,0,0,Rugby World Cup,Pool C,archive,
 1995-05-27,Italy,Samoa,18,42,1995 Rugby World Cup,Basil Kenyon Stadium,East London,South Africa,True,True,2,1,1,1,0,0,6,3,2,0,0,0,Rugby World Cup,Pool B,archive,1
 1995-05-30,Scotland,Tonga,41,5,1995 Rugby World Cup,Pretoria,,,True,True,3,1,8,0,0,0,1,0,0,0,0,0,Rugby World Cup,Pool D,espn,1
 1995-05-30,France,Ivory Coast,54,18,1995 Rugby World Cup,Rustenberg,,,True,True,8,4,2,0,0,0,2,1,2,0,0,0,Rugby World Cup,Pool D,espn,1
 1995-05-30,South Africa,Romania,21,8,1995 Rugby World Cup,Newlands,Cape Town,South Africa,False,True,2,1,3,0,0,0,1,0,1,0,0,0,Rugby World Cup,Pool A,archive,1
-1995-05-30,Argentina,Samoa,26,32,1995 Rugby World Cup,Basil Kenyon Stadium,East London,South Africa,False,True,2,2,4,0,0,0,3,1,5,0,0,0,Rugby World Cup,Pool B,archive,1
+1995-05-30,Argentina,Samoa,26,32,1995 Rugby World Cup,Basil Kenyon Stadium,East London,South Africa,False,True,2,2,4,0,0,0,3,1,5,0,0,0,Rugby World Cup,Pool B,archive,
 1995-05-31,New Zealand,Wales,34,9,1995 Rugby World Cup,Johannesburg,,,True,True,3,2,4,1,0,0,0,0,2,1,0,0,Rugby World Cup,Pool C,archive,1
 1995-05-31,England,Italy,27,20,1995 Rugby World Cup,Durban,,,True,True,2,1,5,0,0,0,2,2,2,0,0,0,Rugby World Cup,Pool B,espn,1
 1995-05-31,Ireland,Japan,50,28,1995 Rugby World Cup,Bloemfontein,,,True,True,7,6,1,0,0,0,4,4,0,0,0,0,Rugby World Cup,Pool C,archive,1
@@ -2007,7 +2007,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 1995-07-22,New Zealand,Australia,28,16,,"Eden Park, Auckland Bledisloe Cup, 1st Test",Auckland,New Zealand,False,False,1,1,5,2,0,0,1,1,3,0,0,0,Australia tour / Bledisloe Cup,,espn,1
 1995-07-29,Australia,New Zealand,23,34,,"Sydney Football Stadium, Bledisloe Cup, 2nd Test",Sydney,Australia,False,False,2,2,3,0,0,0,5,3,1,0,0,0,New Zealand tour / Bledisloe Cup,,espn,1
 1995-08-26,Chile,Spain,28,23,,Santiago,,,False,False,,,,,,,,,,,,,Spain tour,,,
-1995-09-02,Uruguay,Spain,47,10,,Montevideo,,,False,False,,,,,,,,,,,,,Spain tour,,,1
+1995-09-02,Uruguay,Spain,47,10,,Montevideo,,,False,False,,,,,,,,,,,,,Spain tour,,,
 1995-09-02,South Africa,Wales,40,11,1995 Wales tour of South Africa,Ellis Park Stadium,Johannesburg,South Africa,False,False,5,3,3,0,0,0,1,0,2,0,0,0,Wales tour,,espn,1
 1995-09-09,Canada,USA,14,15,1995 United States tour of Canada,Fletcher's Fields,Markham,Canada,False,False,1,0,3,0,0,0,2,1,1,0,0,0,United States of America tour,,espn,1
 1995-09-21,Zimbabwe,Namibia,14,19,,Harare,,,False,False,,,,,,,,,,,,,Namibia tour,,,
@@ -2036,12 +2036,12 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 1996-02-17,France,Ireland,45,10,,Parc des Princes,Paris,France,False,False,7,5,0,0,0,0,1,1,1,0,0,0,Five Nations,,espn,1
 1996-02-17,Wales,Scotland,14,16,,Cardiff,Cardiff,Wales,False,False,1,0,3,0,0,0,1,1,3,0,0,0,Five Nations,,espn,1
 1996-03-01,Namibia,Zimbabwe,13,15,,Windhoek,,,False,False,2,0,1,0,0,0,2,1,1,0,0,0,Bankfin Nite Series,,espn,1
-1996-03-02,Portugal,Italy,3,64,,Lisbon,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,1
+1996-03-02,Portugal,Italy,3,64,,Lisbon,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,
 1996-03-02,Ireland,Wales,30,17,,Lansdowne Road,Dublin,Ireland,False,False,4,2,2,0,0,0,2,2,1,0,0,0,Five Nations,,espn,1
 1996-03-02,Scotland,England,9,18,,Murrayfield,Edinburgh,Scotland,False,False,0,0,3,0,0,0,0,0,6,0,0,0,Five Nations / Calcutta Cup,,espn,1
 1996-03-16,England,Ireland,28,15,,Twickenham,London,England,False,False,1,1,6,1,0,0,0,0,4,1,0,0,Five Nations / Millennium Trophy,,espn,1
 1996-03-16,Wales,France,16,15,,Cardiff,Cardiff,Wales,False,False,1,1,3,0,0,0,2,1,1,0,0,0,Five Nations,,espn,1
-1996-04-13,Romania,Portugal,92,0,,Bucharest,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,1
+1996-04-13,Romania,Portugal,92,0,,Bucharest,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,
 1996-04-14,Spain,Russia,52,6,,Madrid,,,False,False,,,,,,,,,,,,,FIRA Championship D1,,,
 1996-04-20,France,Romania,64,12,,"Stade Jean Alric, Aurillac",,,False,False,10,7,0,0,0,0,0,0,3,1,0,0,Romania tour,,espn,1
 1996-05-04,Zimbabwe,Namibia,18,19,,Harare,,,False,False,2,1,2,0,0,0,1,1,3,1,0,0,Bankfin Nite Series,,espn,1
@@ -2117,10 +2117,10 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 1997-03-15,Wales,England,13,34,,Cardiff,Cardiff,Wales,False,False,1,1,2,0,0,0,4,4,2,0,0,0,Five Nations,,espn,1
 1997-03-15,France,Scotland,47,20,,Parc des Princes,Paris,France,False,False,4,3,6,1,0,0,2,2,2,0,0,0,Five Nations,,espn,1
 1997-03-22,France,Italy,32,40,,"Stade Lesdiguiéres, Grenoble",,,False,False,4,3,2,0,0,0,4,4,4,0,0,0,FIRA Championship D1,,espn,1
-1997-04-19,Portugal,Georgia,21,17,,Lisbon,,,False,False,,,,,,,,,,,,,FIRA Championship,,,1
+1997-04-19,Portugal,Georgia,21,17,,Lisbon,,,False,False,,,,,,,,,,,,,FIRA Championship,,,
 1997-05-03,Hong Kong,Japan,42,20,,Hong Kong,,,False,False,5,4,3,0,0,0,3,1,1,0,0,0,Pacific Rim Championship,,espn,1
 1997-05-10,Canada,USA,53,12,,Vancouver,,,False,False,7,6,2,0,0,0,2,1,0,0,0,0,Pacific Rim Championship,,espn,1
-1997-05-11,Spain,Portugal,25,18,,Madrid,,,False,False,,,,,,,,,,,,,FIRA Championship,,,1
+1997-05-11,Spain,Portugal,25,18,,Madrid,,,False,False,,,,,,,,,,,,,FIRA Championship,,,
 1997-05-17,Zimbabwe,Tonga,13,42,,Harare,,,False,False,,,,,,,,,,,,,Tonga tour,,,
 1997-05-17,Hong Kong,USA,46,9,,Hong Kong,,,False,False,6,5,2,0,0,0,0,0,3,0,0,0,Pacific Rim Championship,,espn,1
 1997-05-18,Japan,Canada,32,31,,Tokyo,,,False,False,4,3,2,0,0,0,3,2,3,1,0,0,Pacific Rim Championship,,espn,1
@@ -2156,7 +2156,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 1997-08-09,New Zealand,South Africa,55,35,,"Eden Park, Auckland",,,False,False,7,4,4,0,0,0,5,5,0,0,0,0,Tri Nations,,espn,1
 1997-08-16,New Zealand,Australia,36,24,,"Carisbrook, Dunedin",,,False,False,3,3,5,0,0,0,4,2,0,0,0,0,Tri Nations / Bledisloe Cup,,espn,1
 1997-08-23,South Africa,Australia,61,22,,"Loftus Versfeld, Pretoria",,,False,False,8,6,3,0,0,0,3,2,1,0,0,0,Tri Nations,,espn,1
-1997-08-24,Uruguay,Chile,32,17,,Montevideo,,,False,False,,,,,,,,,,,,,South American Championship,,,1
+1997-08-24,Uruguay,Chile,32,17,,Montevideo,,,False,False,,,,,,,,,,,,,South American Championship,,,
 1997-08-30,Wales,Romania,70,21,,"The Racecourse Ground, Wrexham",Wrexham,Wales,False,False,11,6,1,0,0,0,2,1,3,0,0,0,Romania tour,,espn,1
 1997-09-27,Uruguay,Argentina,17,56,,Montevideo,,,False,False,2,2,1,0,0,0,8,5,1,1,0,0,South American Championship,,espn,1
 1997-10-04,Argentina,Chile,50,10,,Mendoza,,,False,False,7,6,1,0,0,0,1,1,1,0,0,0,South American Championship,,espn,1
@@ -2790,7 +2790,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2004-03-27,France,England,24,21,2004 Six Nations Championship,Stade de France,Paris,France,False,False,2,1,4,0,0,0,2,1,3,0,0,0,Six Nations,,espn,1
 2004-05-27,Japan,Russia,29,12,,National Stadium,Tokyo,Japan,False,False,2,2,5,0,0,0,2,1,0,0,0,0,Super Powers Cup,,espn,1
 2004-05-27,Canada,USA,23,20,,Tokyo,,,False,False,2,2,3,0,0,0,2,2,2,0,0,0,Super Powers Cup,,espn,1
-2004-05-29,Samoa,Tonga,24,14,,Apia,,,False,False,,,,,,,,,,,,,2007 Rugby World Cup Qualifier / South Pacific Championship,,,1
+2004-05-29,Samoa,Tonga,24,14,,Apia,,,False,False,,,,,,,,,,,,,2007 Rugby World Cup Qualifier / South Pacific Championship,,,
 2004-05-30,Russia,USA,11,41,,Tokyo,,,False,False,1,0,2,0,0,0,4,3,4,1,0,0,Super Powers Cup,,espn,1
 2004-05-30,Japan,Canada,34,21,,Prince Chichibu Memorial Ground,Tokyo,Japan,False,False,4,4,2,0,0,0,2,1,3,0,0,0,Super Powers Cup,,espn,1
 2004-06-04,Samoa,Scotland,3,38,,Wellington,Wellington,,False,False,0,0,1,0,0,0,5,2,3,0,0,0,Samoa tour / Scotland tour,,espn,1
@@ -2944,7 +2944,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2006-02-12,Wales,Scotland,28,18,2006 Six Nations Championship,Millennium Stadium,Cardiff,Wales,False,False,4,4,0,0,0,0,2,1,2,0,0,0,Six Nations,,archive,1
 2006-02-25,Scotland,England,18,12,2006 Six Nations Championship,Murrayfield,Edinburgh,Scotland,False,False,0,0,5,1,0,0,0,0,4,0,0,0,Six Nations / Calcutta Cup,,espn,1
 2006-02-25,Romania,Georgia,35,10,,Bucharest,,,False,False,4,3,3,0,0,0,1,1,1,0,0,0,Six Nations B / Antim Cup,,espn,1
-2006-02-25,Portugal,Russia,19,19,,Lisbon,,,False,False,,,,,,,,,,,,,Six Nations B,,,1
+2006-02-25,Portugal,Russia,19,19,,Lisbon,,,False,False,,,,,,,,,,,,,Six Nations B,,,
 2006-02-25,France,Italy,37,12,2006 Six Nations Championship,Stade de France,Saint-Denis,France,False,False,5,3,2,0,0,0,0,0,3,1,0,0,Six Nations,,espn,1
 2006-02-26,Ireland,Wales,31,5,2006 Six Nations Championship,Lansdowne Road,Dublin,Ireland,False,False,3,2,4,0,0,0,1,0,0,0,0,0,Six Nations,,espn,1
 2006-03-11,Wales,Italy,18,18,2006 Six Nations Championship,Millennium Stadium,Cardiff,Wales,False,False,2,1,2,0,0,0,2,1,2,0,0,0,Six Nations,,espn,1
@@ -2989,8 +2989,8 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2006-08-05,Australia,South Africa,20,18,2006 Tri Nations Series,Sydney,,,False,False,2,2,2,0,0,0,2,1,2,0,0,0,Tri Nations / Mandela Challenge Plate,,espn,1
 2006-08-12,Canada,USA,56,7,,St John's,,,False,False,7,6,3,0,0,0,1,1,0,0,0,0,2007 Rugby World Cup Qualifier,,espn,1
 2006-08-19,New Zealand,Australia,34,27,2006 Tri Nations Series,Eden Park,Auckland,New Zealand,False,False,3,2,5,0,0,0,3,3,2,0,0,0,Tri Nations / Bledisloe Cup,,archive,1
-2006-08-26,South Africa,New Zealand,26,45,2006 Tri Nations Series,Pretoria,,,False,False,,,,,,,,,,,,,Tri Nations / Freedom Cup,,,1
-2006-09-02,South Africa,New Zealand,21,20,2006 Tri Nations Series,Royal Bafokeng Stadium,Rustenburg,South Africa,False,False,2,1,3,0,0,0,2,2,2,0,0,0,Tri Nations / Freedom Cup,,archive,1
+2006-08-26,South Africa,New Zealand,26,45,2006 Tri Nations Series,Pretoria,,,False,False,,,,,,,,,,,,,Tri Nations / Freedom Cup,,,
+2006-09-02,South Africa,New Zealand,21,20,2006 Tri Nations Series,Royal Bafokeng Stadium,Rustenburg,South Africa,False,False,2,1,3,0,0,0,2,2,2,0,0,0,Tri Nations / Freedom Cup,,archive,
 2006-09-09,South Africa,Australia,24,16,2006 Tri Nations Series,Johannesburg,,,False,False,2,1,3,1,0,0,1,1,3,0,0,0,Tri Nations / Mandela Challenge Plate,,espn,1
 2006-09-16,Uruguay,Portugal,20,14,,Canelones,,,False,False,3,1,1,0,0,0,2,2,0,0,0,0,Portugal tour,,espn,1
 2006-09-30,Uruguay,USA,13,42,,Montevideo,,,False,False,1,1,2,0,0,0,5,4,3,0,0,0,2007 Rugby World Cup Qualifier,,espn,1
@@ -3187,7 +3187,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2008-06-22,Japan,Fiji,12,24,,Tokyo,,,False,False,0,0,4,0,0,0,3,3,1,0,0,0,Pacific Nations Cup,,espn,1
 2008-06-28,Tonga,Samoa,15,20,,Nuku A'lofa,,,False,False,0,0,5,0,0,0,2,2,2,0,0,0,Pacific Nations Cup,,espn,1
 2008-06-28,Australia,France,34,13,,Sydney,,,False,False,4,4,2,0,0,0,1,1,2,0,0,0,France tour / Trophee des Bicentenaires,,archive,1
-2008-06-28,Argentina,Italy,12,13,,Cordoba,Cordoba,Argentina,False,False,0,0,4,0,0,0,1,1,2,0,0,0,Italy tour,,archive,1
+2008-06-28,Argentina,Italy,12,13,,Cordoba,Cordoba,Argentina,False,False,0,0,4,0,0,0,1,1,2,0,0,0,Italy tour,,archive,
 2008-07-05,Tonga,Fiji,27,16,,Nuku A'lofa,,,False,False,4,2,1,0,0,0,1,1,3,0,0,0,Pacific Nations Cup,,espn,1
 2008-07-05,Samoa,Japan,37,31,,Apia,,,False,False,5,3,2,0,0,0,4,4,1,0,0,0,Pacific Nations Cup,,espn,1
 2008-07-05,New Zealand,South Africa,19,8,2008 Tri Nations Series,Wellington,,,False,False,1,1,4,0,0,0,1,0,1,0,0,0,Tri Nations / Freedom Cup,,archive,1
@@ -3329,7 +3329,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2010-02-13,Spain,Russia,20,38,2008-10 European Nations Cup Division 1A,Madrid,,,False,False,2,2,2,0,0,0,4,3,4,0,0,0,2011 Rugby World Cup Qualifier / Six Nations B,,espn,1
 2010-02-13,Portugal,Georgia,10,16,2008-10 European Nations Cup Division 1A,Lisbon,,,False,False,1,1,1,0,0,0,1,1,2,1,0,0,2011 Rugby World Cup Qualifier / Six Nations B,,espn,1
 2010-02-13,France,Ireland,33,10,2010 Six Nations Championship,Stade de France,Paris,France,False,False,3,3,2,2,0,0,1,1,1,0,0,0,Six Nations,,archive,1
-2010-02-14,Italy,England,12,17,2010 Six Nations Championship,Rome,Rome,Italy,False,False,0,0,4,0,0,0,1,0,3,1,0,0,Six Nations,,archive,1
+2010-02-14,Italy,England,12,17,2010 Six Nations Championship,Rome,Rome,Italy,False,False,0,0,4,0,0,0,1,0,3,1,0,0,Six Nations,,archive,
 2010-02-26,Wales,France,20,26,2010 Six Nations Championship,Millennium Stadium,Cardiff,Wales,False,False,2,2,2,0,0,0,2,2,4,0,0,0,Six Nations,,archive,1
 2010-02-27,Russia,Romania,21,21,2008-10 European Nations Cup Division 1A,Sotchi,,,False,False,2,1,3,0,0,0,2,1,3,0,0,0,2011 Rugby World Cup Qualifier / Six Nations B,,espn,1
 2010-02-27,Italy,Scotland,16,12,2010 Six Nations Championship,Rome,Rome,Italy,False,False,1,1,3,0,0,0,0,0,3,1,0,0,Six Nations,,archive,1
@@ -3771,7 +3771,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2014-05-25,Japan,Hong Kong,49,8,,National Stadium,Tokyo,Japan,False,False,8,3,1,0,0,0,1,0,0,1,0,0,2015 Rugby World Cup Qualifier / Asian - Top 3,,espn,1
 2014-05-25,Chile,Argentina,12,73,,Santiago,,,False,False,0,0,4,0,0,0,11,9,0,0,0,0,South American Championship,,espn,1
 2014-05-30,Japan,Samoa,33,14,,Prince Chichibu Memorial Ground,Tokyo,Japan,False,False,3,3,4,0,0,0,2,2,0,0,0,0,Samoa tour,,espn,1
-2014-06-07,USA,Scotland,6,24,,Houston,,,False,False,,,,,,,,,,,,,Scotland tour,,,1
+2014-06-07,USA,Scotland,6,24,,Houston,,,False,False,,,,,,,,,,,,,Scotland tour,,,
 2014-06-07,Samoa,Tonga,18,18,,Apia,,,False,False,2,1,2,0,0,0,2,1,2,0,0,0,Pacific Nations Cup,,espn,1
 2014-06-07,New Zealand,England,20,15,,Auckland,,,False,False,1,0,5,0,0,0,0,0,5,0,0,0,England tour / Hillary Shield,,archive,1
 2014-06-07,Fiji,Italy,25,14,,Suva,,,False,False,3,2,2,0,0,0,2,2,0,0,0,0,Italy tour,,espn,1
@@ -3833,7 +3833,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2014-11-15,Tonga,USA,40,12,,Gloucester,,,False,False,5,3,3,0,0,0,2,1,0,0,0,0,Tonga tour / United States of America tour,,espn,1
 2014-11-15,Scotland,New Zealand,16,24,,Murrayfield,Edinburgh,Scotland,False,False,1,1,3,0,0,0,2,1,4,0,0,0,New Zealand tour,,archive,1
 2014-11-15,Romania,Japan,13,18,,Bucharest,,Romania,False,False,0,1,2,0,0,1,0,0,6,0,0,0,Japan tour,,espn,1
-2014-11-15,Hong Kong,Russia,27,39,,Hong Kong,,,False,False,,,,,,,,,,,,,Russia tour,,,1
+2014-11-15,Hong Kong,Russia,27,39,,Hong Kong,,,False,False,,,,,,,,,,,,,Russia tour,,,
 2014-11-15,France,Australia,29,26,,Stade de France,Paris,France,False,False,2,2,5,0,0,0,2,2,4,0,0,0,Australia tour,,archive,1
 2014-11-15,England,South Africa,28,31,,Twickenham,,,False,False,3,2,3,0,0,0,3,2,3,1,0,0,South Africa tour,,archive,1
 2014-11-16,Ireland,Georgia,49,7,,Lansdowne Road,,,False,False,6,5,3,0,0,0,1,1,0,0,0,0,Georgia tour,,espn,1
@@ -3875,7 +3875,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2015-03-21,Italy,Wales,20,61,2015 Six Nations Championship,Rome,Rome,Italy,False,False,2,2,2,0,0,0,8,6,3,0,0,0,Six Nations,,archive,1
 2015-03-21,England,France,55,35,2015 Six Nations Championship,Twickenham,,,False,False,7,7,2,0,0,0,5,2,2,0,0,0,Six Nations,,archive,1
 2015-05-02,Japan,Hong Kong,41,0,,Prince Chichibu Memorial Ground,Tokyo,Japan,False,False,7,3,0,0,0,0,0,0,0,0,0,0,Asian - Top 3,,espn,1
-2015-05-09,Chile,Uruguay,30,15,,Santiago,,,False,False,,,,,,,,,,,,,South American Championship,,,1
+2015-05-09,Chile,Uruguay,30,15,,Santiago,,,False,False,,,,,,,,,,,,,South American Championship,,,
 2015-05-16,Uruguay,Argentina,14,36,,Montevideo,,,False,False,1,0,3,0,0,0,6,3,0,0,0,0,South American Championship,,espn,1
 2015-05-23,Hong Kong,Japan,0,3,,,,,False,False,,,,,,,,,,,,,,,,
 2015-06-12,Romania,Spain,35,9,,Bucharest,,,False,False,2,2,7,0,0,0,0,0,3,0,0,0,Nations Cup,,espn,1
@@ -3905,7 +3905,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2015-08-08,South Africa,Argentina,25,37,2015 The Rugby Championship,Durban,,,False,False,3,2,2,0,0,0,4,4,2,1,0,0,Rugby Championship,,archive,1
 2015-08-08,Australia,New Zealand,27,19,2015 The Rugby Championship,Sydney,,,False,False,3,3,2,0,0,0,2,0,3,0,0,0,Rugby Championship / Bledisloe Cup,,espn,1
 2015-08-15,New Zealand,Australia,41,13,2015 Bledisloe Cup,Auckland,,,False,False,4,5,2,0,0,1,1,1,2,0,0,0,Australia tour / Bledisloe Cup,,espn,1
-2015-08-15,Namibia,Zimbabwe,80,6,,Windhoek,,,False,False,,,,,,,,,,,,,African CAR Championship,,,1
+2015-08-15,Namibia,Zimbabwe,80,6,,Windhoek,,,False,False,,,,,,,,,,,,,African CAR Championship,,,
 2015-08-15,Ireland,Scotland,28,22,,Lansdowne Road,,,False,False,4,4,0,0,0,0,3,2,1,0,0,0,Scotland tour,,archive,1
 2015-08-15,England,France,19,14,,Twickenham,,,False,False,3,2,0,0,0,0,1,0,3,0,0,0,France tour,,archive,1
 2015-08-15,Argentina,South Africa,12,26,International Friendly,Buenos Aires,,,False,False,0,0,4,0,0,0,2,2,3,1,0,0,South Africa tour,,archive,1
@@ -3975,10 +3975,10 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2015-11-13,Portugal,Russia,12,23,,Hong Kong,,,False,False,0,0,4,0,0,0,2,2,3,0,0,0,Cup of Nations,,espn,1
 2015-11-13,Hong Kong,Zimbabwe,30,11,,Hong Kong,,,False,False,,,,,,,,,,,,,Cup of Nations,,,
 2015-11-17,Russia,Zimbabwe,50,5,,Hong Kong,,,False,False,8,5,0,0,0,0,1,0,0,0,0,0,Cup of Nations,,espn,1
-2015-11-17,Hong Kong,Portugal,13,6,,Hong Kong,,,False,False,,,,,,,,,,,,,Cup of Nations,,,1
+2015-11-17,Hong Kong,Portugal,13,6,,Hong Kong,,,False,False,,,,,,,,,,,,,Cup of Nations,,,
 2015-11-21,Spain,Chile,54,10,,Torrelavega,,,False,False,8,7,0,0,0,0,2,0,0,0,0,0,Chile tour,,espn,1
 2015-11-21,Portugal,Zimbabwe,36,11,,Hong Kong,,,False,False,,,,,,,,,,,,,Cup of Nations,,,
-2015-11-21,Hong Kong,Russia,12,31,,Hong Kong,,,False,False,,,,,,,,,,,,,Cup of Nations,,,1
+2015-11-21,Hong Kong,Russia,12,31,,Hong Kong,,,False,False,,,,,,,,,,,,,Cup of Nations,,,
 2016-02-06,USA,Argentina,35,35,,,,,False,False,,,,,,,,,,,,,,,,
 2016-02-06,Scotland,England,9,15,2016 Six Nations Championship,Murrayfield,,,False,False,0,0,3,0,0,0,2,1,1,0,0,0,Six Nations / Calcutta Cup,,espn,1
 2016-02-06,Russia,Spain,22,20,,Sotchi,,,False,False,3,2,1,0,0,0,2,2,2,0,0,0,Six Nations B,,espn,1
@@ -4013,12 +4013,12 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2016-03-19,Ireland,Scotland,35,25,2016 Six Nations Championship,Lansdowne Road,,,False,False,4,3,3,0,0,0,3,2,2,0,0,0,Six Nations / Centenary Quaich,,espn,1
 2016-03-19,Georgia,Romania,38,9,,Tbilisi,,,False,False,6,4,0,0,0,0,0,0,3,0,0,0,Six Nations B,,espn,1
 2016-03-19,France,England,21,31,2016 Six Nations Championship,Stade de France,,,False,False,0,0,7,0,0,0,3,2,4,0,0,0,Six Nations,,espn,1
-2016-05-07,Uruguay,Chile,39,14,,Montevideo,,,False,False,,,,,,,,,,,,,South American Championship,,,1
+2016-05-07,Uruguay,Chile,39,14,,Montevideo,,,False,False,,,,,,,,,,,,,South American Championship,,,
 2016-05-07,Hong Kong,Japan,3,38,,Hong Kong,,,False,False,0,0,1,0,0,0,6,4,0,0,0,0,Asian - Top 3,,espn,1
 2016-05-28,Uruguay,Argentina,33,38,,,,,False,False,,,,,,,,,,,,,,,,
-2016-05-28,Japan,Hong Kong,59,17,,Prince Chichibu Memorial Ground,Tokyo,Japan,False,False,,,,,,,,,,,,,Asian - Top 3,,,1
+2016-05-28,Japan,Hong Kong,59,17,,Prince Chichibu Memorial Ground,Tokyo,Japan,False,False,,,,,,,,,,,,,Asian - Top 3,,,
 2016-05-29,England,Wales,27,13,,Twickenham,,,False,False,5,1,0,0,0,0,1,1,2,0,0,0,Wales tour,,espn,1
-2016-06-04,Chile,Argentina,12,87,,Santiago,,,False,False,,,,,,,,,,,,,South American Championship,,,1
+2016-06-04,Chile,Argentina,12,87,,Santiago,,,False,False,,,,,,,,,,,,,South American Championship,,,
 2016-06-11,South Africa,Ireland,20,26,,Cape Town,,,False,False,2,2,2,0,0,0,2,2,3,1,0,0,Ireland tour,,espn,1
 2016-06-11,Samoa,Georgia,19,19,,Apia,,,False,False,1,1,4,0,0,0,1,1,4,0,0,0,Georgia tour,,espn,1
 2016-06-11,New Zealand,Wales,39,21,,Auckland,,,False,False,5,4,2,0,0,0,2,1,3,0,0,0,Wales tour,,espn,1
@@ -4038,13 +4038,13 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2016-06-24,Fiji,Georgia,3,14,,Suva,,,False,False,0,0,1,0,0,0,1,0,3,0,0,0,Georgia tour,,espn,1
 2016-06-25,USA,Russia,25,0,,Sacramento,,,False,False,1,1,6,0,0,0,0,0,0,0,0,0,Russia tour,,espn,1
 2016-06-25,South Africa,Ireland,19,13,,Port Elizabeth,,,False,False,1,1,4,0,0,0,1,1,2,0,0,0,Ireland tour,,espn,1
-2016-06-25,Samoa,Tonga,30,10,,Apia,,,False,False,,,,,,,,,,,,,2019 Rugby World Cup Qualifier / South Pacific Championship,,,1
+2016-06-25,Samoa,Tonga,30,10,,Apia,,,False,False,,,,,,,,,,,,,2019 Rugby World Cup Qualifier / South Pacific Championship,,,
 2016-06-25,New Zealand,Wales,46,6,,Dunedin,,,False,False,6,5,2,0,0,0,0,0,2,0,0,0,Wales tour,,espn,1
 2016-06-25,Japan,Scotland,16,21,,Ajinomoto Stadium,Chofu,Japan,False,False,1,1,3,0,0,0,0,0,7,0,0,0,Scotland tour,,espn,1
 2016-06-25,Australia,England,40,44,,Sydney,,,False,False,5,3,3,0,0,0,4,3,6,0,0,0,England tour,,espn,1
 2016-06-25,Argentina,France,0,27,,Tucuman,,,False,False,0,0,0,0,0,0,3,3,2,0,0,0,France tour,,espn,1
 2016-06-26,Canada,Italy,18,20,,Toronto,,,False,False,0,0,6,0,0,0,1,0,5,0,0,0,Italy tour,,espn,1
-2016-08-06,Namibia,Zimbabwe,60,22,,Windhoek,,,False,False,,,,,,,,,,,,,2019 Rugby World Cup Qualifier / African CAR Championship,,,1
+2016-08-06,Namibia,Zimbabwe,60,22,,Windhoek,,,False,False,,,,,,,,,,,,,2019 Rugby World Cup Qualifier / African CAR Championship,,,
 2016-08-20,South Africa,Argentina,30,23,2016 The Rugby Championship,Nelspruit,,,False,False,3,3,3,0,0,0,2,2,3,0,0,0,Rugby Championship,,espn,1
 2016-08-20,Australia,New Zealand,8,42,2016 The Rugby Championship,Sydney,,,False,False,1,0,1,0,0,0,6,3,2,0,0,0,Rugby Championship / Bledisloe Cup,,espn,1
 2016-08-27,New Zealand,Australia,29,9,2016 The Rugby Championship,Wellington,,,False,False,4,3,1,0,0,0,0,0,3,0,0,0,Rugby Championship / Bledisloe Cup,,espn,1
@@ -4074,13 +4074,13 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2016-11-15,Hong Kong,Zimbabwe,34,11,,Hong Kong,,,False,False,,,,,,,,,,,,,Cup of Nations,,,
 2016-11-19,Wales,Japan,33,30,,Millennium Stadium,Cardiff,Wales,False,False,3,3,3,1,0,0,3,3,3,0,0,0,Japan tour,,espn,1
 2016-11-19,Tonga,USA,20,17,,San Sebastian,,,False,False,2,2,2,0,0,0,2,2,1,0,0,0,Tonga tour / United States of America tour,,espn,1
-2016-11-19,Spain,Uruguay,33,16,,Malaga,,,False,False,,,,,,,,,,,,,Uruguay tour,,,1
+2016-11-19,Spain,Uruguay,33,16,,Malaga,,,False,False,,,,,,,,,,,,,Uruguay tour,,,
 2016-11-19,Scotland,Argentina,19,16,,Murrayfield,,,False,False,1,1,4,0,0,0,1,1,3,0,0,0,Argentina tour,,espn,1
 2016-11-19,Romania,Canada,21,16,,Bucharest,,,False,False,2,1,3,0,0,0,1,1,3,0,0,0,Canada tour,,espn,1
 2016-11-19,Italy,South Africa,20,18,,Firenze,,,False,False,2,2,2,0,0,0,2,1,2,0,0,0,South Africa tour,,espn,1
 2016-11-19,Ireland,New Zealand,9,21,,Lansdowne Road,,,False,False,0,0,3,0,0,0,3,3,0,0,0,0,New Zealand tour,,espn,1
 2016-11-19,Hong Kong,Russia,0,27,,Hong Kong,,,False,False,0,0,0,0,0,0,4,2,1,0,0,0,Cup of Nations,,espn,1
-2016-11-19,Georgia,Samoa,20,16,,Tbilisi,,,False,False,,,,,,,,,,,,,Samoa tour,,,1
+2016-11-19,Georgia,Samoa,20,16,,Tbilisi,,,False,False,,,,,,,,,,,,,Samoa tour,,,
 2016-11-19,France,Australia,23,25,,Stade de France,,,False,False,3,1,2,0,0,0,2,2,2,0,0,1,Australia tour,,espn,1
 2016-11-19,England,Fiji,58,15,,Twickenham,,,False,False,9,5,1,0,0,0,3,0,0,0,0,0,Fiji tour,,espn,1
 2016-11-25,Canada,Samoa,23,25,,Grenoble,,,False,False,3,1,2,0,0,0,1,1,5,1,0,0,Canada tour / Samoa tour,,espn,1
@@ -4090,7 +4090,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2016-11-26,Italy,Tonga,17,19,,Padova,,,False,False,2,2,1,0,0,0,1,1,4,0,0,0,Tonga tour,,espn,1
 2016-11-26,Ireland,Australia,27,24,,Lansdowne Road,,,False,False,3,3,2,0,0,0,3,3,1,0,0,0,Australia tour,,espn,1
 2016-11-26,France,New Zealand,19,24,,Stade de France,,,False,False,1,1,4,0,0,0,3,3,1,0,0,0,New Zealand tour,,espn,1
-2016-11-26,Fiji,Japan,38,25,,Vannes,,,False,False,,,,,,,,,,,,,Fiji tour / Japan tour,,,1
+2016-11-26,Fiji,Japan,38,25,,Vannes,,,False,False,,,,,,,,,,,,,Fiji tour / Japan tour,,,
 2016-11-26,England,Argentina,27,14,,Twickenham,,,False,False,1,1,5,0,0,1,2,2,0,0,0,0,Argentina tour,,espn,1
 2016-12-03,England,Australia,37,21,,Twickenham,,,False,False,4,4,3,0,0,0,2,1,3,0,0,0,Australia tour,,espn,1
 2017-02-04,USA,Uruguay,29,23,,San Antonio,,,False,False,2,2,5,0,0,0,2,2,3,0,0,0,Americas Rugby Championship,,espn,1
@@ -4104,12 +4104,12 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2017-02-12,France,Scotland,22,16,2017 Six Nations Championship,Stade de France,,,False,False,1,1,5,0,0,0,2,0,2,0,0,0,Six Nations,,espn,1
 2017-02-18,Romania,Spain,13,3,,Iasi,,,False,False,1,1,2,0,0,0,0,0,1,0,0,0,2019 Rugby World Cup Qualifier / Six Nations B,,espn,1
 2017-02-18,Canada,USA,34,51,,Vancouver,,,False,False,5,3,1,0,0,0,7,5,2,0,0,0,Americas Rugby Championship,,espn,1
-2017-02-25,Uruguay,Canada,17,13,,Punte de l'Este,,,False,False,,,,,,,,,,,,,Americas Rugby Championship,,,1
+2017-02-25,Uruguay,Canada,17,13,,Punte de l'Este,,,False,False,,,,,,,,,,,,,Americas Rugby Championship,,,
 2017-02-25,Scotland,Wales,29,13,2017 Six Nations Championship,Murrayfield,,,False,False,2,2,5,0,0,0,1,1,2,0,0,0,Six Nations,,espn,1
 2017-02-25,Ireland,France,19,9,2017 Six Nations Championship,Lansdowne Road,,,False,False,1,1,3,1,0,0,0,0,3,0,0,0,Six Nations,,espn,1
 2017-02-25,Chile,USA,9,57,,Santiago,,,False,False,0,0,3,0,0,0,8,7,1,0,0,0,Americas Rugby Championship,,espn,1
 2017-02-26,England,Italy,36,15,2017 Six Nations Championship,Twickenham,,,False,False,6,3,0,0,0,0,2,1,0,1,0,0,Six Nations,,espn,1
-2017-03-04,Uruguay,Chile,45,14,,Montevideo,,,False,False,,,,,,,,,,,,,Americas Rugby Championship,,,1
+2017-03-04,Uruguay,Chile,45,14,,Montevideo,,,False,False,,,,,,,,,,,,,Americas Rugby Championship,,,
 2017-03-04,Spain,Georgia,10,20,,Madrid,,,False,False,1,1,1,0,0,0,2,2,2,0,0,0,Six Nations B,,espn,1
 2017-03-04,Russia,Romania,10,30,,Sotchi,,,False,False,1,1,1,0,0,0,4,2,2,0,0,0,2019 Rugby World Cup Qualifier / Six Nations B,,espn,1
 2017-03-10,Wales,Ireland,22,9,2017 Six Nations Championship,Millennium Stadium,,,False,False,3,2,1,0,0,0,0,0,3,0,0,0,Six Nations,,espn,1
@@ -4122,45 +4122,45 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2017-03-19,Romania,Georgia,8,7,,Bucharest,,,False,False,1,0,1,0,0,0,1,1,0,0,0,0,Six Nations B,,espn,1
 2017-05-06,Japan,Hong Kong,29,17,,Prince Chichibu Memorial Ground,Tokyo,Japan,False,False,5,2,0,0,0,0,2,2,1,0,0,0,Asian - Top 3,,espn,1
 2017-05-13,Hong Kong,Japan,0,16,,Hong Kong,,,False,False,0,0,0,0,0,0,1,1,3,0,0,0,Asian - Top 3,,espn,1
-2017-05-27,Uruguay,Chile,27,11,,Montevideo,,,False,False,,,,,,,,,,,,,2019 Rugby World Cup Qualifier / South American Championship,,,1
+2017-05-27,Uruguay,Chile,27,11,,Montevideo,,,False,False,,,,,,,,,,,,,2019 Rugby World Cup Qualifier / South American Championship,,,
 2017-06-10,USA,Ireland,19,55,,Harrison,,,False,False,3,2,0,0,0,0,9,5,0,0,0,0,Ireland tour,,espn,1
-2017-06-10,South Africa,France,37,14,,Pretoria,,,False,False,,,,,,,,,,,,,France tour,,,1
+2017-06-10,South Africa,France,37,14,,Pretoria,,,False,False,,,,,,,,,,,,,France tour,,,
 2017-06-10,Namibia,Spain,13,15,,Montevideo,,,False,False,1,1,2,0,0,0,2,1,1,0,0,0,Nations Cup,,espn,1
 2017-06-10,Japan,Romania,33,21,,Egao Kenko Stadium,Kumamoto,Japan,False,False,3,3,4,0,0,0,2,1,3,0,0,0,Romania tour,,espn,1
 2017-06-10,Italy,Scotland,13,34,,Singpore,,,True,False,2,0,1,0,0,0,5,3,1,0,0,0,Scotland tour,,espn,1
 2017-06-10,Canada,Georgia,0,13,,Calgary,,,False,False,0,0,0,0,0,0,1,1,2,0,0,0,Georgia tour,,espn,1
 2017-06-10,Australia,Fiji,37,14,,Melbourne,,,False,False,5,3,2,0,0,0,2,2,0,0,0,0,Fiji tour,,espn,1
 2017-06-10,Argentina,England,34,38,,San Juan,,,False,False,4,4,1,1,0,0,4,3,4,0,0,0,England tour,,espn,1
-2017-06-14,Uruguay,Russia,32,29,,Montevideo,,,False,False,,,,,,,,,,,,,Nations Cup,,,1
-2017-06-16,Tonga,Wales,6,24,,Auckland,,,False,False,0,0,2,0,0,0,1,0,4,0,0,1,Wales tour,,espn,1
+2017-06-14,Uruguay,Russia,32,29,,Montevideo,,,False,False,,,,,,,,,,,,,Nations Cup,,,
+2017-06-16,Tonga,Wales,6,24,,Auckland,,,False,False,0,0,2,0,0,0,1,0,4,0,0,1,Wales tour,,espn,
 2017-06-16,New Zealand,Samoa,78,0,,Auckland,,,False,False,12,9,0,0,0,0,0,0,0,0,0,0,Samoa tour,,espn,1
-2017-06-17,USA,Georgia,17,21,,Atlanta,,,False,False,,,,,,,,,,,,,Georgia tour,,,1
+2017-06-17,USA,Georgia,17,21,,Atlanta,,,False,False,,,,,,,,,,,,,Georgia tour,,,
 2017-06-17,South Africa,France,37,15,,Durban,,,False,False,4,4,3,0,0,0,2,1,1,0,0,0,France tour,,espn,1
 2017-06-17,Japan,Ireland,22,50,,Ecopa Stadium,Fukuroi,Japan,False,False,3,2,1,0,0,0,7,6,1,0,0,0,Ireland tour,,espn,1
 2017-06-17,Fiji,Italy,22,19,,Suva,,,False,False,3,2,0,1,0,0,1,1,4,0,0,0,Italy tour,,espn,1
 2017-06-17,Canada,Romania,9,25,,Edmonton,,,False,False,0,0,3,0,0,0,3,2,2,0,0,0,Romania tour,,espn,1
 2017-06-17,Australia,Scotland,19,24,,Sydney,,,False,False,3,2,0,0,0,0,3,3,1,0,0,0,Scotland tour,,espn,1
 2017-06-17,Argentina,England,25,35,,Santa Fe,,,False,False,3,2,2,0,0,0,4,3,2,1,0,0,England tour,,espn,1
-2017-06-18,Uruguay,Spain,24,14,,Montevideo,,,False,False,,,,,,,,,,,,,Nations Cup,,,1
-2017-06-18,Namibia,Russia,10,31,,Montevideo,,,False,False,,,,,,,,,,,,,Nations Cup,,,1
+2017-06-18,Uruguay,Spain,24,14,,Montevideo,,,False,False,,,,,,,,,,,,,Nations Cup,,,
+2017-06-18,Namibia,Russia,10,31,,Montevideo,,,False,False,,,,,,,,,,,,,Nations Cup,,,
 2017-06-23,Samoa,Wales,17,19,,Apia,,,False,False,2,2,1,0,0,0,2,0,3,0,0,0,Wales tour,,espn,1
 2017-06-24,South Africa,France,35,12,,Johannesburg,,,False,False,4,3,3,0,0,0,0,0,4,0,0,0,France tour,,espn,1
 2017-06-24,Japan,Ireland,13,35,,Ajinomoto Stadium,Chofu,Japan,False,False,2,0,1,0,0,0,5,5,0,0,0,0,Ireland tour,,espn,1
 2017-06-24,Fiji,Scotland,27,22,,Suva,,,False,False,2,1,5,0,0,0,3,2,1,0,0,0,Scotland tour,,espn,1
 2017-06-24,Canada,USA,28,28,,ONT,,,False,False,3,2,3,0,0,0,4,4,0,0,0,0,2019 Rugby World Cup Qualifier,,espn,1
 2017-06-24,Australia,Italy,40,27,,Brisbane,Brisbane,Australia,False,False,6,5,0,0,0,0,3,3,2,0,0,0,Italy tour,,espn,1
-2017-06-24,Argentina,Georgia,45,29,,Estadio 23 de Agosto,San Salvador de Jujuy,,False,False,5,4,4,0,0,0,3,2,1,0,0,1,Georgia tour,,espn,1
+2017-06-24,Argentina,Georgia,45,29,,Estadio 23 de Agosto,San Salvador de Jujuy,,False,False,5,4,4,0,0,0,3,2,1,0,0,1,Georgia tour,,espn,
 2017-07-01,USA,Canada,52,16,,San Diego,,,False,False,8,6,0,0,0,0,1,1,3,0,0,0,2019 Rugby World Cup Qualifier,,espn,1
 2017-07-01,Tonga,Samoa,30,26,,Nuku A'lofa,,,False,False,3,3,3,0,0,0,2,2,4,0,0,0,2019 Rugby World Cup Qualifier / South Pacific Championship,,espn,1
 2017-07-08,Tonga,Fiji,10,14,,Nuku A'lofa,,,False,False,1,1,1,0,0,0,1,0,3,0,0,0,2019 Rugby World Cup Qualifier / South Pacific Championship,,espn,1
 2017-07-15,Samoa,Fiji,16,38,,Apia,,,False,False,1,1,3,0,0,0,5,5,1,0,0,0,2019 Rugby World Cup Qualifier / South Pacific Championship,,espn,1
-2017-07-15,Namibia,Zimbabwe,31,26,,Windhoek,,,False,False,,,,,,,,,,,,,2019 Rugby World Cup Qualifier / African CAR Championship,,,1
+2017-07-15,Namibia,Zimbabwe,31,26,,Windhoek,,,False,False,,,,,,,,,,,,,2019 Rugby World Cup Qualifier / African CAR Championship,,,
 2017-08-19,South Africa,Argentina,37,15,2017 The Rugby Championship,Port Elizabeth,,,False,False,4,4,3,0,0,0,2,1,1,0,0,0,Rugby Championship,,espn,1
 2017-08-19,Australia,New Zealand,34,54,2017 The Rugby Championship,Sydney,,,False,False,4,4,2,0,0,0,8,7,0,0,0,0,Rugby Championship / Bledisloe Cup,,espn,1
 2017-08-26,New Zealand,Australia,35,29,2017 The Rugby Championship,Dunedin,,,False,False,5,5,0,0,0,0,5,2,0,0,0,0,Rugby Championship / Bledisloe Cup,,espn,1
-2017-08-26,Argentina,South Africa,23,41,2017 The Rugby Championship,Salta,,,False,False,,,,,,,,,,,,,Rugby Championship,,,1
+2017-08-26,Argentina,South Africa,23,41,2017 The Rugby Championship,Salta,,,False,False,,,,,,,,,,,,,Rugby Championship,,,
 2017-09-09,New Zealand,Argentina,39,22,2017 The Rugby Championship,New Plymouth,,,False,False,6,3,1,0,0,0,1,1,4,1,0,0,Rugby Championship,,espn,1
-2017-09-09,Australia,South Africa,23,23,2017 The Rugby Championship,Perth,,,False,False,,,,,,,,,,,,,Rugby Championship,,,1
+2017-09-09,Australia,South Africa,23,23,2017 The Rugby Championship,Perth,,,False,False,,,,,,,,,,,,,Rugby Championship,,,
 2017-09-16,New Zealand,South Africa,57,0,2017 The Rugby Championship,North Shore City,,,False,False,8,7,1,0,0,0,0,0,0,0,0,0,Rugby Championship / Freedom Cup,,espn,1
 2017-09-16,Australia,Argentina,45,20,2017 The Rugby Championship,Canberra,,,False,False,6,6,1,0,0,0,2,2,2,0,0,0,Rugby Championship / Puma Trophy,,espn,1
 2017-09-30,South Africa,Australia,27,27,2017 The Rugby Championship,Bloemfontein,,,False,False,3,3,2,0,0,0,3,3,2,0,0,0,Rugby Championship / Mandela Challenge Plate,,espn,1
@@ -4179,7 +4179,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2017-11-11,England,Argentina,21,8,,Twickenham,,,False,False,2,1,3,0,0,0,1,0,1,0,0,0,Argentina tour,,espn,1
 2017-11-14,Hong Kong,Chile,13,6,,Hong Kong,,,False,False,,,,,,,,,,,,,Cup of Nations,,,
 2017-11-18,Wales,Georgia,13,6,,Millennium Stadium,,,False,False,1,1,2,0,0,0,0,0,2,0,0,0,Georgia tour,,espn,1
-2017-11-18,Spain,Canada,27,37,,Madrid,,,False,False,,,,,,,,,,,,,Canada tour,,,1
+2017-11-18,Spain,Canada,27,37,,Madrid,,,False,False,,,,,,,,,,,,,Canada tour,,,
 2017-11-18,Scotland,New Zealand,17,22,,Murrayfield,,,False,False,2,2,1,0,0,0,3,2,1,0,0,0,New Zealand tour,,espn,1
 2017-11-18,Romania,Samoa,17,13,,Bucharest,,,False,False,2,2,1,0,0,0,1,1,2,0,0,0,Samoa tour,,espn,1
 2017-11-18,Namibia,Uruguay,36,52,,Windhoek,,,False,False,5,4,1,0,0,0,7,7,1,0,0,0,Uruguay tour,,espn,1
@@ -4192,15 +4192,15 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2017-11-25,Wales,New Zealand,18,33,,Millennium Stadium,,,False,False,2,1,2,0,0,0,5,4,0,0,0,0,New Zealand tour,,espn,1
 2017-11-25,Scotland,Australia,53,24,,Murrayfield,,,False,False,8,5,1,0,0,0,4,2,0,0,0,0,Australia tour,,espn,1
 2017-11-25,Romania,Tonga,20,25,,Bucharest,,,False,False,2,2,2,0,0,0,3,2,2,0,0,0,Tonga tour,,espn,1
-2017-11-25,Namibia,Uruguay,34,39,,Windhoek,,,False,False,,,,,,,,,,,,,Uruguay tour,,,1
+2017-11-25,Namibia,Uruguay,34,39,,Windhoek,,,False,False,,,,,,,,,,,,,Uruguay tour,,,
 2017-11-25,Italy,South Africa,6,35,,Padova,,,False,False,0,0,2,0,0,0,5,5,0,0,0,0,South Africa tour,,espn,1
 2017-11-25,Ireland,Argentina,28,19,,Lansdowne Road,,,False,False,3,2,3,0,0,0,3,2,0,0,0,0,Argentina tour,,espn,1
-2017-11-25,Georgia,USA,21,20,,Tbilisi,,,False,False,2,2,0,0,0,1,3,1,1,0,0,0,United States of America tour,,espn,1
+2017-11-25,Georgia,USA,21,20,,Tbilisi,,,False,False,2,2,0,0,0,1,3,1,1,0,0,0,United States of America tour,,espn,
 2017-11-25,France,Japan,23,23,,Paris,,,False,False,2,2,3,0,0,0,3,1,2,0,0,0,Japan tour,,espn,1
 2017-11-25,England,Samoa,48,14,,Twickenham,,,False,False,7,5,1,0,0,0,2,2,0,0,0,0,Samoa tour,,espn,1
-2017-11-25,Canada,Fiji,17,57,,Narbonne,,,False,False,,,,,,,,,,,,,Fiji tour / Canada tour,,,1
+2017-11-25,Canada,Fiji,17,57,,Narbonne,,,False,False,,,,,,,,,,,,,Fiji tour / Canada tour,,,
 2017-12-02,Wales,South Africa,24,22,,Millennium Stadium,,,False,False,3,3,1,0,0,0,3,2,1,0,0,0,South Africa tour,,espn,1
-2018-01-27,Canada,Uruguay,29,38,,Vancouver,,,False,False,,,,,,,,,,,,,2019 Rugby World Cup Qualifier / Americas Rugby Championship,,,1
+2018-01-27,Canada,Uruguay,29,38,,Vancouver,,,False,False,,,,,,,,,,,,,2019 Rugby World Cup Qualifier / Americas Rugby Championship,,,
 2018-02-03,Wales,Scotland,34,7,2018 Six Nations Championship,Millennium Stadium,,,False,False,4,4,2,0,0,0,1,1,0,0,0,0,Six Nations,,espn,1
 2018-02-03,Uruguay,Canada,32,31,,Montevideo,,,False,False,4,3,2,0,0,0,4,1,3,0,0,0,2019 Rugby World Cup Qualifier,,espn,1
 2018-02-03,France,Ireland,13,15,2018 Six Nations Championship,Stade de France,,,False,False,1,1,2,0,0,0,0,0,4,1,0,0,Six Nations,,espn,1
@@ -4212,21 +4212,21 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2018-02-11,Scotland,France,32,26,2018 Six Nations Championship,Murrayfield,,,False,False,2,2,6,0,0,0,2,2,4,0,0,0,Six Nations / Auld Alliance Trophy,,espn,1
 2018-02-17,USA,Chile,45,13,,Fullerton,,,False,False,7,5,0,0,0,0,2,0,1,0,0,0,Americas Rugby Championship,,espn,1
 2018-02-18,Spain,Romania,22,10,,Madrid,,,False,False,2,0,4,0,0,0,1,1,1,0,0,0,2019 Rugby World Cup Qualifier / Six Nations B,,espn,1
-2018-02-23,France,Italy,34,17,2018 Six Nations Championship,Marseille,,,False,False,,,,,,,,,,,,,Six Nations / Trophee Garibaldi,,,1
+2018-02-23,France,Italy,34,17,2018 Six Nations Championship,Marseille,,,False,False,,,,,,,,,,,,,Six Nations / Trophee Garibaldi,,,
 2018-02-24,Scotland,England,25,13,2018 Six Nations Championship,Murrayfield,,,False,False,3,2,2,0,0,0,1,1,2,0,0,0,Six Nations / Calcutta Cup,,espn,1
 2018-02-24,Ireland,Wales,37,27,2018 Six Nations Championship,Lansdowne Road,,,False,False,5,3,2,0,0,0,3,3,2,0,0,0,Six Nations,,espn,1
-2018-02-24,Chile,Uruguay,15,67,,Santiago,,,False,False,,,,,,,,,,,,,Americas Rugby Championship,,,1
-2018-03-03,Uruguay,USA,19,61,,Montevideo,,,False,False,,,,,,,,,,,,,Americas Rugby Championship,,,1
-2018-03-03,Romania,Russia,25,15,,Cluj,,,False,False,,,,,,,,,,,,,2019 Rugby World Cup Qualifier / Six Nations B,,,1
-2018-03-03,Georgia,Spain,23,10,,Tbilisi,,,False,False,,,,,,,,,,,,,Six Nations B,,,1
-2018-03-03,Chile,Canada,17,33,,La Serena,,,False,False,,,,,,,,,,,,,Americas Rugby Championship,,,1
+2018-02-24,Chile,Uruguay,15,67,,Santiago,,,False,False,,,,,,,,,,,,,Americas Rugby Championship,,,
+2018-03-03,Uruguay,USA,19,61,,Montevideo,,,False,False,,,,,,,,,,,,,Americas Rugby Championship,,,
+2018-03-03,Romania,Russia,25,15,,Cluj,,,False,False,,,,,,,,,,,,,2019 Rugby World Cup Qualifier / Six Nations B,,,
+2018-03-03,Georgia,Spain,23,10,,Tbilisi,,,False,False,,,,,,,,,,,,,Six Nations B,,,
+2018-03-03,Chile,Canada,17,33,,La Serena,,,False,False,,,,,,,,,,,,,Americas Rugby Championship,,,
 2018-03-10,Russia,Georgia,9,29,,Krasnodar,,,False,False,0,0,3,0,0,0,4,3,1,0,0,0,Six Nations B,,espn,1
 2018-03-10,Ireland,Scotland,28,8,2018 Six Nations Championship,Lansdowne Road,,,False,False,4,4,0,0,0,0,1,0,1,0,0,0,Six Nations / Centenary Quaich,,espn,1
 2018-03-10,France,England,22,16,2018 Six Nations Championship,Stade de France,,,False,False,0,0,5,0,0,1,1,1,3,0,0,0,Six Nations,,espn,1
 2018-03-11,Wales,Italy,38,14,2018 Six Nations Championship,Millennium Stadium,,,False,False,5,5,1,0,0,0,2,2,0,0,0,0,Six Nations,,espn,1
 2018-03-17,Wales,France,14,13,2018 Six Nations Championship,Millennium Stadium,,,False,False,1,0,3,0,0,0,1,1,1,1,0,0,Six Nations,,espn,1
 2018-03-17,Italy,Scotland,27,29,2018 Six Nations Championship,Rome,,,False,False,3,3,2,0,0,0,4,3,1,0,0,0,Six Nations,,espn,1
-2018-03-17,England,Ireland,15,24,2018 Six Nations Championship,Twickenham,,,False,False,3,0,0,0,0,0,3,3,1,0,0,0,Six Nations / Millennium Trophy,,espn,1
+2018-03-17,England,Ireland,15,24,2018 Six Nations Championship,Twickenham,,,False,False,3,0,0,0,0,0,3,3,1,0,0,0,Six Nations / Millennium Trophy,,espn,
 2018-03-18,Georgia,Romania,25,16,,Tbilisi,,,False,False,3,2,2,0,0,0,1,1,3,0,0,0,Six Nations B,,espn,1
 2018-06-02,South Africa,Wales,20,22,,Washington DC,,,True,False,2,2,2,0,0,0,3,2,1,0,0,0,South Africa tour / Wales tour / Prince William Cup,,espn,1
 2018-06-09,USA,Russia,62,13,,Commerce City,,,False,False,9,7,1,0,0,0,1,1,2,0,0,0,Russia tour,,espn,1
@@ -4239,13 +4239,13 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2018-06-09,Australia,Ireland,18,9,,Brisbane,,,False,False,2,1,2,0,0,0,0,0,3,0,0,0,Ireland tour / Lansdowne Cup,,espn,1
 2018-06-09,Argentina,Wales,10,23,,San Juan,,,False,False,1,1,1,0,0,0,2,2,3,0,0,0,Wales tour,,espn,1
 2018-06-16,USA,Scotland,30,29,,Houston,,,False,False,3,3,3,0,0,0,3,2,1,0,0,1,Scotland tour,,espn,1
-2018-06-16,South Africa,England,23,12,,Bloemfontein,,,False,False,,,,,,,,,,,,,England tour,,,1
+2018-06-16,South Africa,England,23,12,,Bloemfontein,,,False,False,,,,,,,,,,,,,England tour,,,
 2018-06-16,Samoa,Tonga,18,28,,Suva,,,False,False,2,1,2,0,0,0,3,2,3,0,0,0,South Pacific Championship,,espn,1
 2018-06-16,New Zealand,France,26,13,,Wellington,,,False,False,4,3,0,0,0,0,1,1,2,0,0,0,France tour,,espn,1
 2018-06-16,Japan,Italy,22,25,,Noevir Stadium Kobe,Kobe,Japan,False,False,3,2,1,0,0,0,3,2,2,0,0,0,Italy tour,,espn,1
 2018-06-16,Fiji,Georgia,37,15,,Suva,,,False,False,6,2,1,0,0,0,2,1,1,0,0,0,South Pacific Championship,,espn,1
 2018-06-16,Canada,Russia,20,43,,Nepean,,,False,False,2,2,2,0,0,0,6,5,1,0,0,0,Russia tour,,espn,1
-2018-06-16,Australia,Ireland,21,26,,Melbourne,,,False,False,,,,,,,,,,,,,Ireland tour / Lansdowne Cup,,,1
+2018-06-16,Australia,Ireland,21,26,,Melbourne,,,False,False,,,,,,,,,,,,,Ireland tour / Lansdowne Cup,,,
 2018-06-16,Argentina,Wales,12,30,,Santa Fe,,,False,False,2,1,0,0,0,0,2,1,6,0,0,0,Wales tour,,espn,1
 2018-06-23,South Africa,England,10,25,,Cape Town,,,False,False,1,1,1,0,0,0,1,1,6,0,0,0,England tour,,espn,1
 2018-06-23,New Zealand,France,49,14,,Dunedin,,,False,False,7,7,0,0,0,0,2,2,0,0,0,0,France tour,,espn,1
@@ -4277,12 +4277,12 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2018-11-10,Samoa,USA,29,30,,San Sebastian,,,False,False,4,3,1,0,0,0,4,2,2,0,0,0,United States of America tour / Samoa tour,,espn,1
 2018-11-10,Russia,Namibia,47,20,,Krasnodar,,,False,False,7,6,0,0,0,0,2,2,2,0,0,0,Namibia tour,,espn,1
 2018-11-10,Romania,Portugal,36,6,,Baia Mare,,,False,False,6,3,0,0,0,0,0,0,1,1,0,0,FIRA Championship,,espn,1
-2018-11-10,Italy,Georgia,28,17,,Firenze,,,False,False,,,,,,,,,,,,,Georgia tour,,,1
+2018-11-10,Italy,Georgia,28,17,,Firenze,,,False,False,,,,,,,,,,,,,Georgia tour,,,
 2018-11-10,Ireland,Argentina,28,17,,Lansdowne Road,,,False,False,3,2,3,0,0,0,1,0,4,0,0,0,Argentina tour / Admiral Brown Cup,,espn,1
 2018-11-10,France,South Africa,26,29,,Stade de France,,,False,False,2,2,3,1,0,0,2,2,5,0,0,0,South Africa tour,,espn,1
 2018-11-10,England,New Zealand,15,16,,Twickenham,,,False,False,2,1,0,1,0,0,1,1,2,1,0,0,New Zealand tour / Hillary Shield,,espn,1
-2018-11-17,Wales,Tonga,74,24,,Millennium Stadium,,,False,False,,,,,,,,,,,,,Tonga tour,,,1
-2018-11-17,Spain,Namibia,34,13,,Madrid,,,False,False,,,,,,,,,,,,,Namibia tour,,,1
+2018-11-17,Wales,Tonga,74,24,,Millennium Stadium,,,False,False,,,,,,,,,,,,,Tonga tour,,,
+2018-11-17,Spain,Namibia,34,13,,Madrid,,,False,False,,,,,,,,,,,,,Namibia tour,,,
 2018-11-17,Scotland,South Africa,20,26,,Murrayfield,,,False,False,2,2,2,0,0,0,2,2,4,0,0,0,South Africa tour,,espn,1
 2018-11-17,Romania,USA,5,31,,Bucharest,,,False,False,1,0,0,0,0,0,5,3,0,0,0,0,United States of America tour,,espn,1
 2018-11-17,Italy,Australia,7,26,,Padova,Padua,Italy,False,False,1,1,0,0,0,0,4,3,0,0,0,0,Australia tour,,espn,1
@@ -4295,7 +4295,7 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2018-11-24,Wales,South Africa,20,11,,Millennium Stadium,,,False,False,2,2,2,0,0,0,1,0,2,0,0,0,South Africa tour / Prince William Cup,,espn,1
 2018-11-24,Spain,Samoa,10,28,,Madrid,,,False,False,1,1,1,0,0,0,4,4,0,0,0,0,Samoa tour,,espn,1
 2018-11-24,Scotland,Argentina,14,9,,Murrayfield,,,False,False,1,0,3,0,0,0,0,0,3,0,0,0,Argentina tour,,espn,1
-2018-11-24,Romania,Uruguay,20,27,,Bucharest,,,False,False,,,,,,,,,,,,,Uruguay tour,,,1
+2018-11-24,Romania,Uruguay,20,27,,Bucharest,,,False,False,,,,,,,,,,,,,Uruguay tour,,,
 2018-11-24,Portugal,Namibia,23,29,,Coimbra,,,False,False,2,2,3,0,0,0,4,3,1,0,0,0,Namibia tour,,espn,1
 2018-11-24,Japan,Russia,32,27,,Kingsholm,Gloucester,England,False,False,4,3,2,0,0,0,2,1,5,0,0,0,Japan tour / Russia tour,,espn,1
 2018-11-24,Italy,New Zealand,3,66,,Rome,,,False,False,0,0,1,0,0,0,10,8,0,0,0,0,New Zealand tour,,espn,1
@@ -4308,9 +4308,9 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2019-02-02,Scotland,Italy,33,20,2019 Six Nations Championship,Murrayfield,,,False,False,5,4,0,0,0,0,3,1,1,0,0,0,Six Nations,,espn,1
 2019-02-02,Ireland,England,20,32,2019 Six Nations Championship,Lansdowne Road,,,False,False,2,2,2,0,0,0,4,3,2,0,0,0,Six Nations / Millennium Trophy,,espn,1
 2019-02-02,Chile,USA,8,71,,Maipu,,,False,False,1,0,1,0,0,0,11,8,0,0,0,0,Americas Rugby Championship,,espn,1
-2019-02-08,Uruguay,Chile,20,5,,Montevideo,,,False,False,,,,,,,,,,,,,Americas Rugby Championship,,,1
+2019-02-08,Uruguay,Chile,20,5,,Montevideo,,,False,False,,,,,,,,,,,,,Americas Rugby Championship,,,
 2019-02-09,Scotland,Ireland,13,22,2019 Six Nations Championship,Murrayfield,,,False,False,1,1,2,0,0,0,3,2,1,0,0,0,Six Nations / Centenary Quaich,,espn,1
-2019-02-09,Romania,Georgia,9,18,,Cluj,,,False,False,,,,,,,,,,,,,Six Nations B,,,1
+2019-02-09,Romania,Georgia,9,18,,Cluj,,,False,False,,,,,,,,,,,,,Six Nations B,,,
 2019-02-09,Italy,Wales,15,26,2019 Six Nations Championship,Rome,,,False,False,2,1,1,0,0,0,2,2,4,0,0,0,Six Nations,,espn,1
 2019-02-10,Spain,Russia,16,14,,Madrid,,,False,False,1,1,3,0,0,0,2,2,0,0,0,0,Six Nations B,,espn,1
 2019-02-10,England,France,44,8,2019 Six Nations Championship,Twickenham,,,False,False,5,3,2,0,0,1,1,0,1,0,0,0,Six Nations,,espn,1
@@ -4323,25 +4323,25 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2019-03-03,Spain,Romania,21,18,,Madrid,,,False,False,3,3,0,0,0,0,2,1,2,0,0,0,Six Nations B,,espn,1
 2019-03-08,USA,Canada,30,25,,Seattle,,,False,False,4,2,2,0,0,0,3,2,2,0,0,0,Americas Rugby Championship,,espn,1
 2019-03-09,Scotland,Wales,11,18,2019 Six Nations Championship,Murrayfield,,,False,False,1,0,2,0,0,0,2,1,2,0,0,0,Six Nations,,espn,1
-2019-03-09,Romania,Russia,22,20,,Botoşani,,,False,False,,,,,,,,,,,,,Six Nations B,,,1
+2019-03-09,Romania,Russia,22,20,,Botoşani,,,False,False,,,,,,,,,,,,,Six Nations B,,,
 2019-03-09,England,Italy,57,14,2019 Six Nations Championship,Twickenham,,,False,False,8,7,1,0,0,0,2,2,0,0,0,0,Six Nations,,espn,1
 2019-03-10,Ireland,France,26,14,2019 Six Nations Championship,Lansdowne Road,,,False,False,4,3,0,0,0,0,2,2,0,0,0,0,Six Nations,,espn,1
 2019-03-16,Wales,Ireland,25,7,2019 Six Nations Championship,Millennium Stadium,,,False,False,1,1,6,0,0,0,1,1,0,0,0,0,Six Nations,,espn,1
 2019-03-16,Italy,France,14,25,2019 Six Nations Championship,Rome,,,False,False,1,0,3,0,0,0,3,2,1,1,0,0,Six Nations / Trophee Garibaldi,,espn,1
 2019-03-16,England,Scotland,38,38,2019 Six Nations Championship,Twickenham,,,False,False,5,5,1,0,0,0,6,4,0,0,0,0,Six Nations / Calcutta Cup,,espn,1
-2019-03-17,Russia,Georgia,6,22,,Krasnodar,,,False,False,,,,,,,,,,,,,Six Nations B,,,1
-2019-06-04,Uruguay,Russia,48,26,,Montevideo,,,False,False,,,,,,,,,,,,,Nations Cup,,,1
+2019-03-17,Russia,Georgia,6,22,,Krasnodar,,,False,False,,,,,,,,,,,,,Six Nations B,,,
+2019-06-04,Uruguay,Russia,48,26,,Montevideo,,,False,False,,,,,,,,,,,,,Nations Cup,,,
 2019-06-08,Chile,Romania,11,27,,Valparaiso,,,False,False,1,0,2,0,0,0,3,3,2,0,0,0,Romania tour,,espn,1
 2019-06-09,Uruguay,Namibia,28,30,,Montevideo,,,False,False,4,4,0,0,0,0,3,3,3,0,0,0,Nations Cup,,espn,1
 2019-06-15,Namibia,Russia,0,20,,Montevideo,,,False,False,0,0,0,0,0,0,2,2,2,0,0,0,Nations Cup,,espn,1
 2019-06-15,Chile,Spain,22,29,,Curico,,,False,False,1,1,5,0,0,0,4,3,1,0,0,0,Spain tour,,espn,1
-2019-06-22,Uruguay,Spain,21,41,,Montevideo,,,False,False,,,,,,,,,,,,,Spain tour,,,1
+2019-06-22,Uruguay,Spain,21,41,,Montevideo,,,False,False,,,,,,,,,,,,,Spain tour,,,
 2019-07-20,South Africa,Australia,35,17,2019 The Rugby Championship,Johannesburg,,,False,False,,,,,,,,,,,,,Rugby Championship,,,1
 2019-07-20,Argentina,New Zealand,16,20,2019 The Rugby Championship,Buenos Aires,,,False,False,1,1,3,0,0,0,2,2,2,0,0,0,Rugby Championship,,espn,1
-2019-07-27,USA,Canada,47,19,,Glendale,,,False,False,,,,,,,,,,,,,Pacific Nations Cup,,,1
+2019-07-27,USA,Canada,47,19,,Glendale,,,False,False,,,,,,,,,,,,,Pacific Nations Cup,,,
 2019-07-27,Samoa,Tonga,25,17,,Apia,,,False,False,3,2,2,0,0,0,3,1,0,0,0,0,Pacific Nations Cup,,espn,1
 2019-07-27,New Zealand,South Africa,16,16,2019 The Rugby Championship,Wellington,,,False,False,,,,,,,,,,,,,Rugby Championship,,,1
-2019-07-27,Japan,Fiji,34,21,,Kamaishi Unosumai Memorial Stadium,Kamaishi,Japan,False,False,,,,,,,,,,,,,Pacific Nations Cup,,,1
+2019-07-27,Japan,Fiji,34,21,,Kamaishi Unosumai Memorial Stadium,Kamaishi,Japan,False,False,,,,,,,,,,,,,Pacific Nations Cup,,,
 2019-07-27,Australia,Argentina,16,10,2019 The Rugby Championship,Brisbane,,,False,False,1,1,3,0,0,0,1,1,1,0,0,0,Rugby Championship,,espn,1
 2019-08-03,Samoa,USA,10,13,,Suva,,,False,False,1,1,1,0,0,0,1,1,2,0,0,0,Pacific Nations Cup,,espn,1
 2019-08-03,Japan,Tonga,41,7,,Hanazono Rugby Stadium,Higashiosaka,Japan,False,False,5,5,2,0,0,0,1,1,0,0,0,0,Pacific Nations Cup,,espn,1
@@ -4349,9 +4349,9 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2019-08-09,Canada,Tonga,23,33,,Lautoka,,,False,False,4,0,1,0,0,0,5,4,0,0,0,0,Pacific Nations Cup,,espn,1
 2019-08-10,Japan,USA,34,20,,ANZ Stadium,Suva,Fiji,False,False,4,4,2,0,0,0,2,2,2,0,0,0,Pacific Nations Cup,,espn,1
 2019-08-10,Ireland,Italy,29,10,,Lansdowne Road,,,False,False,5,2,0,0,0,0,2,0,0,0,0,0,Italy tour,,espn,1
-2019-08-10,Fiji,Samoa,10,3,,Suva,,,False,False,,,,,,,,,,,,,Pacific Nations Cup,,,1
-2019-08-10,Australia,New Zealand,47,26,2019 The Rugby Championship,Perth,,,False,False,6,4,3,0,0,0,4,3,0,0,0,0,Rugby Championship,,espn,1
-2019-08-10,Argentina,South Africa,13,46,2019 The Rugby Championship,Salta,,,False,False,1,1,2,0,0,0,5,3,5,0,0,0,Rugby Championship,,espn,1
+2019-08-10,Fiji,Samoa,10,3,,Suva,,,False,False,,,,,,,,,,,,,Pacific Nations Cup,,,
+2019-08-10,Australia,New Zealand,47,26,2019 The Rugby Championship,Perth,,,False,False,6,4,3,0,0,0,4,3,0,0,0,0,Rugby Championship,,espn,
+2019-08-10,Argentina,South Africa,13,46,2019 The Rugby Championship,Salta,,,False,False,1,1,2,0,0,0,5,3,5,0,0,0,Rugby Championship,,espn,
 2019-08-11,England,Wales,33,19,,Twickenham,,,False,False,3,3,3,1,0,0,3,2,0,0,0,0,Wales tour,,espn,1
 2019-08-17,Wales,England,13,6,,Millennium Stadium,,,False,False,1,1,2,0,0,0,0,0,2,0,0,0,England tour,,espn,1
 2019-08-17,South Africa,Argentina,24,18,International Friendly,Pretoria,,,False,False,2,1,4,0,0,0,2,1,2,0,0,0,Argentina tour,,espn,1
@@ -4360,8 +4360,8 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2019-08-17,France,Scotland,32,3,,Nice,,,False,False,5,2,1,0,0,0,0,0,1,0,0,0,Scotland tour / Auld Alliance Trophy,,espn,1
 2019-08-24,Scotland,France,17,14,,,,,False,False,2,2,1,0,0,0,2,2,0,0,0,0,International,,espn,1
 2019-08-24,England,Ireland,57,15,,Twickenham,,,False,False,8,7,1,0,0,0,2,1,1,0,0,0,Ireland tour,,espn,1
-2019-08-30,France,Italy,47,19,,,,,False,False,,,,,,,,,,,,,Italy tour,,,1
-2019-08-31,Wales,Ireland,17,22,,Millennium Stadium,,,False,False,2,2,1,0,0,0,2,1,1,0,0,1,Ireland tour,,espn,1
+2019-08-30,France,Italy,47,19,,,,,False,False,,,,,,,,,,,,,Italy tour,,,
+2019-08-31,Wales,Ireland,17,22,,Millennium Stadium,,,False,False,2,2,1,0,0,0,2,1,1,0,0,1,Ireland tour,,espn,
 2019-08-31,Fiji,Tonga,29,19,,Suva,,,False,False,5,2,0,0,0,0,3,2,0,0,0,0,Tonga tour,,espn,1
 2019-09-06,Scotland,Georgia,36,9,,Murrayfield,,,False,False,6,3,0,0,0,0,0,0,3,0,0,0,Georgia tour,,espn,1
 2019-09-06,Japan,South Africa,7,41,,Kumagaya Rugby Ground,Kumagaya,Japan,False,False,1,1,0,0,0,0,6,4,1,0,0,0,South Africa tour,,espn,1
@@ -4423,17 +4423,17 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2020-02-01,Georgia,Romania,41,13,2020 Rugby Europe Championship,Dinamo Arena,Tbilisi,Georgia,False,False,6,4,1,0,0,0,1,1,2,0,0,0,Six Nations B,,archive,
 2020-02-02,France,England,24,17,2020 Six Nations Championship,Stade de France,Saint-Denis,France,False,False,3,3,1,0,0,0,2,2,1,0,0,0,Six Nations,,archive,1
 2020-02-08,Scotland,England,6,13,2020 Six Nations Championship,Murrayfield,Edinburgh,Scotland,False,False,0,0,2,0,0,0,1,1,2,0,0,0,Six Nations / Calcutta Cup,,archive,1
-2020-02-08,Portugal,Romania,22,11,2020 Rugby Europe Championship,Complexo Desportivo Municipal,Caldas da Rainha,Portugal,False,False,3,2,1,0,0,0,1,0,2,0,0,0,Six Nations B,,archive,1
+2020-02-08,Portugal,Romania,22,11,2020 Rugby Europe Championship,Complexo Desportivo Municipal,Caldas da Rainha,Portugal,False,False,3,2,1,0,0,0,1,0,2,0,0,0,Six Nations B,,archive,
 2020-02-08,Ireland,Wales,24,14,2020 Six Nations Championship,Aviva Stadium,Dublin,Ireland,False,False,4,2,0,0,0,0,2,2,0,0,0,0,Six Nations,,archive,1
-2020-02-09,Spain,Georgia,10,23,2020 Rugby Europe Championship,Estadio Nacional Universidad Complutense,Madrid,Spain,False,False,2,0,0,0,0,0,3,1,2,0,0,0,Six Nations B,,archive,1
+2020-02-09,Spain,Georgia,10,23,2020 Rugby Europe Championship,Estadio Nacional Universidad Complutense,Madrid,Spain,False,False,2,0,0,0,0,0,3,1,2,0,0,0,Six Nations B,,archive,
 2020-02-09,France,Italy,35,22,2020 Six Nations Championship,Stade de France,Saint-Denis,France,False,False,5,2,2,0,0,0,3,2,1,0,0,0,Six Nations / Trophee Garibaldi,,archive,1
 2020-02-22,Wales,France,23,27,2020 Six Nations Championship,Principality Stadium,Cardiff,Wales,False,False,2,2,3,0,0,0,3,3,2,0,0,0,Six Nations,,archive,1
-2020-02-22,Russia,Portugal,19,18,2020 Rugby Europe Championship,Kaliningrad Stadium,Kaliningrad,Russia,False,False,1,1,4,0,0,0,2,1,2,0,0,0,Six Nations B,,archive,1
-2020-02-22,Romania,Spain,24,7,2020 Rugby Europe Championship,Stadionul Municipal,Botosani,Romania,False,False,2,1,4,0,0,0,1,1,0,0,0,0,Six Nations B,,archive,1
+2020-02-22,Russia,Portugal,19,18,2020 Rugby Europe Championship,Kaliningrad Stadium,Kaliningrad,Russia,False,False,1,1,4,0,0,0,2,1,2,0,0,0,Six Nations B,,archive,
+2020-02-22,Romania,Spain,24,7,2020 Rugby Europe Championship,Stadionul Municipal,Botosani,Romania,False,False,2,1,4,0,0,0,1,1,0,0,0,0,Six Nations B,,archive,
 2020-02-22,Italy,Scotland,0,17,2020 Six Nations Championship,Stadio Olimpico,Rome,Italy,False,False,0,0,0,0,0,0,3,1,0,0,0,0,Six Nations,,archive,1
 2020-02-23,England,Ireland,24,12,2020 Six Nations Championship,Twickenham Stadium,London,England,False,False,3,3,1,0,0,0,2,1,0,0,0,0,Six Nations / Millennium Trophy,,archive,1
-2020-03-07,Russia,Romania,32,25,2020 Rugby Europe Championship,Kuban Stadium,Krasnodar,Russia,False,False,4,3,2,0,0,0,3,2,2,0,0,0,Six Nations B,,archive,1
-2020-03-07,Portugal,Georgia,24,39,2020 Rugby Europe Championship,Stade Jean Bouin,Paris,France,True,False,3,3,1,0,0,0,6,1,0,0,0,1,Six Nations B,,archive,1
+2020-03-07,Russia,Romania,32,25,2020 Rugby Europe Championship,Kuban Stadium,Krasnodar,Russia,False,False,4,3,2,0,0,0,3,2,2,0,0,0,Six Nations B,,archive,
+2020-03-07,Portugal,Georgia,24,39,2020 Rugby Europe Championship,Stade Jean Bouin,Paris,France,True,False,3,3,1,0,0,0,6,1,0,0,0,1,Six Nations B,,archive,
 2020-03-07,England,Wales,33,30,2020 Six Nations Championship,Twickenham Stadium,London,England,False,False,3,3,4,0,0,0,3,3,3,0,0,0,Six Nations,,archive,1
 2020-03-08,Scotland,France,28,17,2020 Six Nations Championship,Murrayfield,Edinburgh,Scotland,False,False,3,2,3,0,0,0,2,2,1,0,0,0,Six Nations / Auld Alliance Trophy,,archive,1
 2020-10-11,New Zealand,Australia,16,16,2020 Bledisloe Cup,Westpac Stadium,Wellington,New Zealand,False,False,2,0,2,0,0,0,2,0,2,0,0,0,Australia tour / Bledisloe Cup,,archive,1
@@ -4448,10 +4448,10 @@ date,home_team,away_team,home_score,away_score,competition,stadium,city,country,
 2020-11-01,Uruguay,Spain,20,32,2020 Autumn Internationals,Estadio Charrúa,Montevideo,Uruguay,False,False,2,2,2,0,0,0,4,3,2,0,0,0,Spain tour,,archive,
 2020-11-06,Uruguay,Spain,19,10,2020 Autumn Internationals,Estadio Charrúa,Montevideo,Uruguay,False,False,1,1,4,0,0,0,1,1,1,0,0,0,Spain tour,,archive,
 2020-11-07,Australia,New Zealand,24,22,2020 Tri Nations,Suncorp Stadium,Brisbane,Australia,False,False,2,1,4,0,0,0,3,2,1,0,0,0,Rugby Championship / Bledisloe Cup,,archive,1
-2020-11-13,Ireland,Wales,32,9,2020 Autumn Nations Cup,Aviva Stadium,Dublin,Ireland,False,False,2,2,6,0,0,0,0,0,3,0,0,0,Autumn Nations Cup,,archive,1
+2020-11-13,Ireland,Wales,32,9,2020 Autumn Nations Cup,Aviva Stadium,Dublin,Ireland,False,False,2,2,6,0,0,0,0,0,3,0,0,0,Autumn Nations Cup,,archive,
 2020-11-14,New Zealand,Argentina,15,25,2020 Tri Nations,Bankwest Stadium,Sydney,Australia,True,False,2,1,1,0,0,0,1,1,6,0,0,0,Rugby Championship,,archive,1
-2020-11-14,Italy,Scotland,17,28,2020 Autumn Nations Cup,Stadio Artemio Franchi,Florence,Italy,False,False,1,0,4,0,0,0,4,4,0,0,0,0,Autumn Nations Cup,,archive,1
-2020-11-14,England,Georgia,40,0,2020 Autumn Nations Cup,Twickenham,London,England,False,False,6,5,0,0,0,0,0,0,0,0,0,0,Autumn Nations Cup,,archive,1
+2020-11-14,Italy,Scotland,17,28,2020 Autumn Nations Cup,Stadio Artemio Franchi,Florence,Italy,False,False,1,0,4,0,0,0,4,4,0,0,0,0,Autumn Nations Cup,,archive,
+2020-11-14,England,Georgia,40,0,2020 Autumn Nations Cup,Twickenham,London,England,False,False,6,5,0,0,0,0,0,0,0,0,0,0,Autumn Nations Cup,,archive,
 2020-11-21,Wales,Georgia,18,0,2020 Autumn Nations Cup,Parc y Scarlets,Llanelli,Wales,False,False,2,1,2,0,0,0,0,0,0,0,0,0,,,archive,
 2020-11-21,England,Ireland,18,7,2020 Autumn Nations Cup,Twickenham,London,England,False,False,2,1,2,0,0,0,1,1,0,0,0,0,,,archive,
 2020-11-21,Australia,Argentina,15,15,2020 Tri Nations,McDonald Jones Stadium,Newcastle,Australia,False,False,0,0,5,0,0,0,0,0,5,0,0,0,,,archive,

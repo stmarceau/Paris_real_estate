@@ -3,7 +3,9 @@
 
 Each game in the pickle has its two teams with score, scoring counts (tries,
 conversions, penalties, drops) and line-up, the list of scoring actions (player,
-minute, action, points, running score) and video links.
+minute, action, points, running score) and video links. Only scoring data is kept:
+counts and actions without the player's name. Line-ups, player names and videos
+are left out.
 
 The pickle is loaded with an unpickler that refuses every class, so only plain
 Python data can be read and no code can run. Missing values (NaN floats) become
@@ -42,17 +44,12 @@ def main(path: str) -> None:
         sides = []
         for t in teams:
             counts = {k: num(t.get(k)) for k in ('tries', 'conversions', 'penalties', 'drops')}
-            lineup = [{'nb': num(p.get('nb')), 'pos': text(p.get('pos')), 'name': text(p.get('name'))}
-                      for p in (t.get('lineup') or []) if isinstance(p, dict) and text(p.get('name'))]
             sides.append({'name': text(t['name']), 'score': int(t['score']),
-                          'counts': counts if all(v is not None for v in counts.values()) else None,
-                          'lineup': lineup})
-        actions = [{'team': text(a.get('team')), 'player': text(a.get('player')), 'action': text(a.get('action')),
-                    'points': num(a.get('points')), 'minute': num(a.get('timestamp')), 'score': text(a.get('score'))}
+                          'counts': counts if all(v is not None for v in counts.values()) else None})
+        actions = [{'team': text(a.get('team')), 'action': text(a.get('action')),
+                    'points': num(a.get('points')), 'minute': num(a.get('timestamp'))}
                    for a in (g.get('actions') if isinstance(g.get('actions'), list) else []) if isinstance(a, dict)]
-        videos = [v for v in (g.get('videos') if isinstance(g.get('videos'), list) else [])
-                  if isinstance(v, str) and v.startswith(('http://www.youtube.com/', 'https://www.youtube.com/'))]
-        out.append({'date': f'{d[:4]}-{d[4:6]}-{d[6:8]}', 'teams': sides, 'actions': actions, 'videos': videos})
+        out.append({'date': f'{d[:4]}-{d[4:6]}-{d[6:8]}', 'teams': sides, 'actions': actions})
     out.sort(key=lambda x: (x['date'], x['teams'][0]['name']))
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_bytes(gzip.compress((json.dumps(out, ensure_ascii=False, separators=(',', ':')) + '\n').encode('utf-8'), mtime=0))

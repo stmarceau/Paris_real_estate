@@ -14,8 +14,8 @@ enriched only when ESPN has the same teams, a date within one day and the same s
 ESPN game details (data/espn_details.json.gz, made by scripts/import_espn_details.py)
 add, for the same matches: a scoring breakdown when the archive has none and ESPN's
 counts add up to the official score (breakdown_source says which source was used),
-and per-year detail files in public/data/details/ with line-ups, the scoring timeline
-(only when its points add up to the score) and a video link.
+and per-year detail files in public/data/details/ with the scoring timeline (only when
+its points add up to the score). No player names, line-ups or videos are published.
 
 Usage: python3 scripts/update_data.py
 """
@@ -88,25 +88,16 @@ def espn_breakdown(sides, g, home, away, year):
     return out
 
 
-def match_details(sides, g, home, away):
-    """Line-ups, scoring timeline (if it adds up to the score) and video for the detail files."""
-    out = {}
-    if sides[home]['lineup'] and sides[away]['lineup']:
-        out['lineups'] = {'home': sides[home]['lineup'], 'away': sides[away]['lineup']}
+def match_details(g, home, away, sides):
+    """Scoring timeline (side, action, points, minute), only if its points add up to the score."""
     acts = [a for a in g['actions'] if a['team'] in (home, away) and a['points'] is not None]
     totals = collections.Counter()
     for a in acts:
         totals[a['team']] += a['points']
     if acts and totals[home] == sides[home]['score'] and totals[away] == sides[away]['score']:
-        out['timeline'] = [{'side': 'home' if a['team'] == home else 'away', 'player': a['player'], 'action': a['action'],
-                            'points': int(a['points']), 'minute': int(a['minute']) if a['minute'] is not None else None}
-                           for a in acts]
-    if g['videos']:
-        # ESPN stored YouTube "embed" links; the app links to the normal watch page instead.
-        vid = g['videos'][0].rstrip('/').split('/')[-1].split('?')[0]
-        if '/embed/' in g['videos'][0] and vid:
-            out['video'] = f'https://www.youtube.com/watch?v={vid}'
-    return out
+        return {'timeline': [{'side': 'home' if a['team'] == home else 'away', 'action': a['action'], 'points': int(a['points']),
+                              'minute': int(a['minute']) if a['minute'] is not None else None} for a in acts]}
+    return {}
 
 
 def load_espn():
@@ -182,7 +173,7 @@ def main() -> None:
                 if b:
                     source = 'espn'
                     from_espn_breakdown += 1
-            extra = match_details(sides, eg, h, a)
+            extra = match_details(eg, h, a, sides)
             if extra:
                 details[r[F['date']][:4]][f"{r[F['date']]}|{h}|{a}"] = extra
         b = b or [''] * 12
@@ -212,10 +203,7 @@ def main() -> None:
     DETAILS_DIR.mkdir(parents=True)
     for year, items in details.items():
         (DETAILS_DIR / f'{year}.json').write_text(json.dumps(items, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
-    print(f'{from_espn_breakdown} breakdowns from ESPN, details for {sum(len(x) for x in details.values())} matches '
-          f'({sum(1 for x in details.values() for e in x.values() if "lineups" in e)} line-ups, '
-          f'{sum(1 for x in details.values() for e in x.values() if "timeline" in e)} timelines, '
-          f'{sum(1 for x in details.values() for e in x.values() if "video" in e)} videos)')
+    print(f'{from_espn_breakdown} breakdowns from ESPN, scoring timelines for {sum(len(x) for x in details.values())} matches')
 
     kept = {r[5] for r in rows}
     meta = {c: {'leftOut': e['matches'], 'teams': sorted(e['teams'])} for c, e in sorted(left_out.items()) if c in kept}
