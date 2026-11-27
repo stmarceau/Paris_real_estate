@@ -7,11 +7,29 @@ import { OverviewView } from './components/OverviewView';
 import { CompetitionsView } from './components/CompetitionsView';
 import type { LeftOut } from './competitions';
 
-const TABS: { view: View; label: string; icon: string }[] = [
-  { view: 'face-a-face', label: 'Face-à-face', icon: '⚔️' },
-  { view: 'competitions', label: 'Compétitions', icon: '🏆' },
-  { view: 'resultats', label: 'Résultats', icon: '📋' },
-  { view: 'bilans', label: 'Bilans', icon: '📊' },
+/** Line icons in the style of system symbols (24×24, drawn with the current text colour). */
+const ICONS: Record<View, JSX.Element> = {
+  'face-a-face': <path d="M4 8h14m0 0-3.5-3.5M18 8l-3.5 3.5M20 16H6m0 0 3.5-3.5M6 16l3.5 3.5" />,
+  competitions: (
+    <path d="M8 4h8v5a4 4 0 0 1-8 0V4Zm0 2H5.5a2.5 2.5 0 0 0 2.6 4M16 6h2.5a2.5 2.5 0 0 1-2.6 4M12 13v4m-4 3h8m-6.5 0 .5-3h4l.5 3" />
+  ),
+  resultats: <path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01" />,
+  bilans: <path d="M5 20v-8M12 20V5M19 20v-5" strokeWidth={2.6} />,
+};
+
+function Icon({ view }: { view: View }) {
+  return (
+    <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      {ICONS[view]}
+    </svg>
+  );
+}
+
+const TABS: { view: View; label: string }[] = [
+  { view: 'face-a-face', label: 'Face-à-face' },
+  { view: 'competitions', label: 'Compétitions' },
+  { view: 'resultats', label: 'Résultats' },
+  { view: 'bilans', label: 'Bilans' },
 ];
 
 export default function App() {
@@ -57,10 +75,7 @@ export default function App() {
           <span className="logo" aria-hidden>
             🏉
           </span>
-          <div>
-            <h1>Rugby Face-à-Face</h1>
-            <p className="muted small">Les nations de la Coupe du monde, de 1871 à aujourd’hui</p>
-          </div>
+          <span className="brand-name">Rugby Face-à-Face</span>
         </div>
         <div className="top-right">
           <div className="period" role="radiogroup" aria-label="Période">
@@ -86,7 +101,8 @@ export default function App() {
               aria-current={route.view === t.view ? 'page' : undefined}
               onClick={() => navigate(t.view, t.view === 'face-a-face' ? { a: p.get('a') ?? undefined, b: p.get('b') ?? undefined } : {})}
             >
-              <span aria-hidden>{t.icon}</span> {t.label}
+              <Icon view={t.view} />
+              <span className="tab-label">{t.label}</span>
             </button>
           ))}
         </nav>
@@ -94,6 +110,12 @@ export default function App() {
       </header>
 
       <main>
+        <div className="title-block">
+          <h1 className="large-title">{TABS.find((t) => t.view === route.view)?.label}</h1>
+          <p className="subtitle">
+            Les nations de la Coupe du monde · {period.from ? `depuis ${period.from}` : 'depuis 1871'}
+          </p>
+        </div>
         {error && <p className="error">Impossible de charger les données ({error}).</p>}
         {!base && !error && <p className="loading">Chargement des résultats…</p>}
         {base && route.view === 'face-a-face' && (
