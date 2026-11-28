@@ -295,3 +295,80 @@ export function leftOutFor(ed: Edition, meta: Record<string, LeftOut>): LeftOut 
   }
   return n ? { leftOut: n, teams: [...teams] } : null;
 }
+
+/** Who won an edition, worked out from the results. */
+export interface EditionResult {
+  winners: string[]; // more than one when the title was shared
+  runnerUp?: string; // World Cup final loser
+  grandSlam?: boolean;
+}
+
+/**
+ * Winner of an edition, or why none is given. World Cups: the final's winner. Round-robin
+ * competitions: the top of the computed table (2 points a win, 1 a draw, then points difference;
+ * bonus points are not in the data). Before 1994 the Home/Five Nations title was shared on equal
+ * points. No winner is given for an edition that is incomplete (a pair of teams never met, or
+ * matches against nations outside the app are missing), split into groups, or not a league.
+ */
+export function editionResult(ed: Edition, meta: Record<string, LeftOut>): EditionResult | { skipped: string } {
+  if (ed.family.id === 'world-cup') {
+    const final = worldCupPhases(ed)?.rounds.find((r) => r.label === 'Final')?.matches[0];
+    const w = final && winner(final);
+    if (!final || !w) return { skipped: 'no final' };
+    return { winners: [w], runnerUp: final.home === w ? final.away : final.home };
+  }
+  if (!ed.family.table) return { skipped: 'not a league' };
+  if (leftOutFor(ed, meta)) return { skipped: 'incomplete' };
+  const groups = standings(ed.matches);
+  if (groups.length !== 1) return { skipped: 'several groups' };
+  const table = groups[0];
+  const teams = table.map((r) => r.team);
+  // 1888–1889: England stayed out and the championship was not completed.
+  if (ed.family.id === 'six-nations' && teams.length < 4) return { skipped: 'incomplete' };
+  for (let i = 0; i < teams.length; i++)
+    for (let j = i + 1; j < teams.length; j++)
+      if (!ed.matches.some((m) => (m.home === teams[i] && m.away === teams[j]) || (m.home === teams[j] && m.away === teams[i])))
+        return { skipped: 'incomplete' };
+  const top = table[0];
+  const shared = ed.family.id === 'six-nations' && Number(ed.key) < 1994;
+  const winners = shared ? table.filter((r) => r.points === top.points).map((r) => r.team) : [top.team];
+  const grandSlam = ed.family.id === 'six-nations' && teams.length >= 4 && winners.length === 1 && top.wins === teams.length - 1;
+  return { winners, ...(grandSlam ? { grandSlam } : {}) };
+}
+
+export interface Honour {
+  team: string;
+  titles: number; // outright + shared
+  shared: number;
+  runnersUp: number;
+  grandSlams: number;
+  years: { key: string; shared: boolean }[];
+}
+
+/** Roll of honour of a competition, plus the editions left out and why. */
+export function rollOfHonour(editions: Edition[], meta: Record<string, LeftOut>): { honours: Honour[]; skipped: { key: string; reason: string }[] } {
+  const by = new Map<string, Honour>();
+  const get = (t: string) => {
+    if (!by.has(t)) by.set(t, { team: t, titles: 0, shared: 0, runnersUp: 0, grandSlams: 0, years: [] });
+    return by.get(t)!;
+  };
+  const skipped: { key: string; reason: string }[] = [];
+  for (const ed of [...editions].sort((a, b) => (a.key < b.key ? -1 : 1))) {
+    const r = editionResult(ed, meta);
+    if ('skipped' in r) {
+      skipped.push({ key: ed.key, reason: r.skipped });
+      continue;
+    }
+    const isShared = r.winners.length > 1;
+    for (const w of r.winners) {
+      const h = get(w);
+      h.titles++;
+      if (isShared) h.shared++;
+      if (r.grandSlam) h.grandSlams++;
+      h.years.push({ key: ed.key, shared: isShared });
+    }
+    if (r.runnerUp) get(r.runnerUp).runnersUp++;
+  }
+  const honours = [...by.values()].sort((a, b) => b.titles - a.titles || b.titles - b.shared - (a.titles - a.shared) || b.runnersUp - a.runnersUp || a.team.localeCompare(b.team));
+  return { honours, skipped };
+}

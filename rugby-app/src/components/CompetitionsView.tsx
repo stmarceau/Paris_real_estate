@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { formatDate, team, type Match } from '../data';
 import {
   FAMILIES,
@@ -6,6 +6,7 @@ import {
   buildEditions,
   leftOutFor,
   poolName,
+  rollOfHonour,
   standings,
   winner,
   worldCupPhases,
@@ -69,6 +70,7 @@ export function CompetitionsView({
               ›
             </button>
           </div>
+          <Honours editions={list} meta={meta} familyId={fam} selected={ed.key} onPick={(key) => onSelect(fam, key)} />
           <EditionDetail ed={ed} leftOut={leftOutFor(ed, meta)} />
         </>
       )}
@@ -282,6 +284,116 @@ function MatchesByDay({ matches }: { matches: Match[] }) {
           </ul>
         </div>
       ))}
+    </div>
+  );
+}
+
+const SKIP_REASONS: Record<string, string> = {
+  incomplete: 'incomplete',
+  'several groups': 'played in several groups',
+  'no final': 'no final in the data',
+};
+
+/** Titles per team across every edition of the selected competition. */
+function Honours({
+  editions,
+  meta,
+  familyId,
+  selected,
+  onPick,
+}: {
+  editions: Edition[];
+  meta: Record<string, LeftOut>;
+  familyId: string;
+  selected: string;
+  onPick: (key: string) => void;
+}) {
+  const { honours, skipped } = useMemo(() => rollOfHonour(editions, meta), [editions, meta]);
+  const [open, setOpen] = useState(false);
+  if (!editions[0]?.family.table) {
+    return (
+      <div className="card honours">
+        <h3>Roll of honour</h3>
+        <p className="muted small">Not available for this competition: it has no league table or final to decide a winner.</p>
+      </div>
+    );
+  }
+  const isWorldCup = familyId === 'world-cup';
+  // World Cup: beaten finalists are part of the roll of honour too (France: 3 finals).
+  const winners = honours.filter((h) => h.titles > 0 || (isWorldCup && h.runnersUp > 0));
+  const isSixNations = familyId === 'six-nations';
+  const shown = open ? winners : winners.slice(0, 5);
+  const counted = editions.length - skipped.length;
+  const reasons = Object.entries(
+    skipped.reduce<Record<string, string[]>>((acc, s) => ({ ...acc, [s.reason]: [...(acc[s.reason] ?? []), s.key] }), {}),
+  );
+
+  return (
+    <div className="card honours">
+      <h3>Roll of honour</h3>
+      {winners.length === 0 ? (
+        <p className="muted small">No edition of this competition can be given a winner from the data.</p>
+      ) : (
+        <>
+          <div className="table-wrap">
+            <table className="table honours-table">
+              <thead>
+                <tr>
+                  <th>Team</th>
+                  <th title="Titles won">Titles</th>
+                  {isWorldCup && <th title="Finals lost">Runners-up</th>}
+                  {isSixNations && <th title="All matches won">Grand Slams</th>}
+                  <th className="years-col">Years</th>
+                </tr>
+              </thead>
+              <tbody>
+                {shown.map((h, i) => (
+                  <tr key={h.team}>
+                    <td>
+                      <span className="muted pos">{i + 1}</span> {team(h.team).flag} {team(h.team).display}
+                    </td>
+                    <td>
+                      <b>{h.titles}</b>
+                      {h.shared > 0 && <span className="muted small"> ({h.shared} shared)</span>}
+                    </td>
+                    {isWorldCup && <td>{h.runnersUp}</td>}
+                    {isSixNations && <td>{h.grandSlams}</td>}
+                    <td className="years-col">
+                      <span className="years">
+                        {h.years.map((y) => (
+                          <button
+                            key={y.key}
+                            className={`year ${y.key === selected ? 'on' : ''} ${y.shared ? 'shared' : ''}`}
+                            title={y.shared ? 'Shared title' : 'Open this edition'}
+                            onClick={() => onPick(y.key)}
+                          >
+                            {y.key}
+                            {y.shared ? '*' : ''}
+                          </button>
+                        ))}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {winners.length > 5 && (
+            <button className="link" onClick={() => setOpen((o) => !o)}>
+              {open ? 'Show fewer teams' : `Show all ${winners.length} teams`}
+            </button>
+          )}
+        </>
+      )}
+      <p className="muted small">
+        {isWorldCup
+          ? 'Champions are the winners of each final.'
+          : `Winners are the top of the table computed from the scores (2 points for a win, 1 for a draw, then points difference; bonus points are not in the data).${
+              isSixNations ? ' Before 1994 teams level on points shared the title (*).' : ''
+            }`}{' '}
+        {counted} of {editions.length} editions counted
+        {reasons.length > 0 && `; not counted: ${reasons.map(([r, keys]) => `${keys.join(', ')} (${SKIP_REASONS[r] ?? r})`).join('; ')}`}.
+      </p>
     </div>
   );
 }

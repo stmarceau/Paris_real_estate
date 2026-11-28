@@ -12,6 +12,10 @@ entre les nations de la Coupe du monde et comparer les bilans historiques d'une 
 - **Compétitions** : Coupe du monde (podium, phase finale, poules), Tournoi des Six Nations (et Tournoi
   britannique / Cinq Nations), Tri-Nations / Rugby Championship, Pacific Nations Cup, Championnat d'Europe,
   Nations Championship, tests d'automne et qualifications : classement calculé et résultats de chaque édition.
+  Sous le filtre d'édition, un **palmarès** (« Roll of honour ») donne les titres de chaque équipe et leurs
+  années (cliquables) : vainqueur de la finale pour la Coupe du monde (avec les finales perdues), premier du
+  classement calculé pour les championnats (titres partagés à égalité de points dans le Tournoi avant 1994,
+  Grands Chelems). Les éditions incomplètes ou en plusieurs groupes ne sont pas comptées, et la carte le dit.
   Certaines éditions sont **reconstituées** (règles commentées dans `src/competitions.ts`) car la source ne nomme
   pas leurs matchs (Cinq Nations 1952–1999, Tri-Nations 1996–1999, Rugby Championship 2021 et 2023) ; d'autres
   sont signalées **incomplètes** quand des matchs contre des nations hors de l'app manquent

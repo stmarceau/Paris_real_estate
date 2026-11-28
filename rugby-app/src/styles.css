@@ -455,3 +455,19 @@ select:focus-visible, input:focus-visible, button:focus-visible, summary:focus-v
   .sheet-grabber { display: block; position: absolute; left: 50%; top: 6px; transform: translateX(-50%); width: 36px; height: 5px; border-radius: 3px; background: var(--fill-strong); }
   .breakdown li { grid-template-columns: 4.5em 1fr 4.5em; }
 }
+
+/* ---------- roll of honour ---------- */
+.honours-table td:nth-child(2) { white-space: nowrap; }
+.honours-table .years-col { text-align: left; white-space: normal; width: 55%; }
+.years { display: flex; flex-wrap: wrap; gap: 4px; }
+.year {
+  border: 0; background: var(--fill); color: var(--text); border-radius: 6px; padding: 2px 7px; cursor: pointer;
+  font: 500 0.75rem var(--font-rounded); font-variant-numeric: tabular-nums;
+}
+.year:hover { background: var(--fill-strong); }
+.year.on { background: var(--accent); color: var(--accent-ink); }
+.year.shared { font-style: italic; }
+.honours .link { padding-left: 0; }
+@media (max-width: 640px) {
+  .honours-table .years-col { width: auto; min-width: 140px; }
+}

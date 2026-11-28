@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { matchesFromCSV } from './data';
-import { buildEditions, poolName, standings, winner, worldCupPhases } from './competitions';
+import { buildEditions, editionResult, poolName, rollOfHonour, standings, winner, worldCupPhases } from './competitions';
 
 const all = matchesFromCSV(readFileSync(new URL('../public/data/rugby_results.csv', import.meta.url), 'utf8'));
 const eds = buildEditions(all);
@@ -97,5 +97,40 @@ describe('families', () => {
       expect(seen.has(m.id)).toBe(false);
       seen.add(m.id);
     }
+  });
+});
+
+describe('roll of honour', () => {
+  const meta = JSON.parse(readFileSync(new URL('../public/data/competitions.json', import.meta.url), 'utf8'));
+  const honours = (fam: string) => rollOfHonour(eds.get(fam)!, meta);
+  const titles = (fam: string, team: string) => honours(fam).honours.find((h) => h.team === team);
+
+  it('World Cup: South Africa 4, New Zealand 3, Australia 2, England 1; England and France lost 3 finals', () => {
+    expect(titles('world-cup', 'South Africa')!.titles).toBe(4);
+    expect(titles('world-cup', 'New Zealand')!.titles).toBe(3);
+    expect(titles('world-cup', 'Australia')!.titles).toBe(2);
+    expect(titles('world-cup', 'England')).toMatchObject({ titles: 1, runnersUp: 3 });
+    expect(titles('world-cup', 'France')).toMatchObject({ titles: 0, runnersUp: 3 });
+  });
+
+  it('Six Nations era (2000–2025) winners and Grand Slams match the record', () => {
+    const since2000 = (team: string) => titles('six-nations', team)!.years.filter((y) => y.key >= '2000' && y.key <= '2025').length;
+    expect([since2000('England'), since2000('France'), since2000('Wales'), since2000('Ireland')]).toEqual([7, 7, 6, 6]);
+    const slams = (k: string) => eds.get('six-nations')!.filter((e) => e.key >= '2000' && e.key <= '2025').map((e) => editionResult(e, meta)).filter((r) => !('skipped' in r) && r.grandSlam && r.winners[0] === k).length;
+    expect([slams('France'), slams('England'), slams('Wales'), slams('Ireland')]).toEqual([4, 2, 4, 3]);
+  });
+
+  it('titles were shared on equal points before 1994 (1973: all five; 1988: France and Wales)', () => {
+    const r1973 = editionResult(ed('six-nations', '1973'), meta);
+    const r1988 = editionResult(ed('six-nations', '1988'), meta);
+    expect('winners' in r1973 && r1973.winners.length).toBe(5);
+    expect('winners' in r1988 && [...r1988.winners].sort()).toEqual(['France', 'Wales']);
+  });
+
+  it('no winner for incomplete editions (1972) or competitions without a table', () => {
+    expect(editionResult(ed('six-nations', '1972'), meta)).toEqual({ skipped: 'incomplete' });
+    expect(editionResult(ed('six-nations', '1888'), meta)).toEqual({ skipped: 'incomplete' });
+    expect(editionResult(ed('six-nations', '1889'), meta)).toEqual({ skipped: 'incomplete' });
+    expect(honours('autumn').honours).toEqual([]);
   });
 });
