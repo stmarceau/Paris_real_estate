@@ -120,6 +120,23 @@ describe('roll of honour', () => {
     expect([slams('France'), slams('England'), slams('Wales'), slams('Ireland')]).toEqual([4, 2, 4, 3]);
   });
 
+  it('World Cup third places: New Zealand 3, South Africa 2; one each for Wales, France, Argentina, Australia and England', () => {
+    const thirds = (t: string) => titles('world-cup', t)!.thirds;
+    expect(['New Zealand', 'South Africa', 'Wales', 'France', 'Argentina', 'Australia', 'England'].map(thirds)).toEqual([3, 2, 1, 1, 1, 1, 1]);
+  });
+
+  it('league podiums: 2023 Six Nations Ireland, France, Scotland; 2019 Rugby Championship South Africa, New Zealand, Australia', () => {
+    const r23 = editionResult(ed('six-nations', '2023'), meta);
+    const r19 = editionResult(ed('rugby-championship', '2019'), meta);
+    expect('podium' in r23 && r23.podium).toEqual([['Ireland'], ['France'], ['Scotland']]);
+    expect('podium' in r19 && r19.podium).toEqual([['South Africa'], ['New Zealand'], ['Australia']]);
+  });
+
+  it('shared places before 1994: in 1988 France and Wales share 1st, so nobody is 2nd', () => {
+    const r = editionResult(ed('six-nations', '1988'), meta);
+    expect('podium' in r && r.podium[1]).toEqual([]);
+  });
+
   it('titles were shared on equal points before 1994 (1973: all five; 1988: France and Wales)', () => {
     const r1973 = editionResult(ed('six-nations', '1973'), meta);
     const r1988 = editionResult(ed('six-nations', '1988'), meta);

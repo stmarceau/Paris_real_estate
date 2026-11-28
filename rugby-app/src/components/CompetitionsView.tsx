@@ -320,8 +320,8 @@ function Honours({
     );
   }
   const isWorldCup = familyId === 'world-cup';
-  // World Cup: beaten finalists are part of the roll of honour too (France: 3 finals).
-  const winners = honours.filter((h) => h.titles > 0 || (isWorldCup && h.runnersUp > 0));
+  // Every team with at least one podium (1st, 2nd or 3rd place).
+  const winners = honours.filter((h) => h.titles + h.runnersUp + h.thirds > 0);
   const isSixNations = familyId === 'six-nations';
   const shown = open ? winners : winners.slice(0, 5);
   const counted = editions.length - skipped.length;
@@ -346,8 +346,10 @@ function Honours({
                     <span className="trophy-team">
                       {team(h.team).flag} {team(h.team).display}
                     </span>
-                    <span className="trophy-count" aria-label={`${h.titles} ${h.titles === 1 ? 'trophy' : 'trophies'}`}>
-                      🏆 {h.titles}
+                    <span className="medals" aria-label={`${h.titles} first, ${h.runnersUp} second, ${h.thirds} third places`}>
+                      <span className={h.titles ? '' : 'none'}>🥇 {h.titles}</span>
+                      <span className={h.runnersUp ? '' : 'none'}>🥈 {h.runnersUp}</span>
+                      <span className={h.thirds ? '' : 'none'}>🥉 {h.thirds}</span>
                     </span>
                     <span className="chevron" aria-hidden>
                       ›
@@ -355,32 +357,39 @@ function Honours({
                   </button>
                   {isOpen && (
                     <div className="trophy-detail">
-                      {h.years.length > 0 ? (
-                        <span className="years">
-                          {h.years.map((y) => (
-                            <button
-                              key={y.key}
-                              className={`year ${y.key === selected ? 'on' : ''} ${y.shared ? 'shared' : ''}`}
-                              title={y.shared ? 'Shared title — open this edition' : 'Open this edition'}
-                              onClick={() => onPick(y.key)}
-                            >
-                              {y.key}
-                              {y.shared ? '*' : ''}
-                            </button>
-                          ))}
+                      {(
+                        [
+                          ['1st', h.years],
+                          ['2nd', h.secondYears],
+                          ['3rd', h.thirdYears],
+                        ] as const
+                      )
+                        .filter(([, ys]) => ys.length)
+                        .map(([label, ys]) => (
+                          <div key={label} className="place-row">
+                            <span className="place-label">{label}</span>
+                            <span className="years">
+                              {ys.map((y) => (
+                                <button
+                                  key={y.key}
+                                  className={`year ${y.key === selected ? 'on' : ''} ${y.shared ? 'shared' : ''}`}
+                                  title={y.shared ? 'Shared place — open this edition' : 'Open this edition'}
+                                  onClick={() => onPick(y.key)}
+                                >
+                                  {y.key}
+                                  {y.shared ? '*' : ''}
+                                </button>
+                              ))}
+                            </span>
+                          </div>
+                        ))}
+                      {(h.shared > 0 || (isSixNations && h.grandSlams > 0)) && (
+                        <span className="muted small trophy-extra">
+                          {[h.shared > 0 && `${h.shared} shared title${h.shared === 1 ? '' : 's'}`, isSixNations && h.grandSlams > 0 && `${h.grandSlams} Grand Slam${h.grandSlams === 1 ? '' : 's'}`]
+                            .filter(Boolean)
+                            .join(' · ')}
                         </span>
-                      ) : (
-                        <span className="muted small">No title yet.</span>
                       )}
-                      <span className="muted small trophy-extra">
-                        {[
-                          h.shared > 0 && `${h.shared} shared`,
-                          isSixNations && `${h.grandSlams} Grand Slam${h.grandSlams === 1 ? '' : 's'}`,
-                          isWorldCup && `${h.runnersUp} final${h.runnersUp === 1 ? '' : 's'} lost`,
-                        ]
-                          .filter(Boolean)
-                          .join(' · ')}
-                      </span>
                     </div>
                   )}
                 </li>
@@ -400,9 +409,9 @@ function Honours({
         </summary>
         <p className="muted small">
           {isWorldCup
-            ? 'Champions are the winners of each final.'
-            : `Winners are the top of the table computed from the scores (2 points for a win, 1 for a draw, then points difference; bonus points are not in the data).${
-                isSixNations ? ' Before 1994 teams level on points shared the title (*).' : ''
+            ? '1st and 2nd: the final’s winner and loser; 3rd: the winner of the bronze final.'
+            : `Places come from the table computed from the scores (2 points for a win, 1 for a draw, then points difference; bonus points are not in the data).${
+                isSixNations ? ' Before 1994 teams level on points shared their place (*), so two co-champions leave no 2nd place.' : ''
               }`}
           {reasons.length > 0 && ` Not counted: ${reasons.map(([r, keys]) => `${keys.join(', ')} (${SKIP_REASONS[r] ?? r})`).join('; ')}.`}
         </p>

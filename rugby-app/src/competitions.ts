@@ -296,26 +296,33 @@ export function leftOutFor(ed: Edition, meta: Record<string, LeftOut>): LeftOut 
   return n ? { leftOut: n, teams: [...teams] } : null;
 }
 
-/** Who won an edition, worked out from the results. */
+/** Podium of an edition, worked out from the results. */
 export interface EditionResult {
-  winners: string[]; // more than one when the title was shared
+  /** teams 1st, 2nd and 3rd; more than one when a place was shared */
+  podium: [string[], string[], string[]];
+  winners: string[]; // = podium[0]
   runnerUp?: string; // World Cup final loser
   grandSlam?: boolean;
 }
 
 /**
- * Winner of an edition, or why none is given. World Cups: the final's winner. Round-robin
- * competitions: the top of the computed table (2 points a win, 1 a draw, then points difference;
- * bonus points are not in the data). Before 1994 the Home/Five Nations title was shared on equal
- * points. No winner is given for an edition that is incomplete (a pair of teams never met, or
- * matches against nations outside the app are missing), split into groups, or not a league.
+ * Podium of an edition, or why none is given. World Cups: the final's winner and loser, then the
+ * bronze final's winner. Round-robin competitions: the computed table (2 points a win, 1 a draw,
+ * then points difference; bonus points are not in the data). Before 1994 Home/Five Nations places
+ * were shared on equal points (two co-champions leave no 2nd place). No podium is given for an
+ * edition that is incomplete (a pair of teams never met, or matches against nations outside the
+ * app are missing), split into groups, or not a league.
  */
 export function editionResult(ed: Edition, meta: Record<string, LeftOut>): EditionResult | { skipped: string } {
   if (ed.family.id === 'world-cup') {
-    const final = worldCupPhases(ed)?.rounds.find((r) => r.label === 'Final')?.matches[0];
+    const rounds = worldCupPhases(ed)?.rounds ?? [];
+    const final = rounds.find((r) => r.label === 'Final')?.matches[0];
+    const bronze = rounds.find((r) => r.label === 'Bronze final')?.matches[0];
     const w = final && winner(final);
     if (!final || !w) return { skipped: 'no final' };
-    return { winners: [w], runnerUp: final.home === w ? final.away : final.home };
+    const second = final.home === w ? final.away : final.home;
+    const third = bronze && winner(bronze);
+    return { podium: [[w], [second], third ? [third] : []], winners: [w], runnerUp: second };
   }
   if (!ed.family.table) return { skipped: 'not a league' };
   if (leftOutFor(ed, meta)) return { skipped: 'incomplete' };
@@ -329,27 +336,42 @@ export function editionResult(ed: Edition, meta: Record<string, LeftOut>): Editi
     for (let j = i + 1; j < teams.length; j++)
       if (!ed.matches.some((m) => (m.home === teams[i] && m.away === teams[j]) || (m.home === teams[j] && m.away === teams[i])))
         return { skipped: 'incomplete' };
-  const top = table[0];
   const shared = ed.family.id === 'six-nations' && Number(ed.key) < 1994;
-  const winners = shared ? table.filter((r) => r.points === top.points).map((r) => r.team) : [top.team];
-  const grandSlam = ed.family.id === 'six-nations' && teams.length >= 4 && winners.length === 1 && top.wins === teams.length - 1;
-  return { winners, ...(grandSlam ? { grandSlam } : {}) };
+  // Place of each team: its row in the table, or (shared era) 1 + the number of teams with more points.
+  const place = (i: number) => (shared ? 1 + table.filter((r) => r.points > table[i].points).length : i + 1);
+  const podium: [string[], string[], string[]] = [[], [], []];
+  table.forEach((r, i) => {
+    const p = place(i);
+    if (p <= 3) podium[p - 1].push(r.team);
+  });
+  const top = table[0];
+  const grandSlam = ed.family.id === 'six-nations' && teams.length >= 4 && podium[0].length === 1 && top.wins === teams.length - 1;
+  return { podium, winners: podium[0], ...(grandSlam ? { grandSlam } : {}) };
+}
+
+export interface PlaceYear {
+  key: string;
+  shared: boolean;
 }
 
 export interface Honour {
   team: string;
-  titles: number; // outright + shared
-  shared: number;
-  runnersUp: number;
+  titles: number; // 1st places, outright + shared
+  shared: number; // shared titles
+  runnersUp: number; // 2nd places
+  thirds: number; // 3rd places
   grandSlams: number;
-  years: { key: string; shared: boolean }[];
+  years: PlaceYear[]; // titles
+  secondYears: PlaceYear[];
+  thirdYears: PlaceYear[];
 }
 
-/** Roll of honour of a competition, plus the editions left out and why. */
+/** Roll of honour (1st, 2nd, 3rd places) of a competition, plus the editions left out and why. */
 export function rollOfHonour(editions: Edition[], meta: Record<string, LeftOut>): { honours: Honour[]; skipped: { key: string; reason: string }[] } {
   const by = new Map<string, Honour>();
   const get = (t: string) => {
-    if (!by.has(t)) by.set(t, { team: t, titles: 0, shared: 0, runnersUp: 0, grandSlams: 0, years: [] });
+    if (!by.has(t))
+      by.set(t, { team: t, titles: 0, shared: 0, runnersUp: 0, thirds: 0, grandSlams: 0, years: [], secondYears: [], thirdYears: [] });
     return by.get(t)!;
   };
   const skipped: { key: string; reason: string }[] = [];
@@ -359,16 +381,29 @@ export function rollOfHonour(editions: Edition[], meta: Record<string, LeftOut>)
       skipped.push({ key: ed.key, reason: r.skipped });
       continue;
     }
-    const isShared = r.winners.length > 1;
-    for (const w of r.winners) {
-      const h = get(w);
-      h.titles++;
-      if (isShared) h.shared++;
-      if (r.grandSlam) h.grandSlams++;
-      h.years.push({ key: ed.key, shared: isShared });
-    }
-    if (r.runnerUp) get(r.runnerUp).runnersUp++;
+    r.podium.forEach((teams, place) => {
+      const isShared = teams.length > 1;
+      for (const t of teams) {
+        const h = get(t);
+        const y = { key: ed.key, shared: isShared };
+        if (place === 0) {
+          h.titles++;
+          if (isShared) h.shared++;
+          if (r.grandSlam) h.grandSlams++;
+          h.years.push(y);
+        } else if (place === 1) {
+          h.runnersUp++;
+          h.secondYears.push(y);
+        } else {
+          h.thirds++;
+          h.thirdYears.push(y);
+        }
+      }
+    });
   }
-  const honours = [...by.values()].sort((a, b) => b.titles - a.titles || b.titles - b.shared - (a.titles - a.shared) || b.runnersUp - a.runnersUp || a.team.localeCompare(b.team));
+  // Medal-table order: titles, then 2nd places, then 3rd places.
+  const honours = [...by.values()].sort(
+    (a, b) => b.titles - a.titles || b.runnersUp - a.runnersUp || b.thirds - a.thirds || a.team.localeCompare(b.team),
+  );
   return { honours, skipped };
 }

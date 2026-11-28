@@ -484,3 +484,11 @@ select:focus-visible, input:focus-visible, button:focus-visible, summary:focus-v
 .honours-note summary::before { content: '›'; display: inline-block; margin-right: 6px; transition: transform 0.2s; }
 .honours-note[open] summary::before { transform: rotate(90deg); }
 .honours-note p { margin: 6px 0 0; }
+.medals { display: flex; gap: 12px; font: 600 1rem var(--font-rounded); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.medals .none { opacity: 0.35; }
+.place-row { display: grid; grid-template-columns: 2.4em 1fr; gap: 8px; align-items: baseline; }
+.place-label { font-size: 0.75rem; font-weight: 600; color: var(--muted); }
+@media (max-width: 640px) {
+  .medals { gap: 8px; font-size: 0.9375rem; }
+  .trophy-row { gap: 8px; }
+}
