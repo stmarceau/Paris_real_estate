@@ -52,6 +52,7 @@ export function CompetitionsView({
 
       {ed && (
         <>
+          <Honours editions={list} meta={meta} familyId={fam} selected={ed.key} onPick={(key) => onSelect(fam, key)} />
           <div className="card edition-bar">
             <button className="swap" disabled={idx >= list.length - 1} onClick={() => onSelect(fam, list[idx + 1].key)} aria-label="Previous edition">
               ‹
@@ -70,7 +71,6 @@ export function CompetitionsView({
               ›
             </button>
           </div>
-          <Honours editions={list} meta={meta} familyId={fam} selected={ed.key} onPick={(key) => onSelect(fam, key)} />
           <EditionDetail ed={ed} leftOut={leftOutFor(ed, meta)} />
         </>
       )}
